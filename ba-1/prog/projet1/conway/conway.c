@@ -10,46 +10,102 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+static void lecture();
+static void reprint(int nbPrint);
 static void erreur_nbJ(int nbJ);
 static void erreur_nbS(int nbS);
 static void erreur_nbJ_nbS(int nbJ, int nbS);
 static void erreur_zoom(int zoom);
 
-static int verbose;
+typedef int bool;
 
+static bool verbose;
+
+enum { false, true };
 
 int main(int argc, const char * argv[]) 
+{
+	lecture();
+
+    return EXIT_SUCCESS ;
+}
+
+//A appeler pour commencer le programme, lecture et accueil
+static void lecture()
 {
 	//variables
 	int nbJ,
 		nbS,
 		nbL,
 		nbC,
-		zoom;
-	
+		zoom,
+		i,
+		j;
+	char format[2];
+
 	//lecture des input
 	scanf("%d", &verbose);
 	
+	reprint(0);
 	scanf("%d", &nbJ);
 	if(nbJ < 0)
 		erreur_nbJ(nbJ);
 	
+	reprint(1);
 	scanf("%d", &nbS);
 	if(nbS < 0)
 		erreur_nbS(nbS);
 	if(nbJ % nbS != 0)
 		erreur_nbJ_nbS(nbJ, nbS);
 
+	reprint(2);
 	scanf("%d", &zoom);
 	if(zoom <= 0 || zoom > 100)
-		erreur_zoom(zoom);	
+		erreur_zoom(zoom);
 
+	reprint(3);
+	scanf("%s", format);
+	
+	reprint(4);
+	scanf("%d", &nbL);
+	scanf("%d", &nbC);
 
-
-
-    return EXIT_SUCCESS ;
+	reprint(5);
+	
+	int tabInit[nbL][nbC];
+	int tabSuiv[nbL][nbC];
+	
+	for(i = 0; i < nbL; i++)
+	{
+		for(j = 0; j < nbC; j++)
+		{
+			scanf("%d", &tabInit[i][j]);
+		}
+	}
 }
 
+static void reprint(int nbPrint)
+{
+	if(verbose)
+	{
+		switch(nbPrint)
+		{
+			case 0 : printf("Entrez le nombre de mises à jours\n");
+						break;
+			case 1 : printf("Entrez la période d'affichage\n");
+						break;
+			case 2 : printf("Entrez le facteur de zoom\n");
+						break;
+			case 3 : printf("Entrez le code du format de l'image\n");
+						break;
+			case 4 : printf("Entrez les dimensions de l'image\n");
+						break;
+			case 5 : printf("Entrez les valeurs du monde\n");
+						break;
+			default : break;
+		}
+	}
+}
 
 
 //-------------------------------------------------------------------------------
