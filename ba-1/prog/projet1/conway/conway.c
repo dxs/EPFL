@@ -10,12 +10,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define DEBUG_LVL_1
+
 typedef int bool;
 enum { false, true };
 
 static void lecture();
-static void start(int * pT1, int * pT2, int nbLig, int nbCol, nbJ, nbS);
-static bool caseVivante(int * tableau, int position, int nbLig, int nbCol, int cas);
+static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS);
+static int  caseVivante(int * tableau, int position, int nbLig, int nbCol, int cas);
 static void reprint(int nbPrint);
 static void erreur_nbJ(int nbJ);
 static void erreur_nbS(int nbS);
@@ -84,33 +86,130 @@ static void lecture()
 			scanf("%d", &tabInit[i][j]);
 		}
 	}
-	
+	for(i = 0; i < nbL; i++)
+	{
+		for(j = 0; j < nbC; j++)
+		{
+			printf("%d", tabInit[i][j]);
+		}
+		printf("\n");
+	}
 	//on commence à analyser
 	//utilisation de un pointeur ou de pointeur de pointeur
 	start(pTabInit, pTabSuiv, nbL, nbC, nbJ, nbS);
+for(i = 0; i < nbL; i++)
+	{
+		for(j = 0; j < nbC; j++)
+		{
+			printf("%d", tabInit[i][j]);
+		}
+		printf("\n");
+	}
 }
 
 
 static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS)
 {
 	int i, k, posX, posY;
-	int compteur = 0;
+
 	for(k = 0; k < nbJ; k++)
 	{
-		if(compteur % 2 == 0)//T1 est la base, T2 est la MaJ
+		posX = posY = 0;
+		if(k % 2 == 0)//T1 est la base, T2 est la MaJ
 		{
-			posX = posY = 0;
-			for(i = 0; i < nbL * nbC; i++)
+#ifdef DEBUG_LVL_1
+			printf("\nT1\n");
+#endif
+			for(i = 0; i < nbLig * nbCol; i++)
 			{
-				posX = i % nbC;
-				poxY = i / nbC;
-				if(poX > 0 && posY > 0 && posX < nbL && posY < nbC)//sans bord
-					pT2 + i = caseVivante(pT1, i, nbL, nbCol, 0);
+				posX = i % nbCol;
+				posY = i / nbCol;
+				if((posX > 0) && (posX < nbLig-1 ) && //cas 0
+						(posY > 0) && (posY < nbCol-1))
+					*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 0);//Maj de case i
+				else
+				{
+					if((posX > 0) && (posX < nbLig-1) && //cas 1
+							(posY == nbCol-1))
+						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 1);
+
+					if((posX == 0) && //cas 2
+							(posY > 0) && (posY < nbCol-1))
+						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 2);
+
+					if((posX == 0) && //cas 3
+							(posY == nbCol-1))
+						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 3);
+					
+					if((posX == nbLig-1) && // cas 4
+							(posY > 0) && (posY < nbCol-1))
+						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 4);
+
+					if((posX == nbLig-1) && //cas 5
+							(posY == nbCol-1))
+						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 5);
+
+					if((posX > 0) && (posX < nbLig-1) && // cas 8
+							(posY == 0))
+						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 8);
+
+					if((posX == 0) && // cas 10
+							(posY == 0))
+						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 10);
+
+					if((posX == nbLig-1) && // cas 12
+							(posY == 0))
+						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 12);
+				}
 			}
 		}
 		else//if compteur%2 != 0, alors T1 est la MaJ et T2 est la base
 		{
-			//%TODO
+#ifdef DEBUG_LVL_1
+			printf("\nT2\n");
+#endif
+			for(i = 0; i < nbLig * nbCol; i++)
+			{
+				posX = i % nbCol;
+				posY = i / nbCol;
+				if((posX > 0) && (posX < nbLig-1 ) && //cas 0
+						(posY > 0) && (posY < nbCol-1))
+					*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 0);//Maj de case i
+				else
+				{
+					if((posX > 0) && (posX < nbLig-1) && //cas 1
+							(posY == nbCol-1))
+						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 1);
+
+					if((posX == 0) && //cas 2
+							(posY > 0) && (posY < nbCol-1))
+						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 2);
+
+					if((posX == 0) && //cas 3
+							(posY == nbCol-1))
+						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 3);
+					
+					if((posX == nbLig-1) && // cas 4
+							(posY > 0) && (posY < nbCol-1))
+						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 4);
+
+					if((posX == nbLig-1) && //cas 5
+							(posY == nbCol-1))
+						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 5);
+
+					if((posX > 0) && (posX < nbLig-1) && // cas 8
+							(posY == 0))
+						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 8);
+
+					if((posX == 0) && // cas 10
+							(posY == 0))
+						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 10);
+
+					if((posX == nbLig-1) && // cas 12
+							(posY == 0))
+						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 12);
+				}
+			}
 		}
 	}	
 }
@@ -118,9 +217,34 @@ static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS)
 /*Fonction qui retourne si la case donnée est vivante.
  *int cas, représente le cas de la case à déterminer, voir doc
 */
-static bool caseVivante(int * tableau, int position, int nbLig, int nbCol, int cas)
+static int caseVivante(int * tableau, int position, int nbLig, int nbCol, int cas)
 {
 	//%TODO
+#ifdef DEBUG_LVL_2
+	switch(cas)
+	{
+		case 0 : printf("Centre\n");
+					break;
+		case 1 : printf("Bas\n");
+					break;
+		case 2 : printf("Gauche\n");
+					break;
+		case 3 : printf("Bas-gauche\n");
+					break;
+		case 4 : printf("Droite\n");
+					break;
+		case 5 : printf("Bas-droite\n");
+					break;
+		case 8 : printf("Haut\n");
+					break;
+		case 10 : printf("Haut-gauche\n");
+					break;
+		case 12 : printf("Haut_droite\n");
+	}
+#endif
+
+	
+	return;
 }
 
 static void reprint(int nbPrint)
