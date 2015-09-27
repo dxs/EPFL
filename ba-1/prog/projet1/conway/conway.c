@@ -3,25 +3,26 @@
 // nom: Borden
 // prenom: Sven
 // fichier: conway.c
-// date: 26.09.2015
+// date: 30.09.2015
 // description du programme: projet PROG I Automne 2015-16 EPFL MT-EL
 //-------------------------------------------------------------------------------
 
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef int bool;
+enum { false, true };
+
 static void lecture();
+static void start(int * pT1, int * pT2, int nbLig, int nbCol, nbJ, nbS);
+static bool caseVivante(int * tableau, int position, int nbLig, int nbCol, int cas);
 static void reprint(int nbPrint);
 static void erreur_nbJ(int nbJ);
 static void erreur_nbS(int nbS);
 static void erreur_nbJ_nbS(int nbJ, int nbS);
 static void erreur_zoom(int zoom);
 
-typedef int bool;
-
 static bool verbose;
-
-enum { false, true };
 
 int main(int argc, const char * argv[]) 
 {
@@ -74,7 +75,8 @@ static void lecture()
 	
 	int tabInit[nbL][nbC];
 	int tabSuiv[nbL][nbC];
-	
+	int *pTabInit = (int*)tabInit;
+	int *pTabSuiv = (int*)tabSuiv;
 	for(i = 0; i < nbL; i++)
 	{
 		for(j = 0; j < nbC; j++)
@@ -82,6 +84,43 @@ static void lecture()
 			scanf("%d", &tabInit[i][j]);
 		}
 	}
+	
+	//on commence à analyser
+	//utilisation de un pointeur ou de pointeur de pointeur
+	start(pTabInit, pTabSuiv, nbL, nbC, nbJ, nbS);
+}
+
+
+static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS)
+{
+	int i, k, posX, posY;
+	int compteur = 0;
+	for(k = 0; k < nbJ; k++)
+	{
+		if(compteur % 2 == 0)//T1 est la base, T2 est la MaJ
+		{
+			posX = posY = 0;
+			for(i = 0; i < nbL * nbC; i++)
+			{
+				posX = i % nbC;
+				poxY = i / nbC;
+				if(poX > 0 && posY > 0 && posX < nbL && posY < nbC)//sans bord
+					pT2 + i = caseVivante(pT1, i, nbL, nbCol, 0);
+			}
+		}
+		else//if compteur%2 != 0, alors T1 est la MaJ et T2 est la base
+		{
+			//%TODO
+		}
+	}	
+}
+
+/*Fonction qui retourne si la case donnée est vivante.
+ *int cas, représente le cas de la case à déterminer, voir doc
+*/
+static bool caseVivante(int * tableau, int position, int nbLig, int nbCol, int cas)
+{
+	//%TODO
 }
 
 static void reprint(int nbPrint)
