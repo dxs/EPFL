@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define DEBUG_LVL_1
+//#define DEBUG_LVL_1
 
 typedef int bool;
 enum { false, true };
@@ -18,6 +18,7 @@ enum { false, true };
 static void lecture();
 static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS);
 static int  caseVivante(int * tableau, int position, int nbLig, int nbCol, int cas);
+static void output(int * tableau, int nbL, int nbC, int compteur);
 static void reprint(int nbPrint);
 static void erreur_nbJ(int nbJ);
 static void erreur_nbS(int nbS);
@@ -37,13 +38,8 @@ int main(int argc, const char * argv[])
 static void lecture()
 {
 	//variables
-	int nbJ,
-		nbS,
-		nbL,
-		nbC,
-		zoom,
-		i,
-		j;
+	int nbJ, nbS, nbL, nbC, zoom;
+	int i, j;
 	char format[2];
 
 	//lecture des input
@@ -86,25 +82,11 @@ static void lecture()
 			scanf("%d", &tabInit[i][j]);
 		}
 	}
-	for(i = 0; i < nbL; i++)
-	{
-		for(j = 0; j < nbC; j++)
-		{
-			printf("%d", tabInit[i][j]);
-		}
-		printf("\n");
-	}
+	
 	//on commence à analyser
 	//utilisation de un pointeur ou de pointeur de pointeur
 	start(pTabInit, pTabSuiv, nbL, nbC, nbJ, nbS);
-for(i = 0; i < nbL; i++)
-	{
-		for(j = 0; j < nbC; j++)
-		{
-			printf("%d", tabInit[i][j]);
-		}
-		printf("\n");
-	}
+
 }
 
 
@@ -160,9 +142,12 @@ static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS)
 					if((posX == nbLig-1) && // cas 12
 							(posY == 0))
 						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 12);
-				}
-			}
-		}
+				}//else end
+			}//for end
+			
+			if(k%nbS == 0)
+				output(pT2, nbLig, nbCol, k);
+		}//if end
 		else//if compteur%2 != 0, alors T1 est la MaJ et T2 est la base
 		{
 #ifdef DEBUG_LVL_1
@@ -208,10 +193,13 @@ static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS)
 					if((posX == nbLig-1) && // cas 12
 							(posY == 0))
 						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 12);
-				}
-			}
-		}
-	}	
+				}//else end
+			}//end for
+			
+			if(k%nbS == 0)
+				output(pT1, nbLig, nbCol, k);
+		}//end else
+	}//end for (k)	
 }
 
 /*Fonction qui retourne si la case donnée est vivante.
@@ -242,16 +230,100 @@ static int caseVivante(int * tableau, int position, int nbLig, int nbCol, int ca
 		case 12 : printf("Haut_droite\n");
 	}
 #endif
+	int vivant = 0, countVoisin = 0;
+	tableau += position;
+	switch(cas)
+	{
+		case 0 :	countVoisin += *(tableau-1-nbCol);
+					countVoisin += *(tableau-nbCol);
+					countVoisin += *(tableau+1-nbCol);
+					countVoisin += *(tableau-1);
+					countVoisin += *(tableau+1);
+					countVoisin += *(tableau-1+nbCol);
+					countVoisin += *(tableau+nbCol);
+					countVoisin += *(tableau+1+nbCol);
+					break;
+		case 1 :	countVoisin += *(tableau-1-nbCol);
+					countVoisin += *(tableau-nbCol);
+					countVoisin += *(tableau+1-nbCol);
+					countVoisin += *(tableau-1);
+					countVoisin += *(tableau+1);
+					break; 
+		case 2 : 	countVoisin += *(tableau-nbCol);
+					countVoisin += *(tableau+1-nbCol);
+					countVoisin += *(tableau+1);	
+					countVoisin += *(tableau+nbCol);
+					countVoisin += *(tableau+1+nbCol);
+					break;
+		case 3 :	countVoisin += *(tableau-nbCol);
+					countVoisin += *(tableau+1-nbCol);
+					countVoisin += *(tableau+1);	
+					break;
+		case 4 :	countVoisin += *(tableau-1-nbCol);
+					countVoisin += *(tableau-nbCol);
+					countVoisin += *(tableau-1);
+					countVoisin += *(tableau-1+nbCol);
+					countVoisin += *(tableau+nbCol);
+					break;
+		case 5 : 	countVoisin += *(tableau-1-nbCol);
+					countVoisin += *(tableau-nbCol);
+					countVoisin += *(tableau-1);
+					break;
+		case 8 :	countVoisin += *(tableau-1);
+					countVoisin += *(tableau+1);
+					countVoisin += *(tableau-1+nbCol);
+					countVoisin += *(tableau+nbCol);
+					countVoisin += *(tableau+1+nbCol);
+					break;
+		case 10:	countVoisin += *(tableau+1);
+					countVoisin += *(tableau+nbCol);
+					countVoisin += *(tableau+1+nbCol);
+					break;
+		case 12:	countVoisin += *(tableau-1);
+					countVoisin += *(tableau-1+nbCol);
+					countVoisin += *(tableau+nbCol);
+	}
+	if(countVoisin == 3)
+		vivant = 1;
+	else
+	{
+		if(*tableau == 1)
+			if(countVoisin == 2)
+				vivant = 1;
+	}
+	tableau -= position;
+	return vivant;
+}
 
-	
-	return;
+static void output(int * tableau, int nbL, int nbC, int compteur)
+{
+	int i, j;
+	FILE *file;
+	file = fopen("image.pbm", "a");
+	if(compteur == 0)
+		fprintf(file, "P1\n%d %d\n", nbL, nbC);
+	//print one blackline if not the first image
+	if(compteur =! 0)
+	{
+		for(i = 0; i < nbC; i++)
+			fprintf(file, "1");
+		fprintf(file, "\n");
+	}
+	for(i = 0; i < nbL; i++)
+	{
+		for(j = 0; j < nbC; j++)
+		{
+			fprintf(file, "%d", *(tableau+i*j));
+		}
+		fprintf(file, "\n");
+	}
 }
 
 static void reprint(int nbPrint)
 {
 	if(verbose)
 	{
-		switch(nbPrint)
+	switch(nbPrint)
 		{
 			case 0 : printf("Entrez le nombre de mises à jours\n");
 						break;
