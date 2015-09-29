@@ -18,7 +18,7 @@ enum { false, true };
 static void lecture();
 static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS);
 static int  caseVivante(int * tableau, int position, int nbLig, int nbCol, int cas);
-static void output(int * tableau, int nbL, int nbC, int compteur);
+static void output(int * tableau, int nbL, int nbC, int compteur, int tailleMax);
 static void reprint(int nbPrint);
 static void erreur_nbJ(int nbJ);
 static void erreur_nbS(int nbS);
@@ -146,7 +146,7 @@ static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS)
 			}//for end
 			
 			if(k%nbS == 0)
-				output(pT2, nbLig, nbCol, k);
+				output(pT2, nbLig, nbCol, k, nbJ);
 		}//if end
 		else//if compteur%2 != 0, alors T1 est la MaJ et T2 est la base
 		{
@@ -197,7 +197,7 @@ static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS)
 			}//end for
 			
 			if(k%nbS == 0)
-				output(pT1, nbLig, nbCol, k);
+				output(pT1, nbLig, nbCol, k, nbJ);
 		}//end else
 	}//end for (k)	
 }
@@ -295,13 +295,13 @@ static int caseVivante(int * tableau, int position, int nbLig, int nbCol, int ca
 	return vivant;
 }
 
-static void output(int * tableau, int nbL, int nbC, int compteur)
+static void output(int * tableau, int nbL, int nbC, int compteur, int tailleMax)
 {
 	int i, j;
 	FILE *file;
 	file = fopen("image.pbm", "a");
 	if(compteur == 0)
-		fprintf(file, "P1\n%d %d\n", nbL, nbC);
+		fprintf(file, "P1\n%d %d\n", nbL*(tailleMax+1)-1, nbC);
 	//print one blackline if not the first image
 	if(compteur =! 0)
 	{
