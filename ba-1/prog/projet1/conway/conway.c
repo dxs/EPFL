@@ -1,4 +1,4 @@
-//-------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // sciper: 253133
 // nom: Borden
 // prenom: Sven
@@ -18,7 +18,7 @@ enum { false, true };
 static void lecture();
 static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS);
 static int  caseVivante(int * tableau, int position, int nbLig, int nbCol, int cas);
-static void output(int * tableau, int nbL, int nbC, int compteur, int tailleMax);
+static void output(int * tableau, int nbL, int nbC, int compteur);
 static void reprint(int nbPrint);
 static void erreur_nbJ(int nbJ);
 static void erreur_nbS(int nbS);
@@ -71,6 +71,7 @@ static void lecture()
 
 	reprint(5);
 	
+	//output de l'entete
 	int tabInit[nbL][nbC];
 	int tabSuiv[nbL][nbC];
 	int *pTabInit = (int*)tabInit;
@@ -83,6 +84,7 @@ static void lecture()
 		}
 	}
 	
+	printf("P1\n%d %d\n", nbL, nbC*(nbJ/nbS)+(nbJ/nbS)-1);
 	//on commence à analyser
 	//utilisation de un pointeur ou de pointeur de pointeur
 	start(pTabInit, pTabSuiv, nbL, nbC, nbJ, nbS);
@@ -146,7 +148,7 @@ static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS)
 			}//for end
 			
 			if(k%nbS == 0)
-				output(pT2, nbLig, nbCol, k, nbJ);
+				output(pT2, nbLig, nbCol, k);
 		}//if end
 		else//if compteur%2 != 0, alors T1 est la MaJ et T2 est la base
 		{
@@ -197,7 +199,7 @@ static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS)
 			}//end for
 			
 			if(k%nbS == 0)
-				output(pT1, nbLig, nbCol, k, nbJ);
+				output(pT1, nbLig, nbCol, k);
 		}//end else
 	}//end for (k)	
 }
@@ -242,81 +244,92 @@ static int caseVivante(int * tableau, int position, int nbLig, int nbCol, int ca
 					countVoisin += *(tableau-1+nbCol);
 					countVoisin += *(tableau+nbCol);
 					countVoisin += *(tableau+1+nbCol);
+					//printf("%d", countVoisin);
 					break;
 		case 1 :	countVoisin += *(tableau-1-nbCol);
 					countVoisin += *(tableau-nbCol);
 					countVoisin += *(tableau+1-nbCol);
 					countVoisin += *(tableau-1);
 					countVoisin += *(tableau+1);
+					//printf("%d", countVoisin);
 					break; 
 		case 2 : 	countVoisin += *(tableau-nbCol);
 					countVoisin += *(tableau+1-nbCol);
 					countVoisin += *(tableau+1);	
 					countVoisin += *(tableau+nbCol);
 					countVoisin += *(tableau+1+nbCol);
+					//printf("%d", countVoisin);
 					break;
 		case 3 :	countVoisin += *(tableau-nbCol);
 					countVoisin += *(tableau+1-nbCol);
 					countVoisin += *(tableau+1);	
+					//printf("%d", countVoisin);
 					break;
 		case 4 :	countVoisin += *(tableau-1-nbCol);
 					countVoisin += *(tableau-nbCol);
 					countVoisin += *(tableau-1);
 					countVoisin += *(tableau-1+nbCol);
 					countVoisin += *(tableau+nbCol);
+					//printf("%d", countVoisin);
 					break;
 		case 5 : 	countVoisin += *(tableau-1-nbCol);
 					countVoisin += *(tableau-nbCol);
 					countVoisin += *(tableau-1);
+					//printf("%d", countVoisin);
 					break;
 		case 8 :	countVoisin += *(tableau-1);
 					countVoisin += *(tableau+1);
 					countVoisin += *(tableau-1+nbCol);
 					countVoisin += *(tableau+nbCol);
 					countVoisin += *(tableau+1+nbCol);
+					//printf("%d", countVoisin);
 					break;
 		case 10:	countVoisin += *(tableau+1);
 					countVoisin += *(tableau+nbCol);
 					countVoisin += *(tableau+1+nbCol);
+					//printf("%d", countVoisin);
 					break;
 		case 12:	countVoisin += *(tableau-1);
 					countVoisin += *(tableau-1+nbCol);
 					countVoisin += *(tableau+nbCol);
+					//printf("%d", countVoisin);
 	}
-	if(countVoisin == 3)
-		vivant = 1;
+	if(*tableau == 0)
+	{
+		if(countVoisin == 3)
+		{
+			vivant = 1;
+		}
+	}
 	else
 	{
-		if(*tableau == 1)
-			if(countVoisin == 2)
-				vivant = 1;
+		if(countVoisin == 3 || countVoisin == 2)
+		{
+			vivant = 1; 
+		}
 	}
 	tableau -= position;
 	return vivant;
 }
 
-static void output(int * tableau, int nbL, int nbC, int compteur, int tailleMax)
+static void output(int * tableau, int nbL, int nbC, int compteur)
 {
-	int i, j;
-	FILE *file;
-	file = fopen("image.pbm", "a");
-	if(compteur == 0)
-		fprintf(file, "P1\n%d %d\n", nbL*(tailleMax+1)-1, nbC);
-	//print one blackline if not the first image
-	if(compteur =! 0)
+	int i, j, maxCol;
+	
+	if(compteur != 0)//ligne noire
+	for(i=0; i < nbC; i++)
+		printf("1");
+	printf("\n");
+	for(i = 0, j = 0; i < nbL * nbC; i++, j++)
 	{
-		for(i = 0; i < nbC; i++)
-			fprintf(file, "1");
-		fprintf(file, "\n");
+			if(j == nbC)
+			{
+				printf("\n");
+				j = 0;
+			}
+			printf("%d", *(tableau+i));
 	}
-	for(i = 0; i < nbL; i++)
-	{
-		for(j = 0; j < nbC; j++)
-		{
-			fprintf(file, "%d", *(tableau+i*j));
-		}
-		fprintf(file, "\n");
-	}
+	printf("\n");
 }
 
 static void reprint(int nbPrint)
