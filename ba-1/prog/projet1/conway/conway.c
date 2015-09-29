@@ -16,9 +16,9 @@ typedef int bool;
 enum { false, true };
 
 static void lecture();
-static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS);
+static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS, int zoom);
 static int  caseVivante(int * tableau, int position, int nbLig, int nbCol, int cas);
-static void output(int * tableau, int nbL, int nbC, int compteur);
+static void output(int * tableau, int nbL, int nbC, int compteur, int zoom);
 static void reprint(int nbPrint);
 static void erreur_nbJ(int nbJ);
 static void erreur_nbS(int nbS);
@@ -84,15 +84,16 @@ static void lecture()
 		}
 	}
 	
-	printf("P1\n%d %d\n", nbL, nbC*(nbJ/nbS)+(nbJ/nbS)-1);
+	printf("P1\n%d %d\n", nbL * zoom, zoom * (nbC * (nbJ/nbS)) + (nbJ/nbS) - 1);
+	output(pTabInit, nbL, nbC, 0, zoom);
 	//on commence à analyser
 	//utilisation de un pointeur ou de pointeur de pointeur
-	start(pTabInit, pTabSuiv, nbL, nbC, nbJ, nbS);
+	start(pTabInit, pTabSuiv, nbL, nbC, nbJ, nbS, zoom);
 
 }
 
 
-static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS)
+static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS, int zoom)
 {
 	int i, k, posX, posY;
 
@@ -148,7 +149,7 @@ static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS)
 			}//for end
 			
 			if(k%nbS == 0)
-				output(pT2, nbLig, nbCol, k);
+				output(pT2, nbLig, nbCol, k, zoom);
 		}//if end
 		else//if compteur%2 != 0, alors T1 est la MaJ et T2 est la base
 		{
@@ -199,7 +200,7 @@ static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS)
 			}//end for
 			
 			if(k%nbS == 0)
-				output(pT1, nbLig, nbCol, k);
+				output(pT1, nbLig, nbCol, k, zoom);
 		}//end else
 	}//end for (k)	
 }
@@ -312,24 +313,43 @@ static int caseVivante(int * tableau, int position, int nbLig, int nbCol, int ca
 	return vivant;
 }
 
-static void output(int * tableau, int nbL, int nbC, int compteur)
+static void output(int * tableau, int nbL, int nbC, int compteur, int zoom)
 {
-	int i, j, maxCol;
+	int i, j, k, l, depassement = 0;
 	
-	if(compteur != 0)//ligne noire
-	for(i=0; i < nbC; i++)
-		printf("1");
-	printf("\n");
-	for(i = 0, j = 0; i < nbL * nbC; i++, j++)
-	{
-			if(j == nbC)
-			{
+	//if(compteur != 0)//ligne noire
+	//{
+		for(i=0; i < nbC * zoom; i++)
+		{
+			if(depassement==70)
+			{		
 				printf("\n");
-				j = 0;
+				depassement=0;
 			}
-			printf("%d", *(tableau+i));
-	}
-	printf("\n");
+			printf("1");
+			depassement++;
+		}
+		printf("\n");
+	//}
+	
+	depassement = 0;
+	for(i = 0; i < nbL; i++)
+		for(k = 0; k < zoom; k++)
+		{
+			for(j = 0; j < nbC; j++)
+				for(l = 0; l < zoom; l++)
+				{
+					if(depassement==70)
+					{
+						printf("\n");
+						depassement = 0;
+					}
+					depassement++;
+					printf("%d", *(tableau + (i*nbL) + j));
+				}
+			printf("\n");
+			depassement=0;
+		}
 }
 
 static void reprint(int nbPrint)
