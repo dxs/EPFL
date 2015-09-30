@@ -15,10 +15,17 @@
 typedef int bool;
 enum { false, true };
 
+struct valeurBase
+{
+	int L;
+	int C;
+	int Z;
+};
+
 static void lecture();
-static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS, int zoom);
-static int  caseVivante(int * tableau, int position, int nbLig, int nbCol, int cas);
-static void output(int * tableau, int nbL, int nbC, int compteur, int zoom);
+static void start(int * pT1, int * pT2, struct valeurBase *pVal, int nbJ, int nbS);
+static int  caseVivante(int * tableau, int position, struct valeurBase *pVal, int cas);
+static void output(int * tableau, struct valeurBase *pVal, int compteur);
 static void reprint(int nbPrint);
 static void erreur_nbJ(int nbJ);
 static void erreur_nbS(int nbS);
@@ -38,10 +45,11 @@ int main(int argc, const char * argv[])
 static void lecture()
 {
 	//variables
-	int nbJ, nbS, nbL, nbC, zoom;
+	int nbJ, nbS;
 	int i, j;
 	char format[2];
-
+	struct valeurBase val;
+	struct valeurBase *pVal = &val;
 	//lecture des input
 	scanf("%d", &verbose);
 	
@@ -58,42 +66,44 @@ static void lecture()
 		erreur_nbJ_nbS(nbJ, nbS);
 
 	reprint(2);
-	scanf("%d", &zoom);
-	if(zoom <= 0 || zoom > 100)
-		erreur_zoom(zoom);
+	scanf("%d", &val.Z);
+	if(val.Z <= 0 || val.Z > 100)
+		erreur_zoom(val.Z);
 
 	reprint(3);
 	scanf("%s", format);
 	
 	reprint(4);
-	scanf("%d", &nbL);
-	scanf("%d", &nbC);
+	scanf("%d", &val.L);
+	scanf("%d", &val.C);
 
 	reprint(5);
 	
 	//output de l'entete
-	int tabInit[nbL][nbC];
-	int tabSuiv[nbL][nbC];
+	int tabInit[val.L][val.C];
+	int tabSuiv[val.L][val.C];
 	int *pTabInit = (int*)tabInit;
 	int *pTabSuiv = (int*)tabSuiv;
-	for(i = 0; i < nbL; i++)
+	
+	for(i = 0; i < val.L; i++)
 	{
-		for(j = 0; j < nbC; j++)
+		for(j = 0; j < val.C; j++)
 		{
 			scanf("%d", &tabInit[i][j]);
 		}
 	}
 	
-	printf("P1\n%d %d\n", nbL * zoom, zoom * (nbC * (nbJ/nbS)) + (nbJ/nbS) - 1);
-	output(pTabInit, nbL, nbC, 0, zoom);
+	printf("P1\n%d %d\n", val.L * val.Z, 
+			val.Z * (val.C * (nbJ/nbS)) + (nbJ/nbS) - 1);
+	output(pTabInit, pVal, 0);
 	//on commence à analyser
 	//utilisation de un pointeur ou de pointeur de pointeur
-	start(pTabInit, pTabSuiv, nbL, nbC, nbJ, nbS, zoom);
+	start(pTabInit, pTabSuiv, pVal, nbJ, nbS);
 
 }
 
 
-static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS, int zoom)
+static void start(int * pT1, int * pT2, struct valeurBase * pVal, int nbJ, int nbS)
 {
 	int i, k, posX, posY;
 
@@ -105,102 +115,102 @@ static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS, 
 #ifdef DEBUG_LVL_1
 			printf("\nT1\n");
 #endif
-			for(i = 0; i < nbLig * nbCol; i++)
+			for(i = 0; i < pVal->L * pVal->C; i++)
 			{
-				posX = i % nbCol;
-				posY = i / nbCol;
-				if((posX > 0) && (posX < nbLig-1 ) && //cas 0
-						(posY > 0) && (posY < nbCol-1))
-					*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 0);//Maj de case i
+				posX = i % pVal->C;
+				posY = i / pVal->C;
+				if((posX > 0) && (posX < pVal->L-1 ) && //cas 0
+						(posY > 0) && (posY < pVal->C-1))
+					*(pT2 + i) = caseVivante(pT1, i, pVal, 0);//Maj de case i
 				else
 				{
-					if((posX > 0) && (posX < nbLig-1) && //cas 1
-							(posY == nbCol-1))
-						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 1);
+					if((posX > 0) && (posX < pVal->L-1) && //cas 1
+							(posY == pVal->C-1))
+						*(pT2 + i) = caseVivante(pT1, i, pVal, 1);
 
 					if((posX == 0) && //cas 2
-							(posY > 0) && (posY < nbCol-1))
-						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 2);
+							(posY > 0) && (posY < pVal->C-1))
+						*(pT2 + i) = caseVivante(pT1, i, pVal, 2);
 
 					if((posX == 0) && //cas 3
-							(posY == nbCol-1))
-						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 3);
+							(posY == pVal->C-1))
+						*(pT2 + i) = caseVivante(pT1, i, pVal, 3);
 					
-					if((posX == nbLig-1) && // cas 4
-							(posY > 0) && (posY < nbCol-1))
-						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 4);
+					if((posX == pVal->L-1) && // cas 4
+							(posY > 0) && (posY < pVal->C-1))
+						*(pT2 + i) = caseVivante(pT1, i, pVal, 4);
 
-					if((posX == nbLig-1) && //cas 5
-							(posY == nbCol-1))
-						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 5);
+					if((posX == pVal->L-1) && //cas 5
+							(posY == pVal->C-1))
+						*(pT2 + i) = caseVivante(pT1, i, pVal, 5);
 
-					if((posX > 0) && (posX < nbLig-1) && // cas 8
+					if((posX > 0) && (posX < pVal->L-1) && // cas 8
 							(posY == 0))
-						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 8);
+						*(pT2 + i) = caseVivante(pT1, i, pVal, 8);
 
 					if((posX == 0) && // cas 10
 							(posY == 0))
-						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 10);
+						*(pT2 + i) = caseVivante(pT1, i, pVal, 10);
 
-					if((posX == nbLig-1) && // cas 12
+					if((posX == pVal->L-1) && // cas 12
 							(posY == 0))
-						*(pT2 + i) = caseVivante(pT1, i, nbLig, nbCol, 12);
+						*(pT2 + i) = caseVivante(pT1, i, pVal, 12);
 				}//else end
 			}//for end
 			
 			if(k%nbS == 0)
-				output(pT2, nbLig, nbCol, k, zoom);
+				output(pT2, pVal, k);
 		}//if end
 		else//if compteur%2 != 0, alors T1 est la MaJ et T2 est la base
 		{
 #ifdef DEBUG_LVL_1
 			printf("\nT2\n");
 #endif
-			for(i = 0; i < nbLig * nbCol; i++)
+			for(i = 0; i < pVal->L * pVal->C; i++)
 			{
-				posX = i % nbCol;
-				posY = i / nbCol;
-				if((posX > 0) && (posX < nbLig-1 ) && //cas 0
-						(posY > 0) && (posY < nbCol-1))
-					*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 0);//Maj de case i
+				posX = i % pVal->C;
+				posY = i / pVal->C;
+				if((posX > 0) && (posX < pVal->L-1 ) && //cas 0
+						(posY > 0) && (posY < pVal->C-1))
+					*(pT1 + i) = caseVivante(pT2, i, pVal, 0);//Maj de case i
 				else
 				{
-					if((posX > 0) && (posX < nbLig-1) && //cas 1
-							(posY == nbCol-1))
-						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 1);
+					if((posX > 0) && (posX < pVal->L-1) && //cas 1
+							(posY == pVal->C-1))
+						*(pT1 + i) = caseVivante(pT2, i, pVal, 1);
 
 					if((posX == 0) && //cas 2
-							(posY > 0) && (posY < nbCol-1))
-						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 2);
+							(posY > 0) && (posY < pVal->C-1))
+						*(pT1 + i) = caseVivante(pT2, i, pVal, 2);
 
 					if((posX == 0) && //cas 3
-							(posY == nbCol-1))
-						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 3);
+							(posY == pVal->C-1))
+						*(pT1 + i) = caseVivante(pT2, i, pVal, 3);
 					
-					if((posX == nbLig-1) && // cas 4
-							(posY > 0) && (posY < nbCol-1))
-						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 4);
+					if((posX == pVal->L-1) && // cas 4
+							(posY > 0) && (posY < pVal->C-1))
+						*(pT1 + i) = caseVivante(pT2, i, pVal, 4);
 
-					if((posX == nbLig-1) && //cas 5
-							(posY == nbCol-1))
-						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 5);
+					if((posX == pVal->L-1) && //cas 5
+							(posY == pVal->C-1))
+						*(pT1 + i) = caseVivante(pT2, i, pVal, 5);
 
-					if((posX > 0) && (posX < nbLig-1) && // cas 8
+					if((posX > 0) && (posX < pVal->L-1) && // cas 8
 							(posY == 0))
-						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 8);
+						*(pT1 + i) = caseVivante(pT2, i, pVal, 8);
 
 					if((posX == 0) && // cas 10
 							(posY == 0))
-						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 10);
+						*(pT1 + i) = caseVivante(pT2, i, pVal, 10);
 
-					if((posX == nbLig-1) && // cas 12
+					if((posX == pVal->L-1) && // cas 12
 							(posY == 0))
-						*(pT1 + i) = caseVivante(pT2, i, nbLig, nbCol, 12);
+						*(pT1 + i) = caseVivante(pT2, i, pVal, 12);
 				}//else end
 			}//end for
 			
 			if(k%nbS == 0)
-				output(pT1, nbLig, nbCol, k, zoom);
+				output(pT1, pVal, k);
 		}//end else
 	}//end for (k)	
 }
@@ -208,7 +218,7 @@ static void start(int * pT1, int * pT2, int nbLig, int nbCol, int nbJ, int nbS, 
 /*Fonction qui retourne si la case donnée est vivante.
  *int cas, représente le cas de la case à déterminer, voir doc
 */
-static int caseVivante(int * tableau, int position, int nbLig, int nbCol, int cas)
+static int caseVivante(int * tableau, int position, struct valeurBase * pVal, int cas)
 {
 	//%TODO
 #ifdef DEBUG_LVL_2
@@ -237,62 +247,62 @@ static int caseVivante(int * tableau, int position, int nbLig, int nbCol, int ca
 	tableau += position;
 	switch(cas)
 	{
-		case 0 :	countVoisin += *(tableau-1-nbCol);
-					countVoisin += *(tableau-nbCol);
-					countVoisin += *(tableau+1-nbCol);
+		case 0 :	countVoisin += *(tableau-1-pVal->C);
+					countVoisin += *(tableau-pVal->C);
+					countVoisin += *(tableau+1-pVal->C);
 					countVoisin += *(tableau-1);
 					countVoisin += *(tableau+1);
-					countVoisin += *(tableau-1+nbCol);
-					countVoisin += *(tableau+nbCol);
-					countVoisin += *(tableau+1+nbCol);
+					countVoisin += *(tableau-1+pVal->C);
+					countVoisin += *(tableau+pVal->C);
+					countVoisin += *(tableau+1+pVal->C);
 					//printf("%d", countVoisin);
 					break;
-		case 1 :	countVoisin += *(tableau-1-nbCol);
-					countVoisin += *(tableau-nbCol);
-					countVoisin += *(tableau+1-nbCol);
+		case 1 :	countVoisin += *(tableau-1-pVal->C);
+					countVoisin += *(tableau-pVal->C);
+					countVoisin += *(tableau+1-pVal->C);
 					countVoisin += *(tableau-1);
 					countVoisin += *(tableau+1);
 					//printf("%d", countVoisin);
 					break; 
-		case 2 : 	countVoisin += *(tableau-nbCol);
-					countVoisin += *(tableau+1-nbCol);
+		case 2 : 	countVoisin += *(tableau-pVal->C);
+					countVoisin += *(tableau+1-pVal->C);
 					countVoisin += *(tableau+1);	
-					countVoisin += *(tableau+nbCol);
-					countVoisin += *(tableau+1+nbCol);
+					countVoisin += *(tableau+pVal->C);
+					countVoisin += *(tableau+1+pVal->C);
 					//printf("%d", countVoisin);
 					break;
-		case 3 :	countVoisin += *(tableau-nbCol);
-					countVoisin += *(tableau+1-nbCol);
+		case 3 :	countVoisin += *(tableau-pVal->C);
+					countVoisin += *(tableau+1-pVal->C);
 					countVoisin += *(tableau+1);	
 					//printf("%d", countVoisin);
 					break;
-		case 4 :	countVoisin += *(tableau-1-nbCol);
-					countVoisin += *(tableau-nbCol);
+		case 4 :	countVoisin += *(tableau-1-pVal->C);
+					countVoisin += *(tableau-pVal->C);
 					countVoisin += *(tableau-1);
-					countVoisin += *(tableau-1+nbCol);
-					countVoisin += *(tableau+nbCol);
+					countVoisin += *(tableau-1+pVal->C);
+					countVoisin += *(tableau+pVal->C);
 					//printf("%d", countVoisin);
 					break;
-		case 5 : 	countVoisin += *(tableau-1-nbCol);
-					countVoisin += *(tableau-nbCol);
+		case 5 : 	countVoisin += *(tableau-1-pVal->C);
+					countVoisin += *(tableau-pVal->C);
 					countVoisin += *(tableau-1);
 					//printf("%d", countVoisin);
 					break;
 		case 8 :	countVoisin += *(tableau-1);
 					countVoisin += *(tableau+1);
-					countVoisin += *(tableau-1+nbCol);
-					countVoisin += *(tableau+nbCol);
-					countVoisin += *(tableau+1+nbCol);
+					countVoisin += *(tableau-1+pVal->C);
+					countVoisin += *(tableau+pVal->C);
+					countVoisin += *(tableau+1+pVal->C);
 					//printf("%d", countVoisin);
 					break;
 		case 10:	countVoisin += *(tableau+1);
-					countVoisin += *(tableau+nbCol);
-					countVoisin += *(tableau+1+nbCol);
+					countVoisin += *(tableau+pVal->C);
+					countVoisin += *(tableau+1+pVal->C);
 					//printf("%d", countVoisin);
 					break;
 		case 12:	countVoisin += *(tableau-1);
-					countVoisin += *(tableau-1+nbCol);
-					countVoisin += *(tableau+nbCol);
+					countVoisin += *(tableau-1+pVal->C);
+					countVoisin += *(tableau+pVal->C);
 					//printf("%d", countVoisin);
 	}
 	if(*tableau == 0)
@@ -313,13 +323,13 @@ static int caseVivante(int * tableau, int position, int nbLig, int nbCol, int ca
 	return vivant;
 }
 
-static void output(int * tableau, int nbL, int nbC, int compteur, int zoom)
+static void output(int * tableau, struct valeurBase * pVal, int compteur)
 {
 	int i, j, k, l, depassement = 0;
 	
 	//if(compteur != 0)//ligne noire
 	//{
-		for(i=0; i < nbC * zoom; i++)
+		for(i=0; i < pVal->C * pVal->Z; i++)
 		{
 			if(depassement==70)
 			{		
@@ -333,11 +343,11 @@ static void output(int * tableau, int nbL, int nbC, int compteur, int zoom)
 	//}
 	
 	depassement = 0;
-	for(i = 0; i < nbL; i++)
-		for(k = 0; k < zoom; k++)
+	for(i = 0; i < pVal->L; i++)
+		for(k = 0; k < pVal->Z; k++)
 		{
-			for(j = 0; j < nbC; j++)
-				for(l = 0; l < zoom; l++)
+			for(j = 0; j < pVal->C; j++)
+				for(l = 0; l < pVal->Z; l++)
 				{
 					if(depassement==70)
 					{
@@ -345,7 +355,7 @@ static void output(int * tableau, int nbL, int nbC, int compteur, int zoom)
 						depassement = 0;
 					}
 					depassement++;
-					printf("%d", *(tableau + (i*nbL) + j));
+					printf("%d", *(tableau + (i*pVal->L) + j));
 				}
 			printf("\n");
 			depassement=0;
