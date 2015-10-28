@@ -67,7 +67,7 @@ static void lecture()
 
 	reprint(2);
 	scanf("%d", &val.Z);
-	if(val.Z <= 0 || val.Z > 100)
+	if(val.Z <= 0 || val.Z >= 100)
 		erreur_zoom(val.Z);
 
 	reprint(3);
