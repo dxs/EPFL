@@ -3,13 +3,17 @@
 // nom: Borden
 // prenom: Sven
 // fichier: conway.c
-// date: 02.10.2015
+// date: 20.10.2015
+// version: 0.9
 // description du programme: projet PROG I Automne 2015-16 EPFL MT-EL
 //-------------------------------------------------------------------------------
 
 #include <stdio.h>
 #include <stdlib.h>
 
+#define ZOOM_MAX = 100
+#define ZOOM_MIN = 1
+#define TAILLE_FORMAT = 2
 
 static void lecture();
 static void reprint(int nbPrint);
@@ -35,36 +39,37 @@ static void lecture()
 	//Fields
 	int nbJ, nbS, nbL, nbC, zoom;
 	int i, j;
-	char format[2];
+	int question = 0;
+	char format[TAILLE_FORMAT];
 
 	//Lecture des inputs
 	scanf("%d", &verbose);
 
-	reprint(0);
+	reprint(question++);
 	scanf("%d", &nbJ);
 	if(nbJ < 0)
 		erreur_nbJ(nbJ);
 	
-	reprint(1);
+	reprint(question++);
 	scanf("%d", &nbS);
 	if(nbS < 0)
 		erreur_nbS(nbS);
 	if((nbS > 0 && nbJ % nbS != 0) || (nbJ == 0 && nbS > 1))
 		erreur_nbJ_nbS(nbJ, nbS);
 
-	reprint(2),
+	reprint(question++);
 	scanf("%d", &zoom);
-	if(zoom <= 0 || zoom >= 100)
+	if(zoom < ZOOM_MIN || zoom > ZOOM_MAX)
 		erreur_zoom(zoom);
 
-	reprint(3);
+	reprint(question++);
 	scanf("%s", format);
 
-	reprint(4);
+	reprint(question++);
 	scanf("%d", &nbC);
 	scanf("%d", &nbL);
 
-	reprint(5);
+	reprint(question++);
 
 	int tabInit[nbC][nbL];
 	int tabSuiv[nbC][nbL];
