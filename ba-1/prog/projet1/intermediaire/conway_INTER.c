@@ -3,7 +3,7 @@
 // nom: Borden
 // prenom: Sven
 // fichier: conway.c
-// date: 20.10.2015
+// date: 30.10.2015
 // version: 0.9
 // description du programme: projet PROG I Automne 2015-16 EPFL MT-EL
 //-------------------------------------------------------------------------------
