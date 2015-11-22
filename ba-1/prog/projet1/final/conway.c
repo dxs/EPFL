@@ -10,10 +10,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ZOOM_MAX  100
-#define ZOOM_MIN 1
-#define TAILLE_FORMAT  2
-#define CHARMAX 35
+#define ZOOM_MAX	100
+#define ZOOM_MIN	1
+#define SIZE_FORMAT 2
+#define NB_SAVE		3
+#define MIN_NB_SAVE 2
+#define ALIVE		1
+#define DEAD		0
+#define CHARMAX		35
 
 struct basicVal
 {
@@ -54,7 +58,7 @@ static void lecture()
 {
 	int i, j;
 	int question = 0;
-	char format[2];
+	char format[SIZE_FORMAT];
 	struct basicVal val;
 	struct basicVal *pVal = &val;
 
@@ -139,7 +143,82 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 
 static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 {
-	return 0;
+	int count = 0;
+	int ligne = pVal->ligne;
+	tab += position;
+	switch (cas)
+	{
+	case 0 :
+		count += *(tab - 1 - ligne);
+		count += *(tab - ligne);
+		count += *(tab + 1 - ligne);
+		count += *(tab - 1);
+		count += *(tab + 1);
+		count += *(tab - 1 + ligne);
+		count += *(tab + ligne);
+		count += *(tab + 1 + ligne);
+		break;
+	case 1 :
+		count += *(tab - 1 - ligne);
+		count += *(tab - ligne);
+		count += *(tab + 1 + ligne);
+		count += *(tab - 1);
+		count += *(tab + 1);
+		break;
+	case 2 :
+		count += *(tab - ligne);
+		count += *(tab + 1 - ligne);
+		count += *(tab + 1);
+		count += *(tab + ligne);
+		count += *(tab + 1 + ligne);
+		break;
+	case 3 :
+		count += *(tab - ligne);
+		count += *(tab + 1 - ligne);
+		count += *(tab + 1);
+		break;
+	case 4 :
+		count += *(tab - 1 - ligne);
+		count += *(tab - ligne);
+		count += *(tab - 1);
+		count += *(tab - 1 + ligne);
+		count += *(tab + ligne);
+		break;
+	case 5 :
+		count += *(tab - 1 - ligne);
+		count += *(tab - ligne);
+		count += *(tab - 1);
+		break;
+	case 8 :
+		count += *(tab - 1);
+		count += *(tab + 1);
+		count += *(tab - 1 + ligne);
+		count += *(tab + ligne);
+		count += *(tab + 1 + ligne);
+		break;
+	case 10:
+		count += *(tab + 1);
+		count += *(tab + ligne);
+		count += *(tab + 1 + ligne);
+		break;
+	case 12:
+		count += *(tab - 1);
+		count += *(tab - 1 + ligne);
+		count += *(tab + ligne);
+		break;
+	default:
+		break;
+	}
+	if (*tab == 0)
+		if (count == NB_SAVE)
+			return ALIVE;
+		else
+			return DEAD;
+	else
+		if (count == MIN_NB_SAVE || count == NB_SAVE)
+			return ALIVE;
+		else
+			return DEAD;
 }
 
 static void start(int* pT1, int* pT2, struct basicVal* pVal)
@@ -173,8 +252,6 @@ static void output(int* tableau, struct basicVal* pVal, int compteur)
 			}
 			else
 				printf("1 ");
-	
-	printf("\n");
 	charcompteur = 0;
 
 	//impression du tableau
