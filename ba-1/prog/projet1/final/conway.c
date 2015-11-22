@@ -146,6 +146,28 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	int count = 0;
 	int ligne = pVal->ligne;
 	tab += position;
+	printf("position = %d\n", *tab);
+	switch (cas)
+	{
+	case 0: printf("Centre\n");
+		break;
+	case 1: printf("Bas\n");
+		break;
+	case 2: printf("Gauche\n");
+		break;
+	case 3: printf("Bas-gauche\n");
+		break;
+	case 4: printf("Droite\n");
+		break;
+	case 5: printf("Bas-droite\n");
+		break;
+	case 8: printf("Haut\n");
+		break;
+	case 10: printf("Haut-gauche\n");
+		break;
+	case 12: printf("Haut_droite\n");
+	}
+
 	switch (cas)
 	{
 	case 0 :
