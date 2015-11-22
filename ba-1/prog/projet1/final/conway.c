@@ -28,7 +28,7 @@ static void entete(struct basicVal*);
 
 static int verbose = 0;
 
-int main(int argc, vonst char* argv[])
+int main(int argc, const char* argv[])
 {
 	lecture();
 	return EXIT_SUCCESS;
