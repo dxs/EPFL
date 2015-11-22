@@ -93,7 +93,7 @@ static void lecture()
 	for (i = 0; i < val.colonne; i++)
 		for (j = 0; j < val.ligne; j++)
 			scanf("%d", &tabInit[i][j]);
-	entete(pVal);
+	header(pVal);
 	output(pTabInit, pVal, 0);
 }
 
