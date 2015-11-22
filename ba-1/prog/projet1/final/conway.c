@@ -17,7 +17,7 @@
 #define MIN_NB_SAVE 2
 #define ALIVE		1
 #define DEAD		0
-#define CHARMAX		35
+#define CHARMAX		30
 
 //#define DEBUG
 
