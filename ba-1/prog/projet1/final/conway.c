@@ -112,7 +112,7 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 		//printf("ANALYSE :\tcase = %d\t valeur = %d\n", i, *pT1);
 		posX = i % ligne;
 		posY = i / ligne;
-		if (posX > 0 && (posY > 0) && (posX < colonne) && (posY < ligne))//cas 0
+		if ((posX > 0) && (posY > 0) && (posX < colonne-1) && (posY < ligne-1))//cas 0
 			*(pT2 + i) = caseVivante(pT1, i, pVal, 0);
 		else
 		{
