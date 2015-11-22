@@ -19,7 +19,7 @@
 #define DEAD		0
 #define CHARMAX		30
 
-//#define DEBUG
+#define DEBUG
 
 struct basicVal
 {
