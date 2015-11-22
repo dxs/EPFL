@@ -13,6 +13,7 @@
 #define ZOOM_MAX  100
 #define ZOOM_MIN 1
 #define TAILLE_FORMAT  2
+#define CHARMAX 35
 
 struct basicVal
 {
@@ -33,8 +34,13 @@ static void erreur_zoom(int zoom);
 //-------------------------------------------------------------------------------
 
 static void lecture();
-static void entete(struct basicVal*);
+static void analysePaire();
+static void analyseImpaire();
+static void start();
+static void output(int* tableau, struct basicVal* pVal, int compteur);
+static void header(struct basicVal*);
 static void reprint(int question);
+stat
 
 static int verbose = 0;
 
@@ -82,19 +88,71 @@ static void lecture()
 
 	int tabInit[val.colonne][val.ligne];
 	int tabSuiv[val.colonne][val.ligne];
-
+	int *pTabInit = (int*)tabInit;
+	int *pTabSuiv = (int*)tabSuiv;
 	for (i = 0; i < val.colonne; i++)
 		for (j = 0; j < val.ligne; j++)
 			scanf("%d", &tabInit[i][j]);
 	entete(pVal);
+	output(pTabInit, pVal, 0);
 }
 
-static void entete(struct basicVal * pVal)
+static void analysePaire()
+{
+
+}
+
+static void analyseImpaire()
+{
+
+}
+
+static void start()
+{
+
+}
+
+static void output(int* tableau, struct basicVal* pVal, int compteur)
+{
+	int i, j, k, l, charcompteur = 0;
+	if (compteur != 0) //imprime une ligne noire
+		for (i = 0; i < pVal->colonne * pVal->zoom; i++, charcompteur++)
+			if (charcompteur == CHARMAX)
+			{
+				printf("\n");
+				charcompteur = 0;
+			}
+			else
+				printf("1 ");
+	
+	printf("\n");
+	charcompteur = 0;
+
+	//impression du tableau
+	for (i = 0; i < pVal->ligne; i++)
+		for (k = 0; k < pVal->zoom; k++)
+		{
+			for (j = 0; j < pVal->colonne; j++)
+				for (l = 0; l < pVal->zoom; l++, charcompteur++)
+				{
+					if (charcompteur == CHARMAX)
+					{
+						printf("\n");
+						charcompteur = 0;
+					}
+					printf("%d ", *(tableau + (i*pVal->ligne) + j));
+				}
+			printf("\n");
+			charcompteur = 0;
+		}
+}
+
+static void header(struct basicVal * pVal)
 {
 	int col = pVal->colonne * pVal->zoom;
-	int lig = pVal->ligne * pVal->zoom; //premier affichage
-	lig += (pVal->nbJ / pVal->nbS) * (pVal->ligne * pVal->zoom); //t etapes
-	lig += pVal->nbJ / pVal->nbS; //t lignes noires
+	int lig = pVal->ligne * pVal->zoom;
+	lig += (pVal->nbJ / pVal->nbS) * (pVal->ligne * pVal->zoom);
+	lig += pVal->nbJ / pVal->nbS;
 	printf("P1\n%d %d\n", col, lig);
 }
 
@@ -120,6 +178,7 @@ static void reprint(int question)
 		}
 	}
 }
+
 
 
 //-------------------------------------------------------------------------------
