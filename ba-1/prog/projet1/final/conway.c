@@ -145,15 +145,17 @@ static void start(int* pT1, int* pT2, struct basicVal* pVal)
 {
 	int i;
 	for (i = 0; i < pVal->nbJ; i++)
+	{
 		if (i % 2 == 0)
 			analyse(pT1, pT2, pVal);
 		else
 			analyse(pT2, pT1, pVal);
-	if (i % pVal->nbS == 0)
-		if (i % 2 == 0)
-			output(pT2, pVal, i);
-		else
-			output(pT1, pVal, i);
+		if (i % pVal->nbS == 0)
+			if (i % 2 == 0)
+				output(pT2, pVal, i);
+			else
+				output(pT1, pVal, i);
+	}
 }
 
 static void output(int* tableau, struct basicVal* pVal, int compteur)
