@@ -350,7 +350,8 @@ static void output(int* tableau, struct basicVal* pVal, int compteur)
 						printf("\n");
 						charcompteur = 0;
 					}
-					printf("%d ", *(tableau + (i*pVal->ligne) + j));
+					printf("%d ", i);
+					//printf("%d ", *(tableau + (i*pVal->ligne) + j));
 				}
 			printf("\n");
 			charcompteur = 0;
