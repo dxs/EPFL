@@ -184,61 +184,101 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	{
 	case 0 :
 		count += *(tab - 1 - ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - ligne));
 		count += *(tab - ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - ligne));
 		count += *(tab + 1 - ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - ligne));
 		count += *(tab - 1);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
 		count += *(tab + 1);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
 		count += *(tab - 1 + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + ligne));
 		count += *(tab + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + ligne));
 		count += *(tab + 1 + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + ligne));
 		break;
 	case 1 :
 		count += *(tab - 1 - ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - ligne));
 		count += *(tab - ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - ligne));
 		count += *(tab + 1 + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n",*(tab + 1 + ligne));
 		count += *(tab - 1);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
 		count += *(tab + 1);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
 		break;
 	case 2 :
 		count += *(tab - ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - ligne));
 		count += *(tab + 1 - ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - ligne));
 		count += *(tab + 1);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
 		count += *(tab + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + ligne));
 		count += *(tab + 1 + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + ligne));
 		break;
 	case 3 :
 		count += *(tab - ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - ligne));
 		count += *(tab + 1 - ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - ligne));
 		count += *(tab + 1);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
 		break;
 	case 4 :
 		count += *(tab - 1 - ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - ligne));
 		count += *(tab - ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - ligne));
 		count += *(tab - 1);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
 		count += *(tab - 1 + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + ligne));
 		count += *(tab + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + ligne));
 		break;
 	case 5 :
 		count += *(tab - 1 - ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - ligne));
 		count += *(tab - ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - ligne));
 		count += *(tab - 1);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
 		break;
 	case 8 :
 		count += *(tab - 1);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
 		count += *(tab + 1);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
 		count += *(tab - 1 + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + ligne));
 		count += *(tab + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + ligne));
 		count += *(tab + 1 + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + ligne));
 		break;
 	case 10:
 		count += *(tab + 1);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
 		count += *(tab + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + ligne));
 		count += *(tab + 1 + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + ligne));
 		break;
 	case 12:
 		count += *(tab - 1);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
 		count += *(tab - 1 + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + ligne));
 		count += *(tab + ligne);
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + ligne));
 		break;
 	default:
 		break;
