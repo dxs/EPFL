@@ -109,7 +109,7 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 	int colonne = pVal->colonne;
 	for (i = 0; i < ligne * colonne; i++)
 	{
-		printf("i = %d\t pT1 = %d\n", i, *pT1);
+		printf("ANALYSE :\t i = %d\t pT1 = %d\n", i, *pT1);
 		posX = i % ligne;
 		posY = i / ligne;
 		if (posX > 0 && (posY > 0) && (posX < colonne) && (posY < ligne))//cas 0
@@ -154,13 +154,12 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 
 static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 {
-	printf("VALEUR BASE = %d\n", *tab);
 	int count = 0;
 	int ligne = pVal->ligne;
 	tab += position;
-	printf("position = %d\n", *tab);
+	printf("CALCUL :\tposition = %d\n", *tab);
 
-	switch (cas)
+	/*switch (cas)
 	{
 	case 0: printf("Centre\n");
 		break;
@@ -179,7 +178,7 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	case 10: printf("Haut-gauche\n");
 		break;
 	case 12: printf("Haut_droite\n");
-	}
+	}*/
 
 	switch (cas)
 	{
@@ -244,7 +243,7 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	default:
 		break;
 	}
-	printf("COUNT = %d\n", count);
+	printf("CALCUL :\tCOUNT = %d\n", count);
 	if (*tab == 0)
 		if (count == NB_SAVE)
 			return ALIVE;
@@ -262,7 +261,7 @@ static void start(int* pT1, int* pT2, struct basicVal* pVal)
 	int i;
 	for (i = 1; i <= pVal->nbJ; i++)
 	{
-		//printf("i = %d\n", i);
+		printf("START :\ti = %d\n", i);
 		if (i % 2 == 0)
 			analyse(pT1, pT2, pVal);
 		else
