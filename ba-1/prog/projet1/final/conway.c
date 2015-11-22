@@ -35,7 +35,7 @@ static void erreur_zoom(int zoom);
 
 static void lecture();
 static void analyse(int* pT1, int* pT2, struct basicVal* pVal);
-static void caseVivante(int* tab, int position, struct basicVal* pVal, int cas);
+static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas);
 static void start(int* pT1, int* pT2, struct basicVal* pVal);
 static void output(int* tableau, struct basicVal* pVal, int compteur);
 static void header(struct basicVal*);
@@ -138,7 +138,7 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 
 static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 {
-
+	return 0;
 }
 
 static void start(int* pT1, int* pT2, struct basicVal* pVal)
