@@ -96,8 +96,8 @@ static void lecture()
 	int tabSuiv[val.colonne][val.ligne];
 	int *pTabInit = (int*)tabInit;
 	int *pTabSuiv = (int*)tabSuiv;
-	for (i = 0; i < val.colonne; i++)
-		for (j = 0; j < val.ligne; j++)
+	for (i = 0; i < val.ligne; i++)
+		for (j = 0; j < val.colonne; j++)
 			scanf("%d", &tabInit[i][j]);
 	header(pVal);
 	output(pTabInit, pVal, 0);
