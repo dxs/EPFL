@@ -330,8 +330,7 @@ static void output(int* tableau, struct basicVal* pVal, int compteur)
 				printf("\n");
 				charcompteur = 0;
 			}
-			else
-				printf("1 ");
+			printf("1 ");
 		}
 	printf("\n");
 	charcompteur = 0;
