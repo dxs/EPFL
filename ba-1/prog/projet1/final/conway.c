@@ -115,8 +115,38 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 			*(pT2 + i) = caseVivante(pT1, i, pVal, 0);
 		else
 		{
-			
-		}
+			if ((posX > 0) && (posX < colonne - 1) && //cas 1
+				(posY == ligne - 1))
+				*(pT2 + i) = caseVivante(pT1, i, pVal, 1);
+
+			if ((posX == 0) && //cas 2
+				(posY > 0) && (posY < ligne - 1))
+				*(pT2 + i) = caseVivante(pT1, i, pVal, 2);
+
+			if ((posX == 0) && //cas 3
+				(posY == ligne - 1))
+				*(pT2 + i) = caseVivante(pT1, i, pVal, 3);
+
+			if ((posX == colonne - 1) && // cas 4
+				(posY > 0) && (posY < ligne - 1))
+				*(pT2 + i) = caseVivante(pT1, i, pVal, 4);
+
+			if ((posX == colonne - 1) && //cas 5
+				(posY == ligne - 1))
+				*(pT2 + i) = caseVivante(pT1, i, pVal, 5);
+
+			if ((posX > 0) && (posX < colonne - 1) && // cas 8
+				(posY == 0))
+				*(pT2 + i) = caseVivante(pT1, i, pVal, 8);
+
+			if ((posX == 0) && // cas 10
+				(posY == 0))
+				*(pT2 + i) = caseVivante(pT1, i, pVal, 10);
+
+			if ((posX == colonne - 1) && // cas 12
+				(posY == 0))
+				*(pT2 + i) = caseVivante(pT1, i, pVal, 12);
+		}//else end
 
 	}//for end
 }
@@ -211,7 +241,7 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	default:
 		break;
 	}
-	printf("COUNT = &d\n", count);
+	printf("COUNT = %d\n", count);
 	if (*tab == 0)
 		if (count == NB_SAVE)
 			return ALIVE;
