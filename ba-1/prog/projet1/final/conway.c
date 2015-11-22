@@ -25,6 +25,7 @@ struct basicVal
 
 static void lecture();
 static void entete(struct basicVal*);
+static void reprint(int nbQuestion);
 
 static int verbose = 0;
 
@@ -79,11 +80,16 @@ static void lecture()
 	entete(pVal);
 }
 
-void entete(struct basicVal * pVal)
+static void entete(struct basicVal * pVal)
 {
 	int col = pVal->colonne * pVal->zoom;
 	int lig = pVal->ligne * pVal->zoom; //premier affichage
 	lig += (pVal->nbJ / pVal->nbS) * (pVal->ligne * pVal->zoom); //t etapes
 	lig += pVal->nbJ / pVal->nbS; //t lignes noires
 	printf("P1\n%d %d\n", col, lig);
+}
+
+static void reprint(int nbQuestion)
+{
+
 }
