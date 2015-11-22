@@ -224,7 +224,7 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 static void start(int* pT1, int* pT2, struct basicVal* pVal)
 {
 	int i;
-	for (i = 0; i < pVal->nbJ; i++)
+	for (i = 1; i <= pVal->nbJ; i++)
 	{
 		//printf("i = %d\n", i);
 		if (i % 2 == 0)
@@ -245,6 +245,7 @@ static void output(int* tableau, struct basicVal* pVal, int compteur)
 	int i, j, k, l, charcompteur = 0;
 	if (compteur != 0) //imprime une ligne noire
 		for (i = 0; i < pVal->colonne * pVal->zoom; i++, charcompteur++)
+		{
 			if (charcompteur == CHARMAX)
 			{
 				printf("\n");
@@ -252,6 +253,8 @@ static void output(int* tableau, struct basicVal* pVal, int compteur)
 			}
 			else
 				printf("1 ");
+		}
+	printf("\n");
 	charcompteur = 0;
 
 	//impression du tableau
