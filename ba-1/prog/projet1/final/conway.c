@@ -34,7 +34,7 @@ static void erreur_zoom(int zoom);
 
 static void lecture();
 static void entete(struct basicVal*);
-static void reprint(int nbQuestion);
+static void reprint(int question);
 
 static int verbose = 0;
 
@@ -98,11 +98,11 @@ static void entete(struct basicVal * pVal)
 	printf("P1\n%d %d\n", col, lig);
 }
 
-static void reprint(int nbQuestion)
+static void reprint(int question)
 {
 	if (verbose)
 	{
-		switch (nbPrint)
+		switch (question)
 		{
 		case 0: printf("Entrez le nombre de mises à jours\n");
 			break;
