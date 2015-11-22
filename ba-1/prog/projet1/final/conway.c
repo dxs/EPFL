@@ -40,7 +40,7 @@ static void start();
 static void output(int* tableau, struct basicVal* pVal, int compteur);
 static void header(struct basicVal*);
 static void reprint(int question);
-stat
+
 
 static int verbose = 0;
 
