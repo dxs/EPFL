@@ -109,7 +109,7 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 	int colonne = pVal->colonne;
 	for (i = 0; i < ligne * colonne; i++)
 	{
-		printf("ANALYSE :\ti = %d\t pT1 = %d\n", i, *pT1);
+		printf("ANALYSE :\tcase = %d\t valeur = %d\n", i, *pT1);
 		posX = i % ligne;
 		posY = i / ligne;
 		if (posX > 0 && (posY > 0) && (posX < colonne) && (posY < ligne))//cas 0
@@ -157,7 +157,7 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	int count = 0;
 	int ligne = pVal->ligne;
 	tab += position;
-	printf("CALCUL :\tposition = %d\n", *tab);
+	printf("CALCUL :\tvaleur = %d\n", *tab);
 
 	/*switch (cas)
 	{
