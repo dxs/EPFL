@@ -34,9 +34,8 @@ static void erreur_zoom(int zoom);
 //-------------------------------------------------------------------------------
 
 static void lecture();
-static void analysePaire();
-static void analyseImpaire();
-static void start();
+static void analyse(int* pT1, int* pT2, struct basicVal* pVal);
+static void start(int* pT1, int* pT2, struct basicVal* pVal);
 static void output(int* tableau, struct basicVal* pVal, int compteur);
 static void header(struct basicVal*);
 static void reprint(int question);
@@ -97,19 +96,63 @@ static void lecture()
 	output(pTabInit, pVal, 0);
 }
 
-static void analysePaire()
+static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
+{
+	int i, posX, posY;
+	int ligne = pVal->ligne;
+	int colonne = pVal->colonne;
+	for (i = 0; i < ligne * colonne; i++)
+	{
+		posX = i % ligne;
+		posY = i / ligne;
+		if ((posX > 0) && (y > 0) && (posX < i) && (posY < j))//cas 0
+			*(pT2 + i) = caseVivante(pT1, i, pVal, 0);
+		else
+		{
+			if (posY == 0 || posY == ligne)
+				if (posY == 0)//cas 8
+					*(pT2 + i) = caseVivante(pT1, i, pVal, 8);
+				else//cas 1
+					*(pT2 + i) = caseVivante(pT1, i, pVal, 1);
+			else
+				if (posX == 0 || posX == colonne)
+					if (posX == 0)//cas 2
+						*(pT2 + i) = caseVivante(pT1, i, pVal, 2);
+					else//cas 4
+						*(pT2 + i) = caseVivante(pT1, i, pVal, 4);
+			if (posX == 0)
+				if(posY == 0)//cas 10
+					*(pT2 + i) = caseVivante(pT1, i, pVal, 10);
+				else//cas 3
+					*(pT2 + i) = caseVivante(pT1, i, pVal, 3);
+			else
+				if(posX == colonne && posY == 0)//cas 12
+					*(pT2 + i) = caseVivante(pT1, i, pVal, 12);
+				else//cas 5
+					*(pT2 + i) = caseVivante(pT1, i, pVal, 5);
+		}
+
+	}//for end
+}
+
+static int caseVivante(int* tableau, int position, struct basicVal* pVal, cas)
 {
 
 }
 
-static void analyseImpaire()
+static void start(int* pT1, int* pT2, struct basicVal* pVal)
 {
-
-}
-
-static void start()
-{
-
+	int i;
+	for (i = 0; i < pVal->nbJ; i++)
+		if (i % 2 == 0)
+			analyse(pT1, pT2, pVal);
+		else
+			analyse(pT2, pT1, pVal);
+	if (i % pVal->nbS == 0)
+		if (i % 2 == 0)
+			output(pT2, pVal, i);
+		else
+			output(pT1, pVal, i);
 }
 
 static void output(int* tableau, struct basicVal* pVal, int compteur)
