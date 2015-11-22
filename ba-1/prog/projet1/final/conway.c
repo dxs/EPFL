@@ -159,27 +159,6 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	tab += position;
 	printf("CALCUL :\tvaleur = %d\t cas = %d\n", *tab, cas);
 
-	/*switch (cas)
-	{
-	case 0: printf("Centre\n");
-		break;
-	case 1: printf("Bas\n");
-		break;
-	case 2: printf("Gauche\n");
-		break;
-	case 3: printf("Bas-gauche\n");
-		break;
-	case 4: printf("Droite\n");
-		break;
-	case 5: printf("Bas-droite\n");
-		break;
-	case 8: printf("Haut\n");
-		break;
-	case 10: printf("Haut-gauche\n");
-		break;
-	case 12: printf("Haut_droite\n");
-	}*/
-
 	switch (cas)
 	{
 	case 0 :
@@ -283,17 +262,29 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	default:
 		break;
 	}
-	printf("CALCUL :\tCOUNT = %d\n\n", count);
+	printf("CALCUL :\tCOUNT = %d\n", count);
 	if (*tab == 0)
 		if (count == NB_SAVE)
+		{
+			printf("CALCUL :\tVIVANT\n\n");
 			return ALIVE;
+		}
 		else
+		{
+			printf("CALCUL :\tMORT\n\n");
 			return DEAD;
+		}
 	else
 		if (count == MIN_NB_SAVE || count == NB_SAVE)
+		{
+			printf("CALCUL :\tVIVANT\n\n");
 			return ALIVE;
+		}
 		else
+		{
+			printf("CALCUL :\tMORT\n\n");
 			return DEAD;
+		}
 }
 
 static void start(int* pT1, int* pT2, struct basicVal* pVal)
