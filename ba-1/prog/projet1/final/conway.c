@@ -153,10 +153,12 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 
 static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 {
+	printf("VALEUR BASE = %d\n", *tab);
 	int count = 0;
 	int ligne = pVal->ligne;
 	tab += position;
 	printf("position = %d\n", *tab);
+
 	switch (cas)
 	{
 	case 0: printf("Centre\n");
