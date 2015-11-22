@@ -95,6 +95,7 @@ static void lecture()
 			scanf("%d", &tabInit[i][j]);
 	header(pVal);
 	output(pTabInit, pVal, 0);
+	start(pTabInit, pTabSuiv, pVal);
 }
 
 static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
@@ -146,7 +147,7 @@ static void start(int* pT1, int* pT2, struct basicVal* pVal)
 	int i;
 	for (i = 0; i < pVal->nbJ; i++)
 	{
-		printf("i = %d\n", i);
+		//printf("i = %d\n", i);
 		if (i % 2 == 0)
 			analyse(pT1, pT2, pVal);
 		else
