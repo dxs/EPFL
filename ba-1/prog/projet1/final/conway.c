@@ -10,9 +10,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ZOOM_MAX = 100
-#define ZOOM_MIN = 1
-#define TAILLE_FORMAT = 2
+#define ZOOM_MAX  100
+#define ZOOM_MIN 1
+#define TAILLE_FORMAT  2
 
 struct basicVal
 {
@@ -23,7 +23,8 @@ struct basicVal
 	int nbS;
 };
 
-static void lecture(),
+static void lecture();
+static void entete(struct basicVal*);
 
 static int verbose = 0;
 
@@ -49,7 +50,7 @@ static void lecture()
 		erreur_nbJ(val.nbJ);
 
 	reprint(question++);
-	scanf("%d", val.nbS);
+	scanf("%d", &val.nbS);
 	if (val.nbS < 0)
 		erreur_nbS(val.nbS);
 	if ((val.nbS > 0 && val.nbJ % val.nbS != 0) || (val.nbJ == 0 && val.nbS > 1))
@@ -72,8 +73,8 @@ static void lecture()
 	int tabInit[val.colonne][val.ligne];
 	int tabSuiv[val.colonne][val.ligne];
 
-	for (i = 0; i < nbC; i++)
-		for (j = 0; j < nbL; j++)
+	for (i = 0; i < val.colonne; i++)
+		for (j = 0; j < val.ligne; j++)
 			scanf("%d", &tabInit[i][j]);
 	entete(pVal);
 }
