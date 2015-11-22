@@ -23,6 +23,15 @@ struct basicVal
 	int nbS;
 };
 
+//-------------------------------------------------------------------------------
+//                 NE PAS MODIFIER CES PROTOTYPES DE FONCTIONS
+
+static void erreur_nbJ(int nbJ);
+static void erreur_nbS(int nbS);
+static void erreur_nbJ_nbS(int nbJ, int nbS);
+static void erreur_zoom(int zoom);
+//-------------------------------------------------------------------------------
+
 static void lecture();
 static void entete(struct basicVal*);
 static void reprint(int nbQuestion);
@@ -91,5 +100,62 @@ static void entete(struct basicVal * pVal)
 
 static void reprint(int nbQuestion)
 {
+	if (verbose)
+	{
+		switch (nbPrint)
+		{
+		case 0: printf("Entrez le nombre de mises à jours\n");
+			break;
+		case 1: printf("Entrez la période d'affichage\n");
+			break;
+		case 2: printf("Entrez le facteur de zoom\n");
+			break;
+		case 3: printf("Entrez le code du format de l'image\n");
+			break;
+		case 4: printf("Entrez les dimensions de l'image\n");
+			break;
+		case 5: printf("Entrez les valeurs du monde\n");
+			break;
+		default: break;
+		}
+	}
+}
 
+
+//-------------------------------------------------------------------------------
+// Fonctions prédéfinies pour indiquer si les données sont correctes
+// Les fonctions signalant une erreur provoquent la fin du programme
+// en appelant exit(). Leur message d'erreur est toujours affiché.
+//
+//                 NE PAS MODIFIER CES FONCTIONS
+//-------------------------------------------------------------------------------
+
+// A appeler si le nombre de mises à jours n'est pas positif
+static void erreur_nbJ(int nbJ)
+{
+	printf("Le nombre de mises à jours nbJ n'est pas positif: %d\n", nbJ);
+	exit(EXIT_FAILURE);
+}
+
+// A appeler si la periode de sauvegarde n'est pas positive
+static void erreur_nbS(int nbS)
+{
+	printf("La période de sauvegarde nbS n'est pas positive: %d\n", nbS);
+	exit(EXIT_FAILURE);
+}
+
+// A appeler si la periode de sauvegarde n'est pas positive
+static void erreur_nbJ_nbS(int nbJ, int nbS)
+{
+	printf("La combinaison du nombre de mises à jour %d et de la période de "
+		"sauvegarde %d est interdite\n", nbJ, nbS);
+	exit(EXIT_FAILURE);
+}
+
+// A appeler si le facteur de zoom n'est pas dans le bon intervalle
+static void erreur_zoom(int zoom)
+{
+	printf("Le facteur de zoom %d n'est pas compris dans l'intervalle ]0,100]\n",
+		zoom);
+	exit(EXIT_FAILURE);
 }
