@@ -184,7 +184,7 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - ligne));
 		count += *(tab - ligne);
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab - ligne));
-		count += *(tab + 1 + ligne);
+		count += *(tab + 1 - ligne);
 		printf("CALCUL :\tvaleurTab = %d\n",*(tab + 1 + ligne));
 		count += *(tab - 1);
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
