@@ -109,7 +109,7 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 	int colonne = pVal->colonne;
 	for (i = 0; i < ligne * colonne; i++)
 	{
-		printf("ANALYSE :\t i = %d\t pT1 = %d\n", i, *pT1);
+		printf("ANALYSE :\ti = %d\t pT1 = %d\n", i, *pT1);
 		posX = i % ligne;
 		posY = i / ligne;
 		if (posX > 0 && (posY > 0) && (posX < colonne) && (posY < ligne))//cas 0
@@ -263,15 +263,15 @@ static void start(int* pT1, int* pT2, struct basicVal* pVal)
 	{
 		printf("START :\ti = %d\n", i);
 		if (i % 2 == 0)
-			analyse(pT1, pT2, pVal);
-		else
 			analyse(pT2, pT1, pVal);
+		else
+			analyse(pT1, pT2, pVal);
 
 		if (i % pVal->nbS == 0)
 			if (i % 2 == 0)
-				output(pT2, pVal, i);
-			else
 				output(pT1, pVal, i);
+			else
+				output(pT2, pVal, i);
 	}
 }
 
