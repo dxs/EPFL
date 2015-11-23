@@ -114,7 +114,7 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 	int colonne = pVal->colonne;
 	for (i = 0; i < ligne * colonne; i++)
 	{
-		//printf("ANALYSE :\tcase = %d\t valeur = %d\n", i, *pT1);
+		printf("ANALYSE :\tcase = %d\t valeur = %d\n", i, *pT1);
 		posX = i % ligne;
 		posY = i / ligne;
 		if ((posX > 0) && (posY > 0) && (posX < colonne-1) && (posY < ligne-1))//cas 0
