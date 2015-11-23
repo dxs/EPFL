@@ -115,42 +115,42 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 	for (i = 0; i < ligne * colonne; i++)
 	{
 		printf("ANALYSE :\tcase = %d\t valeur = %d\n", i, *pT1);
-		posY = i % ligne;
 		posX = i / ligne;
-		if ((posX > 0) && (posY > 0) && (posX < colonne-1) && (posY < ligne-1))//cas 0
+		posY = i % ligne;
+		if ((posX > 0) && (posY > 0) && (posX < ligne-1) && (posY < colonne-1))//cas 0
 			*(pT2 + i) = caseVivante(pT1, i, pVal, 0);
 		else
 		{
-			if ((posX > 0) && (posX < colonne - 1) && //cas 1
-				(posY == ligne - 1))
+			if ((posX == lignes - 1) && //cas 1
+				(posY > 0) && (posY < colonne-1)
 				*(pT2 + i) = caseVivante(pT1, i, pVal, 1);
 
-			if ((posX == 0) && //cas 2
-				(posY > 0) && (posY < ligne - 1))
+			if ((posX > 0) && (posX < ligne - 1) &&//cas 2
+				(posY == 0))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, 2);
 
-			if ((posX == 0) && //cas 3
-				(posY == ligne - 1))
+			if ((posX == ligne - 1) && //cas 3
+				(posY == 0))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, 3);
 
-			if ((posX == colonne - 1) && // cas 4
-				(posY > 0) && (posY < ligne - 1))
+			if ((posX > 0) && (posX < ligne - 1)// cas 4
+				(posY == colonne - 1))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, 4);
 
-			if ((posX == colonne - 1) && //cas 5
-				(posY == ligne - 1))
+			if ((posX == ligne - 1) && //cas 5
+				(posY == colonne - 1))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, 5);
 
-			if ((posX > 0) && (posX < colonne - 1) && // cas 8
-				(posY == 0))
+			if ((posX == 0) && // cas 8
+				(posY > 0) && (posY < colonne - 1)
 				*(pT2 + i) = caseVivante(pT1, i, pVal, 8);
 
 			if ((posX == 0) && // cas 10
 				(posY == 0))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, 10);
 
-			if ((posX == colonne - 1) && // cas 12
-				(posY == 0))
+			if ((posX == 0) && // cas 12
+				(posY == colonne - 1))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, 12);
 		}//else end
 
