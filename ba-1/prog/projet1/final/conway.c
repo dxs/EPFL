@@ -100,7 +100,7 @@ static void lecture()
 		for (j = 0; j < val.colonne; j++)
 		{
 			scanf("%d", &tabInit[i][j]);
-			printf("LECTURE :\t%d\tcol : %d\tlig : %d\n", tabInit[i][j], i, j);
+			printf("LECTURE :\t%d\tcol : %d\tlig : %d\n", tabInit[j][i], j, i);
 		}
 	header(pVal);
 	output(pTabInit, pVal, 0);
