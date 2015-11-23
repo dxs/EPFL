@@ -92,15 +92,15 @@ static void lecture()
 
 	reprint(question++);
 
-	int tabInit[val.colonne][val.ligne];
-	int tabSuiv[val.colonne][val.ligne];
+	int tabInit[val.ligne][val.colonne];
+	int tabSuiv[val.ligne][val.colonne];
 	int *pTabInit = (int*)tabInit;
 	int *pTabSuiv = (int*)tabSuiv;
 	for (i = 0; i < val.ligne; i++)
 		for (j = 0; j < val.colonne; j++)
 		{
 			scanf("%d", &tabInit[i][j]);
-			printf("LECTURE :\t%d\tcol : %d\tlig : %d\n", tabInit[j][i], j, i);
+			printf("LECTURE :\t%d\n", tabInit[i][j]);
 		}
 	header(pVal);
 	output(pTabInit, pVal, 0);
