@@ -115,8 +115,8 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 	for (i = 0; i < ligne * colonne; i++)
 	{
 		printf("ANALYSE :\tcase = %d\t valeur = %d\n", i, *pT1);
-		posX = i % ligne;
-		posY = i / ligne;
+		posY = i % ligne;
+		posX = i / ligne;
 		if ((posX > 0) && (posY > 0) && (posX < colonne-1) && (posY < ligne-1))//cas 0
 			*(pT2 + i) = caseVivante(pT1, i, pVal, 0);
 		else
@@ -351,7 +351,7 @@ static void output(int* tableau, struct basicVal* pVal, int compteur)
 						charcompteur = 0;
 					}
 					//printf("%d ", (i*pVal->colonne) + j);
-					printf("%d\t ", *(tableau + (i*pVal->colonne) + j));
+					printf("%d ", *(tableau + (i*pVal->colonne) + j));
 				}
 			printf("\n");
 			charcompteur = 0;
