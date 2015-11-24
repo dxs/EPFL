@@ -259,36 +259,18 @@ static void start(int* pT1, int* pT2, struct basicVal* pVal)
 static void output(int* tableau, struct basicVal* pVal, int compteur)
 {
 	int i, j, k, l, charCompteur = 0;
-	if (compteur != 0) //imprime une ligne noire
-		for (i = 0; i < pVal->colonne * pVal->zoom; i++, charCompteur++)
-		{
-			if (charCompteur == CHARMAX)
-			{
-				printf("\n");
-				charCompteur = 0;
-			}
-			printf("1 ");
-		}
-	printf("\n");
-	charCompteur = 0;
-
-	//impression du tableau
+	printf("\e[1;1H\e[2J");
 	for (i = 0; i < pVal->ligne; i++)
 		for (k = 0; k < pVal->zoom; k++)
 		{
 			for (j = 0; j < pVal->colonne; j++)
 				for (l = 0; l < pVal->zoom; l++, charCompteur++)
 				{
-					if (charCompteur == CHARMAX)
-					{
-						printf("\n");
-						charCompteur = 0;
-					}
-					printf("%d ", *(tableau + (i*pVal->colonne) + j));
+					*(tableau + (i*pVal->colonne) + j) ? printf("%c", '*') : printf("%c", 32);
 				}
 			printf("\n");
-			charCompteur = 0;
 		}
+	Sleep(10);
 }
 
 static void header(struct basicVal * pVal)
