@@ -378,10 +378,16 @@ static void output(int* tableau, struct basicVal* pVal, int compteur)
 
 static void header(struct basicVal * pVal)
 {
+#ifdef DEBUG
+	printf("HEADER :\theader start\n");
+#endif
 	int col = pVal->colonne * pVal->zoom;
 	int lig = pVal->ligne * pVal->zoom;
 	lig += (pVal->nbJ / pVal->nbS) * (pVal->ligne * pVal->zoom);
 	lig += pVal->nbJ / pVal->nbS;
+#ifdef DEBUG
+	printf("HEADER :\theader end\n");
+#endif
 	printf("P1\n%d %d\n", col, lig);
 }
 
