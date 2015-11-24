@@ -19,7 +19,7 @@
 #define DEAD		0
 #define CHARMAX		30
 
-#define DEBUG
+//#define DEBUG
 
 struct basicVal
 {
@@ -100,7 +100,9 @@ static void lecture()
 		for (j = 0; j < val.colonne; j++)
 		{
 			scanf("%d", &tabInit[i][j]);
+#ifdef DEBUG
 			printf("LECTURE :\t%d\n", tabInit[i][j]);
+#endif
 		}
 	header(pVal);
 	output(pTabInit, pVal, 0);
@@ -114,15 +116,17 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 	int colonne = pVal->colonne;
 	for (i = 0; i < ligne * colonne; i++)
 	{
-		printf("ANALYSE :\tcase = %d\t valeur = %d\n", i, *pT1);
-		posX = i / ligne;
-		posY = i % ligne;
+		posX = i / colonne;
+		posY = i % colonne;
+#ifdef DEBUG
+		printf("ANALYSE :\tcase = %d\t valeur = %d\tposX = %d\tposY = %d\n", i, *pT1, posX, posY);
+#endif
 		if ((posX > 0) && (posY > 0) && (posX < ligne-1) && (posY < colonne-1))//cas 0
 			*(pT2 + i) = caseVivante(pT1, i, pVal, 0);
 		else
 		{
-			if ((posX == lignes - 1) && //cas 1
-				(posY > 0) && (posY < colonne-1)
+			if ((posX == ligne - 1) && //cas 1
+				(posY > 0) && (posY < colonne-1))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, 1);
 
 			if ((posX > 0) && (posX < ligne - 1) &&//cas 2
@@ -133,7 +137,7 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 				(posY == 0))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, 3);
 
-			if ((posX > 0) && (posX < ligne - 1)// cas 4
+			if ((posX > 0) && (posX < ligne - 1) &&// cas 4
 				(posY == colonne - 1))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, 4);
 
@@ -142,7 +146,7 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 				*(pT2 + i) = caseVivante(pT1, i, pVal, 5);
 
 			if ((posX == 0) && // cas 8
-				(posY > 0) && (posY < colonne - 1)
+				(posY > 0) && (posY < colonne - 1))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, 8);
 
 			if ((posX == 0) && // cas 10
@@ -160,7 +164,7 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 {
 	int count = 0;
-	int ligne = pVal->ligne;
+	int colonne = pVal->colonne;
 	tab += position;
 #ifdef DEBUG
 	printf("CALCUL :\tvaleur = %d\t cas = %d\n", *tab, cas);
@@ -168,119 +172,119 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	switch (cas)
 	{
 	case 0 :
-		count += *(tab - 1 - ligne);
-		count += *(tab - ligne);
-		count += *(tab + 1 - ligne);
+		count += *(tab - 1 - colonne);
+		count += *(tab - colonne);
+		count += *(tab + 1 - colonne);
 		count += *(tab - 1);
 		count += *(tab + 1);
-		count += *(tab - 1 + ligne);
-		count += *(tab + ligne);
-		count += *(tab + 1 + ligne);
+		count += *(tab - 1 + colonne);
+		count += *(tab + colonne);
+		count += *(tab + 1 + colonne);
 #ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - ligne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - ligne));		
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - ligne));		
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - colonne));
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));		
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));		
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + ligne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + ligne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + ligne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
 #endif
 		break;
 	case 1 :
-		count += *(tab - 1 - ligne);
-		count += *(tab - ligne);
-		count += *(tab + 1 - ligne);
+		count += *(tab - 1 - colonne);
+		count += *(tab - colonne);
+		count += *(tab + 1 - colonne);
 		count += *(tab - 1);
 		count += *(tab + 1);
 #ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - ligne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - ligne));		
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + ligne));		
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));		
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
 #endif
 		break;
 	case 2 :
-		count += *(tab - ligne);
-		count += *(tab + 1 - ligne);
+		count += *(tab - colonne);
+		count += *(tab + 1 - colonne);
 		count += *(tab + 1);
-		count += *(tab + ligne);
-		count += *(tab + 1 + ligne);
+		count += *(tab + colonne);
+		count += *(tab + 1 + colonne);
 #ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - ligne));		
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - ligne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - colonne));
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + ligne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + ligne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
 #endif
 		break;
 	case 3 :
-		count += *(tab - ligne);
-		count += *(tab + 1 - ligne);
+		count += *(tab - colonne);
+		count += *(tab + 1 - colonne);
 		count += *(tab + 1);
 #ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - ligne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - ligne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - colonne));
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
 #endif
 		break;
 	case 4 :
-		count += *(tab - 1 - ligne);
-		count += *(tab - ligne);
+		count += *(tab - 1 - colonne);
+		count += *(tab - colonne);
 		count += *(tab - 1);
-		count += *(tab - 1 + ligne);
-		count += *(tab + ligne);
+		count += *(tab - 1 + colonne);
+		count += *(tab + colonne);
 #ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - ligne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - ligne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + ligne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + ligne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
 #endif
 		break;
 	case 5 :
-		count += *(tab - 1 - ligne);
-		count += *(tab - ligne);
+		count += *(tab - 1 - colonne);
+		count += *(tab - colonne);
 		count += *(tab - 1);
 #ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - ligne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - ligne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
 #endif
 		break;
 	case 8 :
 		count += *(tab - 1);
 		count += *(tab + 1);
-		count += *(tab - 1 + ligne);
-		count += *(tab + ligne);
-		count += *(tab + 1 + ligne);
+		count += *(tab - 1 + colonne);
+		count += *(tab + colonne);
+		count += *(tab + 1 + colonne);
 #ifdef DEBUG
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + ligne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + ligne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + ligne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
 #endif
 		break;
 	case 10:
 		count += *(tab + 1);
-		count += *(tab + ligne);
-		count += *(tab + 1 + ligne);
+		count += *(tab + colonne);
+		count += *(tab + 1 + colonne);
 #ifdef DEBUG
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + ligne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + ligne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
 #endif
 		break;
 	case 12:
 		count += *(tab - 1);
-		count += *(tab - 1 + ligne);
-		count += *(tab + ligne);
+		count += *(tab - 1 + colonne);
+		count += *(tab + colonne);
 #ifdef DEBUG
 		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + ligne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + ligne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + colonne));
+		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
 #endif
 		break;
 	default:
@@ -350,7 +354,9 @@ static void output(int* tableau, struct basicVal* pVal, int compteur)
 						printf("\n");
 						charcompteur = 0;
 					}
-					//printf("%d ", (i*pVal->colonne) + j);
+#ifdef DEBUG
+					printf("%d ", (i*pVal->colonne) + j);
+#endif
 					printf("%d ", *(tableau + (i*pVal->colonne) + j));
 				}
 			printf("\n");
