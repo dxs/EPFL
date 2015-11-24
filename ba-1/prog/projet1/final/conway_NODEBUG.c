@@ -84,9 +84,7 @@ static void lecture()
 	scanf("%d", &val.nbS);
 	if (val.nbS < 0)
 		erreur_nbS(val.nbS);
-	if (val.nbS != 0)
-		if ((val.nbS > 0 && val.nbJ % val.nbS != 0) ||
-			(val.nbJ == 0 && val.nbS > 1))
+	if ((val.nbS > 0 && val.nbJ % val.nbS != 0) || (val.nbJ == 0 && val.nbS > 1))
 			erreur_nbJ_nbS(val.nbJ, val.nbS);
 
 	reprint(question++);
@@ -111,7 +109,8 @@ static void lecture()
 		for (j = 0; j < val.colonne; j++)
 			scanf("%d", &tabInit[i][j]);
 
-	header(pVal);
+	if(val.nbS != 0)
+		header(pVal);
 	output(pTabInit, pVal, 0);
 	start(pTabInit, pTabSuiv, pVal);
 }

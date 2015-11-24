@@ -84,10 +84,8 @@ static void lecture()
 	reprint(question++);
 	scanf("%d", &val.nbS);
 	if (val.nbS < 0)
-		erreur_nbS(val.nbS);
-	if (val.nbS != 0)
-		if ((val.nbS > 0 && val.nbJ % val.nbS != 0) ||
-			(val.nbJ == 0 && val.nbS > 1))
+		erreur_nbS(val.nbS)
+	if ((val.nbS > 0 && val.nbJ % val.nbS != 0) || (val.nbJ == 0 && val.nbS > 1))
 			erreur_nbJ_nbS(val.nbJ, val.nbS);
 
 	reprint(question++);
@@ -116,7 +114,8 @@ static void lecture()
 			printf("LECTURE :\t%d\n", tabInit[i][j]);
 #endif
 		}
-	header(pVal);
+	if(val.nbS != 0)
+		header(pVal);
 	output(pTabInit, pVal, 0);
 	start(pTabInit, pTabSuiv, pVal);
 }
@@ -383,8 +382,8 @@ static void header(struct basicVal * pVal)
 #endif
 	int col = pVal->colonne * pVal->zoom;
 	int lig = pVal->ligne * pVal->zoom;
-	lig += (pVal->nbJ / pVal->nbS) * (pVal->ligne * pVal->zoom);
-	lig += pVal->nbJ / pVal->nbS;
+		lig += (pVal->nbJ / pVal->nbS) * (pVal->ligne * pVal->zoom);
+		lig += pVal->nbJ / pVal->nbS;
 #ifdef DEBUG
 	printf("HEADER :\theader end\n");
 #endif
