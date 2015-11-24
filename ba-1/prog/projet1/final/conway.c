@@ -29,7 +29,7 @@
 #define HAUT_GAUCHE 10
 #define HAUT_DROITE 12
 
-//#define DEBUG
+#define DEBUG
 
 struct basicVal
 {
@@ -85,8 +85,10 @@ static void lecture()
 	scanf("%d", &val.nbS);
 	if (val.nbS < 0)
 		erreur_nbS(val.nbS);
-	if ((val.nbS > 0 && val.nbJ % val.nbS != 0) || (val.nbJ == 0 && val.nbS > 1))
-		erreur_nbJ_nbS(val.nbJ, val.nbS);
+	if (val.nbS != 0)
+		if ((val.nbS > 0 && val.nbJ % val.nbS != 0) ||
+			(val.nbJ == 0 && val.nbS > 1))
+			erreur_nbJ_nbS(val.nbJ, val.nbS);
 
 	reprint(question++);
 	scanf("%d", &val.zoom);
