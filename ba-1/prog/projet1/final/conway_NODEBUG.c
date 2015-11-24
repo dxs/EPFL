@@ -59,7 +59,6 @@ static void reprint(int question);
 
 
 static int verbose = 0;
-
 int main(int argc, const char* argv[])
 {
 	lecture();
@@ -110,9 +109,6 @@ static void lecture()
 		for (j = 0; j < val.colonne; j++)
 		{
 			scanf("%d", &tabInit[i][j]);
-#ifdef DEBUG
-			printf("LECTURE :\t%d\n", tabInit[i][j]);
-#endif
 		}
 	header(pVal);
 	output(pTabInit, pVal, 0);
@@ -128,9 +124,7 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 	{
 		posX = i / colonne;
 		posY = i % colonne;
-#ifdef DEBUG
-		printf("ANALYSE :\tcase = %d\t valeur = %d\tposX = %d\tposY = %d\n", i, *pT1, posX, posY);
-#endif
+		
 		if ((posX > 0) && (posY > 0) && (posX < ligne-1) && (posY < colonne-1))//cas 0
 			*(pT2 + i) = caseVivante(pT1, i, pVal, CENTRE);
 		else
@@ -176,9 +170,7 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	int count = 0;
 	int colonne = pVal->colonne;
 	tab += position;
-#ifdef DEBUG
-	printf("CALCUL :\tvaleur = %d\t cas = %d\n", *tab, cas);
-#endif
+	
 	switch (cas)
 	{
 	case CENTRE :
@@ -190,16 +182,6 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 		count += *(tab - 1 + colonne);
 		count += *(tab + colonne);
 		count += *(tab + 1 + colonne);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));		
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));		
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
-#endif
 		break;
 	case BAS :
 		count += *(tab - 1 - colonne);
@@ -207,13 +189,6 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 		count += *(tab + 1 - colonne);
 		count += *(tab - 1);
 		count += *(tab + 1);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));		
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
-#endif
 		break;
 	case GAUCHE :
 		count += *(tab - colonne);
@@ -221,23 +196,11 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 		count += *(tab + 1);
 		count += *(tab + colonne);
 		count += *(tab + 1 + colonne);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
-#endif
 		break;
 	case BAS_GAUCHE :
 		count += *(tab - colonne);
 		count += *(tab + 1 - colonne);
 		count += *(tab + 1);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
-#endif
 		break;
 	case DROITE :
 		count += *(tab - 1 - colonne);
@@ -245,23 +208,11 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 		count += *(tab - 1);
 		count += *(tab - 1 + colonne);
 		count += *(tab + colonne);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
-#endif
 		break;
 	case BAS_DROITE :
 		count += *(tab - 1 - colonne);
 		count += *(tab - colonne);
 		count += *(tab - 1);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
-#endif
 		break;
 	case HAUT :
 		count += *(tab - 1);
@@ -269,40 +220,20 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 		count += *(tab - 1 + colonne);
 		count += *(tab + colonne);
 		count += *(tab + 1 + colonne);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
-#endif
 		break;
 	case HAUT_GAUCHE :
 		count += *(tab + 1);
 		count += *(tab + colonne);
 		count += *(tab + 1 + colonne);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
-#endif
 		break;
 	case HAUT_DROITE :
 		count += *(tab - 1);
 		count += *(tab - 1 + colonne);
 		count += *(tab + colonne);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
-#endif
 		break;
 	default:
 		break;
 	}
-#ifdef DEBUG
-	printf("CALCUL :\tCOUNT = %d\n", count);
-#endif
 	if (*tab == 0)
 		if (count == NB_SAVE)
 			return ALIVE;
@@ -320,9 +251,6 @@ static void start(int* pT1, int* pT2, struct basicVal* pVal)
 	int i;
 	for (i = 1; i <= pVal->nbJ; i++)
 	{
-#ifdef DEBUG
-		printf("START :\ti = %d\n", i);
-#endif
 		if (i % 2 == 0)
 			analyse(pT2, pT1, pVal);
 		else
@@ -364,9 +292,6 @@ static void output(int* tableau, struct basicVal* pVal, int compteur)
 						printf("\n");
 						charcompteur = 0;
 					}
-#ifdef DEBUG
-					printf("%d ", (i*pVal->colonne) + j);
-#endif
 					printf("%d ", *(tableau + (i*pVal->colonne) + j));
 				}
 			printf("\n");
@@ -389,9 +314,9 @@ static void reprint(int question)
 	{
 		switch (question)
 		{
-		case 0: printf("Entrez le nombre de mises à jours\n");
+		case 0: printf("Entrez le nombre de mises Ã  jours\n");
 			break;
-		case 1: printf("Entrez la période d'affichage\n");
+		case 1: printf("Entrez la pÃ©riode d'affichage\n");
 			break;
 		case 2: printf("Entrez le facteur de zoom\n");
 			break;
@@ -406,34 +331,32 @@ static void reprint(int question)
 	}
 }
 
-
-
 //-------------------------------------------------------------------------------
-// Fonctions prédéfinies pour indiquer si les données sont correctes
+// Fonctions prÃ©dÃ©finies pour indiquer si les donnÃ©es sont correctes
 // Les fonctions signalant une erreur provoquent la fin du programme
-// en appelant exit(). Leur message d'erreur est toujours affiché.
+// en appelant exit(). Leur message d'erreur est toujours affichÃ©.
 //
 //                 NE PAS MODIFIER CES FONCTIONS
 //-------------------------------------------------------------------------------
 
-// A appeler si le nombre de mises à jours n'est pas positif
+// A appeler si le nombre de mises Ã  jours n'est pas positif
 static void erreur_nbJ(int nbJ)
 {
-	printf("Le nombre de mises à jours nbJ n'est pas positif: %d\n", nbJ);
+	printf("Le nombre de mises Ã  jours nbJ n'est pas positif: %d\n", nbJ);
 	exit(EXIT_FAILURE);
 }
 
 // A appeler si la periode de sauvegarde n'est pas positive
 static void erreur_nbS(int nbS)
 {
-	printf("La période de sauvegarde nbS n'est pas positive: %d\n", nbS);
+	printf("La pÃ©riode de sauvegarde nbS n'est pas positive: %d\n", nbS);
 	exit(EXIT_FAILURE);
 }
 
 // A appeler si la periode de sauvegarde n'est pas positive
 static void erreur_nbJ_nbS(int nbJ, int nbS)
 {
-	printf("La combinaison du nombre de mises à jour %d et de la période de "
+	printf("La combinaison du nombre de mises Ã  jour %d et de la pÃ©riode de "
 		"sauvegarde %d est interdite\n", nbJ, nbS);
 	exit(EXIT_FAILURE);
 }
