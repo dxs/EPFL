@@ -109,9 +109,11 @@ static void lecture()
 		for (j = 0; j < val.colonne; j++)
 			scanf("%d", &tabInit[i][j]);
 
-	if(val.nbS != 0)
+	if (val.nbS != 0)
+	{
 		header(pVal);
-	output(pTabInit, pVal, 0);
+		output(pTabInit, pVal, 0);
+	}
 	start(pTabInit, pTabSuiv, pVal);
 }
 
@@ -249,7 +251,7 @@ static void start(int* pT1, int* pT2, struct basicVal* pVal)
 		else
 			analyse(pT1, pT2, pVal);
 
-		if (i % pVal->nbS == 0)
+		if (pVal->nbS != 0 && i % pVal->nbS == 0)
 			if (i % 2 == 0)
 				output(pT1, pVal, i);
 			else

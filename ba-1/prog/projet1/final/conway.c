@@ -84,7 +84,7 @@ static void lecture()
 	reprint(question++);
 	scanf("%d", &val.nbS);
 	if (val.nbS < 0)
-		erreur_nbS(val.nbS)
+		erreur_nbS(val.nbS);
 	if ((val.nbS > 0 && val.nbJ % val.nbS != 0) || (val.nbJ == 0 && val.nbS > 1))
 			erreur_nbJ_nbS(val.nbJ, val.nbS);
 
@@ -114,9 +114,11 @@ static void lecture()
 			printf("LECTURE :\t%d\n", tabInit[i][j]);
 #endif
 		}
-	if(val.nbS != 0)
+	if (val.nbS != 0)
+	{
 		header(pVal);
-	output(pTabInit, pVal, 0);
+		output(pTabInit, pVal, 0);
+	}
 	start(pTabInit, pTabSuiv, pVal);
 }
 
@@ -329,7 +331,7 @@ static void start(int* pT1, int* pT2, struct basicVal* pVal)
 		else
 			analyse(pT1, pT2, pVal);
 
-		if (i % pVal->nbS == 0)
+		if (pVal->nbS != 0 && i % pVal->nbS == 0)
 			if (i % 2 == 0)
 				output(pT1, pVal, i);
 			else
