@@ -12,9 +12,9 @@
 
 #define ZOOM_MAX	100
 #define ZOOM_MIN	1
-#define SIZE_FORMAT 2
+#define SIZE_FORMAT	2
 #define NB_SAVE		3
-#define MIN_NB_SAVE 2
+#define MIN_NB_SAVE	2
 #define ALIVE		1
 #define DEAD		0
 #define CHARMAX		34
@@ -26,8 +26,8 @@
 #define DROITE		4
 #define BAS_DROITE	5
 #define HAUT		8
-#define HAUT_GAUCHE 10
-#define HAUT_DROITE 12
+#define HAUT_GAUCHE	10
+#define HAUT_DROITE	12
 
 #define DEBUG
 

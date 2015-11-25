@@ -29,12 +29,10 @@
 #define HAUT_GAUCHE	10
 #define HAUT_DROITE	12
 
-//#define DEBUG
-
 struct basicVal
 {
 	int ligne;
-	int colonne; 
+	int colonne;
 	int zoom;
 	int nbJ;
 	int nbS;
@@ -85,7 +83,7 @@ static void lecture()
 	if (val.nbS < 0)
 		erreur_nbS(val.nbS);
 	if ((val.nbS > 0 && val.nbJ % val.nbS != 0) || (val.nbJ == 0 && val.nbS > 1))
-			erreur_nbJ_nbS(val.nbJ, val.nbS);
+		erreur_nbJ_nbS(val.nbJ, val.nbS);
 
 	reprint(question++);
 	scanf("%d", &val.zoom);
@@ -100,11 +98,11 @@ static void lecture()
 	scanf("%d", &val.ligne);
 
 	reprint(question++);
+
 	int tabInit[val.ligne][val.colonne];
 	int tabSuiv[val.ligne][val.colonne];
 	int *pTabInit = (int*)tabInit;
 	int *pTabSuiv = (int*)tabSuiv;
-
 	for (i = 0; i < val.ligne; i++)
 		for (j = 0; j < val.colonne; j++)
 			scanf("%d", &tabInit[i][j]);
@@ -126,13 +124,13 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 	{
 		posX = i / colonne;
 		posY = i % colonne;
-		
+
 		if ((posX > 0) && (posY > 0) && (posX < ligne-1) && (posY < colonne-1))
 			*(pT2 + i) = caseVivante(pT1, i, pVal, CENTRE);
 		else
 		{
-			if ((posX == ligne - 1) && 
-				(posY > 0) && (posY < colonne-1))
+			if ((posX == ligne - 1) &&
+				(posY > 0) && (posY < colonne - 1))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, BAS);
 
 			if ((posX > 0) && (posX < ligne - 1) &&
@@ -163,6 +161,7 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 				(posY == colonne - 1))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, HAUT_DROITE);
 		}
+
 	}
 }
 
@@ -171,10 +170,10 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	int count = 0;
 	int colonne = pVal->colonne;
 	tab += position;
-	
+
 	switch (cas)
 	{
-	case CENTRE :
+	case CENTRE:
 		count += *(tab - 1 - colonne);
 		count += *(tab - colonne);
 		count += *(tab + 1 - colonne);
@@ -184,50 +183,50 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 		count += *(tab + colonne);
 		count += *(tab + 1 + colonne);
 		break;
-	case BAS :
+	case BAS:
 		count += *(tab - 1 - colonne);
 		count += *(tab - colonne);
 		count += *(tab + 1 - colonne);
 		count += *(tab - 1);
 		count += *(tab + 1);
 		break;
-	case GAUCHE :
+	case GAUCHE:
 		count += *(tab - colonne);
 		count += *(tab + 1 - colonne);
 		count += *(tab + 1);
 		count += *(tab + colonne);
 		count += *(tab + 1 + colonne);
 		break;
-	case BAS_GAUCHE :
+	case BAS_GAUCHE:
 		count += *(tab - colonne);
 		count += *(tab + 1 - colonne);
 		count += *(tab + 1);
 		break;
-	case DROITE :
+	case DROITE:
 		count += *(tab - 1 - colonne);
 		count += *(tab - colonne);
 		count += *(tab - 1);
 		count += *(tab - 1 + colonne);
 		count += *(tab + colonne);
 		break;
-	case BAS_DROITE :
+	case BAS_DROITE:
 		count += *(tab - 1 - colonne);
 		count += *(tab - colonne);
 		count += *(tab - 1);
 		break;
-	case HAUT :
+	case HAUT:
 		count += *(tab - 1);
 		count += *(tab + 1);
 		count += *(tab - 1 + colonne);
 		count += *(tab + colonne);
 		count += *(tab + 1 + colonne);
 		break;
-	case HAUT_GAUCHE :
+	case HAUT_GAUCHE:
 		count += *(tab + 1);
 		count += *(tab + colonne);
 		count += *(tab + 1 + colonne);
 		break;
-	case HAUT_DROITE :
+	case HAUT_DROITE:
 		count += *(tab - 1);
 		count += *(tab - 1 + colonne);
 		count += *(tab + colonne);
@@ -235,10 +234,16 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	default:
 		break;
 	}
-	if (*tab != ALIVE)
-		return count == NB_SAVE ? ALIVE : DEAD;
+	if (*tab == 0)
+		if (count == NB_SAVE)
+			return ALIVE;
+		else
+			return DEAD;
 	else
-		return (count == NB_SAVE || count == MIN_NB_SAVE) ? ALIVE : DEAD;
+		if (count == MIN_NB_SAVE || count == NB_SAVE)
+			return ALIVE;
+		else
+			return DEAD;
 }
 
 static void start(int* pT1, int* pT2, struct basicVal* pVal)
@@ -261,36 +266,36 @@ static void start(int* pT1, int* pT2, struct basicVal* pVal)
 
 static void output(int* tableau, struct basicVal* pVal, int compteur)
 {
-	int i, j, k, l, charCompteur = 0;
+	int i, j, k, l, charcompteur = 0;
 	if (compteur != 0) //imprime une ligne noire
-		for (i = 0; i < pVal->colonne * pVal->zoom; i++, charCompteur++)
+		for (i = 0; i < pVal->colonne * pVal->zoom; i++, charcompteur++)
 		{
-			if (charCompteur == CHARMAX)
+			if (charcompteur == CHARMAX)
 			{
 				printf("\n");
-				charCompteur = 0;
+				charcompteur = 0;
 			}
 			printf("1 ");
 		}
 	printf("\n");
-	charCompteur = 0;
+	charcompteur = 0;
 
 	//impression du tableau
 	for (i = 0; i < pVal->ligne; i++)
 		for (k = 0; k < pVal->zoom; k++)
 		{
 			for (j = 0; j < pVal->colonne; j++)
-				for (l = 0; l < pVal->zoom; l++, charCompteur++)
+				for (l = 0; l < pVal->zoom; l++, charcompteur++)
 				{
-					if (charCompteur == CHARMAX)
+					if (charcompteur == CHARMAX)
 					{
 						printf("\n");
-						charCompteur = 0;
+						charcompteur = 0;
 					}
 					printf("%d ", *(tableau + (i*pVal->colonne) + j));
 				}
 			printf("\n");
-			charCompteur = 0;
+			charcompteur = 0;
 		}
 }
 
