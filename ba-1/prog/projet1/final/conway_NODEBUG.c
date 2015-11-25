@@ -234,16 +234,10 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	default:
 		break;
 	}
-	if (*tab == 0)
-		if (count == NB_SAVE)
-			return ALIVE;
-		else
-			return DEAD;
+	if (*tab != ALIVE)
+		return (count == NB_SAVE) ? ALIVE : DEAD;
 	else
-		if (count == MIN_NB_SAVE || count == NB_SAVE)
-			return ALIVE;
-		else
-			return DEAD;
+		return (count == MIN_NB_SAVE || count == NB_SAVE) ? ALIVE : DEAD;
 }
 
 static void start(int* pT1, int* pT2, struct basicVal* pVal)
@@ -311,7 +305,6 @@ static void header(struct basicVal * pVal)
 static void reprint(int question)
 {
 	if (verbose)
-	{
 		switch (question)
 		{
 		case 0: printf("Entrez le nombre de mises à jours\n");
@@ -328,7 +321,6 @@ static void reprint(int question)
 			break;
 		default: break;
 		}
-	}
 }
 
 //-------------------------------------------------------------------------------
