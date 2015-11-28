@@ -1,4 +1,3 @@
-TODO algo de tri des bord à refaire avec moins de if si possible (complexité moindre
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 sciper 	: 253133
@@ -6,19 +5,13 @@ nom 	: Borden
 prénom 	: Sven
 fichier : doc
 date 	: 30.09.2015
-Version : 0.9
+Version : 1.0
 Descrip : Explications sur certaines subtilité concernant le projet PROG I Automne
 		  2015-16 EPFL MT-EL fait par Sven Borden
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
-TABLE DES MATIERES
-#1 ASPECT GENERAL
-#2 FONCTION CASEVIVANTE
 
-
-#1 %TODO
-
-#2 FONCTION CASEVIVANTE
+# FONCTION CASEVIVANTE
 
 	Cette fonction vérifie les cases autours d'une case donnée et retourne
 	true ou false en si la case doit être vivante ou morte. Cette fonction
@@ -30,7 +23,7 @@ TABLE DES MATIERES
 	- int nbCol		: 	nombre de colonnes du tableau
 	- int cas		:	cas du tableau, ces cas sont déterminé avec une 
 						valeur binaire entre 0 et 15 
-						[hdgb] = position dans le tableau
+						[hdgb] = position dans le tableau = [HAUT|DROITE|GAUCHE|BAS]
 						 1111  = valeurs entre 0 et 15
 						
 						Decimal		Binaire		Position
