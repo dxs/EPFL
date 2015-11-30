@@ -57,7 +57,7 @@ static void initialisation(int *ptr_nbJ, int *ptr_nbS, int *ptr_zoom);
 static void impression(int zoom, int nbL, int nbC, int etape,
                        int tab_maj[nbL + 2][nbC + 2]);
 
-static void mise_a_jour(int nbJ, int nbS, int nbL, int nbC, int zoom,
+static void mise_a_jour(int nbJ, int nbL, int nbC, int zoom, int nbS,
                         int tab_initial[nbL + 2][nbC + 2]);
 
 static int tab_a_jour(int i, int j, int nbL, int nbC,
@@ -110,12 +110,12 @@ int main(int argc, const char * argv[])
         }
     }
     
-    mise_a_jour(nbJ, nbL, nbC, zoom, nbS, tab_initial);
+    mise_a_jour(nbJ, nbS, nbL, nbC, zoom, tab_initial);
     
     return EXIT_SUCCESS;
 }
 
-static void mise_a_jour(int nbL, int nbC, int nbJ, int nbS, int zoom,
+static void mise_a_jour(int nbJ,int nbS, int nbL, int nbC, int zoom,
                         int tab_initial[nbL + 2][nbC + 2])
 {
     int i = 0, j = 0;
@@ -187,9 +187,8 @@ static void impression(int zoom, int nbL, int nbC, int etape,
         for (k = 0; k < zoom; k++)
         {
             for (j = 1; j < nbC+1; j++)
-                for (l = 0; l < zoom; l++)
+                for (l = 0; l < zoom; l++, compteur++)
                 {
-                    compteur++;
                     if (compteur == MAX_CHAR)
                     {
                         printf("\n");
@@ -198,12 +197,13 @@ static void impression(int zoom, int nbL, int nbC, int etape,
                     printf("%d ", tab_maj[i][j]);
                 }
             printf("\n");
+	    compteur = 0;
         }
 }
 
-{
 static void en_tete(int nbL, int nbC, int zoom, int nbJ, int nbS)
-    printf("P1\n%d %d\n", nbC*zoom, nbL*(zoom+1)*(nbJ/nbS)-1);
+{
+    printf("P1\n%d %d\n", nbC*zoom, (nbL*zoom)*(nbJ/nbS+1)+(nbJ/nbS));
 }
 
 static void initialisation(int *ptr_nbJ, int *ptr_nbS, int *ptr_zoom)
