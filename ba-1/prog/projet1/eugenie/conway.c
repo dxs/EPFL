@@ -57,7 +57,7 @@ static void initialisation(int *ptr_nbJ, int *ptr_nbS, int *ptr_zoom);
 static void impression(int zoom, int nbL, int nbC, int etape,
                        int tab_maj[nbL + 2][nbC + 2]);
 
-static void mise_a_jour(int nbJ,int nbS int nbL, int nbC, int zoom,
+static void mise_a_jour(int nbJ,int nbS, int nbL, int nbC, int zoom,
                         int tab_initial[nbL + 2][nbC + 2]);
 
 static int tab_a_jour(int i, int j, int nbL, int nbC,
