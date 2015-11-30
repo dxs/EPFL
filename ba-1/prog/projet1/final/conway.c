@@ -68,6 +68,9 @@ int main(int argc, const char* argv[])
 
 static void lecture()
 {
+#ifdef DEBUG
+	printf("LECTURE:\t debut");
+#endif
 	int i, j;
 	int question = 0;
 	char format[SIZE_FORMAT];

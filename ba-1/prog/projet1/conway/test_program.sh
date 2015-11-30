@@ -104,12 +104,12 @@ while [ $i -le $LAST_FINAL ]; do
 	echo
 	echo "TEST $i"
 	
-	# run TEST_FILE for test i, save resulting image
-	OUT_IMAGE=$("./$TEST_FILE" < "test$i.txt")
+	# run FINAL_FILE for test i, save resulting image
+	OUT_IMAGE=$("./$FINAL_FILE" < "test$i.txt")
 	echo "$OUT_IMAGE" >> "out$i.pbm"
 	
-	# run FINAL_FILE for test i, save resulting image
-	MY_OUT_IMAGE=$("./$FINAL_FILE" < "test$i.txt")
+	# run TEST_FILE for test i, save resulting image
+	MY_OUT_IMAGE=$("./$TEST_FILE" < "test$i.txt")
 	echo "$MY_OUT_IMAGE" >> "my_out$i.pbm"
 	
 	# compare out.pbm to the correct ouptput, if all pixels are equal the output is 0	
