@@ -219,7 +219,7 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 
 static int voisinCentre(int* tab, int position, int colonne)
 {
-	int count;
+	int count = 0;
 	tab += position;
 	count += *(tab - 1 - colonne);
 	count += *(tab - colonne);
@@ -235,7 +235,7 @@ static int voisinCentre(int* tab, int position, int colonne)
 
 static int voisinBas(int* tab, int position, int colonne)
 {
-	int count;
+	int count = 0;
 	tab += position;
 	count += *(tab - 1 - colonne);
 	count += *(tab - colonne);
@@ -248,7 +248,7 @@ static int voisinBas(int* tab, int position, int colonne)
 
 static int voisinGauche(int* tab, int position, int colonne)
 {
-	int count;
+	int count = 0;
 	tab += position;
 	count += *(tab - colonne);
 	count += *(tab + 1 - colonne);
@@ -261,7 +261,7 @@ static int voisinGauche(int* tab, int position, int colonne)
 
 static int voisinDroite(int* tab, int position, int colonne)
 {
-	int count;
+	int count = 0;
 	tab += position;
 	count += *(tab - 1 - colonne);
 	count += *(tab - colonne);
@@ -274,7 +274,7 @@ static int voisinDroite(int* tab, int position, int colonne)
 
 static int voisinHaut(int* tab, int position, int colonne)
 {
-	int count;
+	int count = 0;
 	tab += position;
 	count += *(tab - 1);
 	count += *(tab + 1);
@@ -286,7 +286,7 @@ static int voisinHaut(int* tab, int position, int colonne)
 }
 static int voisinBasGauche(int* tab, int position, int colonne)
 {
-	int count;
+	int count = 0;
 	tab += position;
 	count += *(tab - colonne);
 	count += *(tab + 1 - colonne);
@@ -297,7 +297,7 @@ static int voisinBasGauche(int* tab, int position, int colonne)
 
 static int voisinBasDroite(int* tab, int position, int colonne)
 {
-	int count;
+	int count = 0;
 	tab += position;
 	count += *(tab - 1 - colonne);
 	count += *(tab - colonne);
@@ -308,7 +308,7 @@ static int voisinBasDroite(int* tab, int position, int colonne)
 
 static int voisinHautGauche(int* tab, int position, int colonne)
 {
-	int count;
+	int count = 0;
 	tab += position;
 	count += *(tab + 1);
 	count += *(tab + colonne);
@@ -319,7 +319,7 @@ static int voisinHautGauche(int* tab, int position, int colonne)
 
 static int voisinHautDroite(int*tab, int position, int colonne)
 {
-	int count;
+	int count = 0;
 	tab += position;
 	count += *(tab - 1);
 	count += *(tab - 1 + colonne);
