@@ -168,68 +168,35 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 {
 	int count = 0;
-	int colonne = pVal->colonne;
-	tab += position;
 
 	switch (cas)
 	{
 	case CENTRE:
-		count += *(tab - 1 - colonne);
-		count += *(tab - colonne);
-		count += *(tab + 1 - colonne);
-		count += *(tab - 1);
-		count += *(tab + 1);
-		count += *(tab - 1 + colonne);
-		count += *(tab + colonne);
-		count += *(tab + 1 + colonne);
+		count = voisinCentre(tab, position, pVal->colonne);
 		break;
 	case BAS:
-		count += *(tab - 1 - colonne);
-		count += *(tab - colonne);
-		count += *(tab + 1 - colonne);
-		count += *(tab - 1);
-		count += *(tab + 1);
+		count = voisinBas(tab, position, pVal->colonne);
 		break;
 	case GAUCHE:
-		count += *(tab - colonne);
-		count += *(tab + 1 - colonne);
-		count += *(tab + 1);
-		count += *(tab + colonne);
-		count += *(tab + 1 + colonne);
+		count = voisinGauche(tab, position, pVal->colonne);
 		break;
 	case BAS_GAUCHE:
-		count += *(tab - colonne);
-		count += *(tab + 1 - colonne);
-		count += *(tab + 1);
+		count = voisinBasGauche(tab, position, pVal->colonne);
 		break;
 	case DROITE:
-		count += *(tab - 1 - colonne);
-		count += *(tab - colonne);
-		count += *(tab - 1);
-		count += *(tab - 1 + colonne);
-		count += *(tab + colonne);
+		count = voisinDroite(tab, position, pVal->colonne);
 		break;
 	case BAS_DROITE:
-		count += *(tab - 1 - colonne);
-		count += *(tab - colonne);
-		count += *(tab - 1);
+		count = voisinBasDroite(tab, position, pVal->colonne);
 		break;
 	case HAUT:
-		count += *(tab - 1);
-		count += *(tab + 1);
-		count += *(tab - 1 + colonne);
-		count += *(tab + colonne);
-		count += *(tab + 1 + colonne);
+		count = voisinHaut(tab, position, pVal->colonne);
 		break;
 	case HAUT_GAUCHE:
-		count += *(tab + 1);
-		count += *(tab + colonne);
-		count += *(tab + 1 + colonne);
+		count = voisinHautGauche(tab, position, pVal->colonne);
 		break;
 	case HAUT_DROITE:
-		count += *(tab - 1);
-		count += *(tab - 1 + colonne);
-		count += *(tab + colonne);
+		count = voisinHautDroite(tab, position, pVal->colonne);
 		break;
 	default:
 		break;
@@ -239,6 +206,118 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	else
 		return (count == MIN_NB_SAVE || count == NB_SAVE) ? ALIVE : DEAD;
 }
+
+static int voisinCentre(int* tab, int position, int colonne)
+{
+	int count;
+	tab += position;
+	count += *(tab - 1 - colonne);
+	count += *(tab - colonne);
+	count += *(tab + 1 - colonne);
+	count += *(tab - 1);
+	count += *(tab + 1);
+	count += *(tab - 1 + colonne);
+	count += *(tab + colonne);
+	count += *(tab + 1 + colonne);
+	
+	return count;
+}
+
+static int voisinBas(int* tab, int position, int colonne)
+{
+	int count;
+	tab += position;
+	count += *(tab - 1 - colonne);
+	count += *(tab - colonne);
+	count += *(tab + 1 - colonne);
+	count += *(tab - 1);
+	count += *(tab + 1);
+	
+	return count;
+}
+
+static int voisinGauche(int* tab, int position, int colonne)
+{
+	int count;
+	tab += position;
+	count += *(tab - colonne);
+	count += *(tab + 1 - colonne);
+	count += *(tab + 1);
+	count += *(tab + colonne);
+	count += *(tab + 1 + colonne);
+	
+	return count;
+}
+
+static int voisinDroite(int* tab, int position, int colonne)
+{
+	int count;
+	tab += position;
+	count += *(tab - 1 - colonne);
+	count += *(tab - colonne);
+	count += *(tab - 1);
+	count += *(tab - 1 + colonne);
+	count += *(tab + colonne);
+	
+	return count;
+}
+
+static int voisinHaut(int* tab, int position, int colonne)
+{
+	int count;
+	tab += position;
+	count += *(tab - 1);
+	count += *(tab + 1);
+	count += *(tab - 1 + colonne);
+	count += *(tab + colonne);
+	count += *(tab + 1 + colonne);
+	
+	return count;
+}
+static int voisinBasGauche(int* tab, int position, int colonne)
+{
+	int count;
+	tab += position;
+	count += *(tab - colonne);
+	count += *(tab + 1 - colonne);
+	count += *(tab + 1);
+	
+	return count;
+}
+
+static int voisinBasDroite(int* tab, int position, int colonne)
+{
+	int count;
+	tab += position;
+	count += *(tab - 1 - colonne);
+	count += *(tab - colonne);
+	count += *(tab - 1);
+	
+	return count;
+}
+
+static int voisinHautGauche(int* tab, int position, int colonne)
+{
+	int count;
+	tab += position;
+	count += *(tab + 1);
+	count += *(tab + colonne);
+	count += *(tab + 1 + colonne);
+	
+	return count;
+}
+
+static int voisinHautDroite(int*tab, int position, int colonne)
+{
+	int count;
+	tab += position;
+	count += *(tab - 1);
+	count += *(tab - 1 + colonne);
+	count += *(tab + colonne);
+	
+	return count;
+}
+
 
 static void start(int* pT1, int* pT2, struct basicVal* pVal)
 {
