@@ -210,6 +210,7 @@ static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 	default:
 		break;
 	}
+	printf("COUNT: %d\n", count);
 	if (*tab != ALIVE)
 		return (count == NB_SAVE) ? ALIVE : DEAD;
 	else
