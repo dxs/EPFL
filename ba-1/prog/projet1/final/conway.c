@@ -52,7 +52,7 @@ static void erreur_zoom(int zoom);
 
 static void lecture();
 static void analyse(int* pT1, int* pT2, struct basicVal* pVal);
-static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas);
+static int caseViv(int* tab, int pos, struct basicVal* pVal, int cas);
 
 static int voisinCentre(int* tab, int position, int colonne);
 static int voisinBas(int* tab, int position, int colonne);
@@ -181,37 +181,46 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 }
 
 //Dispatch dans la bonne analyse de voisins
-static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
+static int caseViv(int* tab, int pos, struct basicVal* pVal, int cas)
 {
 	int count = 0;
 
 	switch (cas)
 	{
-	case CENTRE:	count = voisinCentre(tab, position, pVal->colonne);
+	case CENTRE:	
+		count = voisinCentre(tab, position, pVal->colonne);
 		break;
-	case BAS:	count = voisinBas(tab, position, pVal->colonne);
+	case BAS:	
+		count = voisinBas(tab, position, pVal->colonne);
 		break;
-	case GAUCHE:	count = voisinGauche(tab, position, pVal->colonne);
+	case GAUCHE:	
+		count = voisinGauche(tab, position, pVal->colonne);
 		break;
-	case BAS_GAUCHE:	count = voisinBasGauche(tab, position, pVal->colonne);
+	case BAS_GAUCHE:	
+		count = voisinBasGauche(tab, position, pVal->colonne);
 		break;
-	case DROITE:	count = voisinDroite(tab, position, pVal->colonne);
+	case DROITE:	
+		count = voisinDroite(tab, position, pVal->colonne);
 		break;
-	case BAS_DROITE:	count = voisinBasDroite(tab, position, pVal->colonne);
+	case BAS_DROITE:	
+		count = voisinBasDroite(tab, position, pVal->colonne);
 		break;
-	case HAUT:	count = voisinHaut(tab, position, pVal->colonne);
+	case HAUT:	
+		count = voisinHaut(tab, position, pVal->colonne);
 		break;
-	case HAUT_GAUCHE:	count = voisinHautGauche(tab, position, pVal->colonne);
+	case HAUT_GAUCHE:	
+		count = voisinHautGauche(tab, position, pVal->colonne);
 		break;
-	case HAUT_DROITE:	count = voisinHautDroite(tab, position, pVal->colonne);
+	case HAUT_DROITE:	
+		count = voisinHautDroite(tab, position, pVal->colonne);
 		break;
 	default:
 		break;
 	}
 	if (*(tab+position) != ALIVE)
-		return (count == NB_SAVE) ? ALIVE : DEAD;
+		return(count == NB_SAVE) ? ALIVE : DEAD;
 	else
-		return (count == MIN_NB_SAVE || count == NB_SAVE) ? ALIVE : DEAD;
+		return(count == MIN_NB_SAVE || count == NB_SAVE) ? ALIVE : DEAD;
 }
 
 static int voisinCentre(int* tab, int position, int colonne)
