@@ -1,9 +1,10 @@
 //------------------------------------------------------------------------------
-// sciper: 253133
-// nom: Borden
-// prenom: Sven
-// fichier: conway.c
-// date: 12.10.2015
+//  sciper:		253133
+//     nom: 	Borden
+//  prenom:  	Sven
+// fichier:		conway.c
+// 	  date: 	12.11.2015
+// version: 	1.3
 // description du programme: projet PROG I Automne 2015-16 EPFL MT-EL
 //-------------------------------------------------------------------------------
 
@@ -18,9 +19,11 @@
 #define ALIVE		1
 #define DEAD		0
 #define CHARMAX		34
+#define DECALAGE	1
+#define PAIR		2
 
 #define CENTRE		0
-#define BAS		1
+#define BAS			1
 #define GAUCHE		2
 #define BAS_GAUCHE	3
 #define DROITE		4
@@ -50,6 +53,7 @@ static void erreur_zoom(int zoom);
 static void lecture();
 static void analyse(int* pT1, int* pT2, struct basicVal* pVal);
 static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas);
+
 static int voisinCentre(int* tab, int position, int colonne);
 static int voisinBas(int* tab, int position, int colonne);
 static int voisinGauche(int* tab, int position, int colonne);
@@ -59,6 +63,7 @@ static int voisinBasGauche(int* tab, int position, int colonne);
 static int voisinBasDroite(int* tab, int position, int colonne);
 static int voisinHautGauche(int* tab, int position, int colonne);
 static int voisinHautDroite(int* tab, int position, int colonne);
+
 static void start(int* pT1, int* pT2, struct basicVal* pVal);
 static void output(int* tableau, struct basicVal* pVal, int compteur);
 static void header(struct basicVal*);
@@ -124,6 +129,7 @@ static void lecture()
 	start(pTabInit, pTabSuiv, pVal);
 }
 
+//Definit si la case est dans une bordure
 static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 {
 	int i, posX, posY;
@@ -174,38 +180,30 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 	}
 }
 
+//Dispatch dans la bonne analyse de voisins
 static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 {
 	int count = 0;
 
 	switch (cas)
 	{
-	case CENTRE:
-		count = voisinCentre(tab, position, pVal->colonne);
+	case CENTRE:	count = voisinCentre(tab, position, pVal->colonne);
 		break;
-	case BAS:
-		count = voisinBas(tab, position, pVal->colonne);
+	case BAS:	count = voisinBas(tab, position, pVal->colonne);
 		break;
-	case GAUCHE:
-		count = voisinGauche(tab, position, pVal->colonne);
+	case GAUCHE:	count = voisinGauche(tab, position, pVal->colonne);
 		break;
-	case BAS_GAUCHE:
-		count = voisinBasGauche(tab, position, pVal->colonne);
+	case BAS_GAUCHE:	count = voisinBasGauche(tab, position, pVal->colonne);
 		break;
-	case DROITE:
-		count = voisinDroite(tab, position, pVal->colonne);
+	case DROITE:	count = voisinDroite(tab, position, pVal->colonne);
 		break;
-	case BAS_DROITE:
-		count = voisinBasDroite(tab, position, pVal->colonne);
+	case BAS_DROITE:	count = voisinBasDroite(tab, position, pVal->colonne);
 		break;
-	case HAUT:
-		count = voisinHaut(tab, position, pVal->colonne);
+	case HAUT:	count = voisinHaut(tab, position, pVal->colonne);
 		break;
-	case HAUT_GAUCHE:
-		count = voisinHautGauche(tab, position, pVal->colonne);
+	case HAUT_GAUCHE:	count = voisinHautGauche(tab, position, pVal->colonne);
 		break;
-	case HAUT_DROITE:
-		count = voisinHautDroite(tab, position, pVal->colonne);
+	case HAUT_DROITE:	count = voisinHautDroite(tab, position, pVal->colonne);
 		break;
 	default:
 		break;
@@ -220,14 +218,14 @@ static int voisinCentre(int* tab, int position, int colonne)
 {
 	int count = 0;
 	tab += position;
-	count += *(tab - 1 - colonne);
+	count += *(tab - DECALAGE - colonne);
 	count += *(tab - colonne);
-	count += *(tab + 1 - colonne);
-	count += *(tab - 1);
-	count += *(tab + 1);
-	count += *(tab - 1 + colonne);
+	count += *(tab + DECALAGE - colonne);
+	count += *(tab - DECALAGE);
+	count += *(tab + DECALAGE);
+	count += *(tab - DECALAGE + colonne);
 	count += *(tab + colonne);
-	count += *(tab + 1 + colonne);
+	count += *(tab + DECALAGE + colonne);
 	
 	return count;
 }
@@ -236,11 +234,11 @@ static int voisinBas(int* tab, int position, int colonne)
 {
 	int count = 0;
 	tab += position;
-	count += *(tab - 1 - colonne);
+	count += *(tab - DECALAGE - colonne);
 	count += *(tab - colonne);
-	count += *(tab + 1 - colonne);
-	count += *(tab - 1);
-	count += *(tab + 1);
+	count += *(tab + DECALAGE - colonne);
+	count += *(tab - DECALAGE);
+	count += *(tab + DECALAGE);
 	
 	return count;
 }
@@ -250,10 +248,10 @@ static int voisinGauche(int* tab, int position, int colonne)
 	int count = 0;
 	tab += position;
 	count += *(tab - colonne);
-	count += *(tab + 1 - colonne);
-	count += *(tab + 1);
+	count += *(tab + DECALAGE - colonne);
+	count += *(tab + DECALAGE);
 	count += *(tab + colonne);
-	count += *(tab + 1 + colonne);
+	count += *(tab + DECALAGE + colonne);
 	
 	return count;
 }
@@ -262,10 +260,10 @@ static int voisinDroite(int* tab, int position, int colonne)
 {
 	int count = 0;
 	tab += position;
-	count += *(tab - 1 - colonne);
+	count += *(tab - DECALAGE - colonne);
 	count += *(tab - colonne);
-	count += *(tab - 1);
-	count += *(tab - 1 + colonne);
+	count += *(tab - DECALAGE);
+	count += *(tab - DECALAGE + colonne);
 	count += *(tab + colonne);
 	
 	return count;
@@ -275,11 +273,11 @@ static int voisinHaut(int* tab, int position, int colonne)
 {
 	int count = 0;
 	tab += position;
-	count += *(tab - 1);
-	count += *(tab + 1);
-	count += *(tab - 1 + colonne);
+	count += *(tab - DECALAGE);
+	count += *(tab + DECALAGE);
+	count += *(tab - DECALAGE + colonne);
 	count += *(tab + colonne);
-	count += *(tab + 1 + colonne);
+	count += *(tab + DECALAGE + colonne);
 	
 	return count;
 }
@@ -288,8 +286,8 @@ static int voisinBasGauche(int* tab, int position, int colonne)
 	int count = 0;
 	tab += position;
 	count += *(tab - colonne);
-	count += *(tab + 1 - colonne);
-	count += *(tab + 1);
+	count += *(tab + DECALAGE - colonne);
+	count += *(tab + DECALAGE);
 	
 	return count;
 }
@@ -298,9 +296,9 @@ static int voisinBasDroite(int* tab, int position, int colonne)
 {
 	int count = 0;
 	tab += position;
-	count += *(tab - 1 - colonne);
+	count += *(tab - DECALAGE - colonne);
 	count += *(tab - colonne);
-	count += *(tab - 1);
+	count += *(tab - DECALAGE);
 	
 	return count;
 }
@@ -309,9 +307,9 @@ static int voisinHautGauche(int* tab, int position, int colonne)
 {
 	int count = 0;
 	tab += position;
-	count += *(tab + 1);
+	count += *(tab + DECALAGE);
 	count += *(tab + colonne);
-	count += *(tab + 1 + colonne);
+	count += *(tab + DECALAGE + colonne);
 	
 	return count;
 }
@@ -320,26 +318,26 @@ static int voisinHautDroite(int*tab, int position, int colonne)
 {
 	int count = 0;
 	tab += position;
-	count += *(tab - 1);
-	count += *(tab - 1 + colonne);
+	count += *(tab - DECALAGE);
+	count += *(tab - DECALAGE + colonne);
 	count += *(tab + colonne);
 	
 	return count;
 }
 
-
+//parcours nbJ fois et switche d'un tableau a un autre
 static void start(int* pT1, int* pT2, struct basicVal* pVal)
 {
 	int i;
 	for (i = 1; i <= pVal->nbJ; i++)
 	{
-		if (i % 2 == 0)
+		if (i % PAIR == 0)
 			analyse(pT2, pT1, pVal);
 		else
 			analyse(pT1, pT2, pVal);
 
 		if (pVal->nbS != 0 && i % pVal->nbS == 0)
-			if (i % 2 == 0)
+			if (i % PAIR == 0)
 				output(pT1, pVal, i);
 			else
 				output(pT2, pVal, i);
@@ -381,12 +379,14 @@ static void output(int* tableau, struct basicVal* pVal, int compteur)
 		}
 }
 
+//ajoute l'entete de l'image
 static void header(struct basicVal * pVal)
 {
 	int col = pVal->colonne * pVal->zoom;
 	int lig = pVal->ligne * pVal->zoom;
 	lig += (pVal->nbJ / pVal->nbS) * (pVal->ligne * pVal->zoom);
 	lig += pVal->nbJ / pVal->nbS;
+	
 	printf("P1\n%d %d\n", col, lig);
 }
 
