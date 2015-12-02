@@ -219,7 +219,7 @@ static int caseViv(int* tab, int pos, struct basicVal* pVal, int cas)
 	default:
 		break;
 	}
-	if (*(tab+position) != ALIVE)
+	if (*(tab + pos) != ALIVE)
 		return(count == NB_SAVE) ? ALIVE : DEAD;
 	else
 		return(count == MIN_NB_SAVE || count == NB_SAVE) ? ALIVE : DEAD;
