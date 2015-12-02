@@ -20,7 +20,7 @@
 #define CHARMAX		34
 
 #define CENTRE		0
-#define BAS			1
+#define BAS		1
 #define GAUCHE		2
 #define BAS_GAUCHE	3
 #define DROITE		4
@@ -29,12 +29,10 @@
 #define HAUT_GAUCHE	10
 #define HAUT_DROITE	12
 
-#define DEBUG
-
 struct basicVal
 {
 	int ligne;
-	int colonne; 
+	int colonne;
 	int zoom;
 	int nbJ;
 	int nbS;
@@ -52,11 +50,19 @@ static void erreur_zoom(int zoom);
 static void lecture();
 static void analyse(int* pT1, int* pT2, struct basicVal* pVal);
 static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas);
+static int voisinCentre(int* tab, int position, int colonne);
+static int voisinBas(int* tab, int position, int colonne);
+static int voisinGauche(int* tab, int position, int colonne);
+static int voisinDroite(int* tab, int position, int colonne);
+static int voisinHaut(int* tab, int position, int colonne);
+static int voisinBasGauche(int* tab, int position, int colonne);
+static int voisinBasDroite(int* tab, int position, int colonne);
+static int voisinHautGauche(int* tab, int position, int colonne);
+static int voisinHautDroite(int* tab, int position, int colonne);
 static void start(int* pT1, int* pT2, struct basicVal* pVal);
 static void output(int* tableau, struct basicVal* pVal, int compteur);
 static void header(struct basicVal*);
 static void reprint(int question);
-
 
 static int verbose = 0;
 
@@ -68,9 +74,6 @@ int main(int argc, const char* argv[])
 
 static void lecture()
 {
-#ifdef DEBUG
-	printf("LECTURE:\t debut");
-#endif
 	int i, j;
 	int question = 0;
 	char format[SIZE_FORMAT];
@@ -89,7 +92,7 @@ static void lecture()
 	if (val.nbS < 0)
 		erreur_nbS(val.nbS);
 	if ((val.nbS > 0 && val.nbJ % val.nbS != 0) || (val.nbJ == 0 && val.nbS > 1))
-			erreur_nbJ_nbS(val.nbJ, val.nbS);
+		erreur_nbJ_nbS(val.nbJ, val.nbS);
 
 	reprint(question++);
 	scanf("%d", &val.zoom);
@@ -111,12 +114,8 @@ static void lecture()
 	int *pTabSuiv = (int*)tabSuiv;
 	for (i = 0; i < val.ligne; i++)
 		for (j = 0; j < val.colonne; j++)
-		{
 			scanf("%d", &tabInit[i][j]);
-#ifdef DEBUG
-			printf("LECTURE :\t%d\n", tabInit[i][j]);
-#endif
-		}
+
 	if (val.nbS != 0)
 	{
 		header(pVal);
@@ -134,201 +133,206 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 	{
 		posX = i / colonne;
 		posY = i % colonne;
-#ifdef DEBUG
-		printf("ANALYSE :\tcase = %d\t valeur = %d\tposX = %d\tposY = %d\n", i, *pT1, posX, posY);
-#endif
-		if ((posX > 0) && (posY > 0) && (posX < ligne-1) && (posY < colonne-1))//cas 0
+
+		if ((posX > 0) && (posY > 0) && (posX < ligne-1) && (posY < colonne-1))
 			*(pT2 + i) = caseVivante(pT1, i, pVal, CENTRE);
 		else
 		{
-			if ((posX == ligne - 1) && //cas 1
-				(posY > 0) && (posY < colonne-1))
+			if ((posX == ligne - 1) &&
+				(posY > 0) && (posY < colonne - 1))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, BAS);
 
-			if ((posX > 0) && (posX < ligne - 1) &&//cas 2
+			if ((posX > 0) && (posX < ligne - 1) &&
 				(posY == 0))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, GAUCHE);
 
-			if ((posX == ligne - 1) && //cas 3
+			if ((posX == ligne - 1) &&
 				(posY == 0))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, BAS_GAUCHE);
 
-			if ((posX > 0) && (posX < ligne - 1) &&// cas 4
+			if ((posX > 0) && (posX < ligne - 1) &&
 				(posY == colonne - 1))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, DROITE);
 
-			if ((posX == ligne - 1) && //cas 5
+			if ((posX == ligne - 1) &&
 				(posY == colonne - 1))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, BAS_DROITE);
 
-			if ((posX == 0) && // cas 8
+			if ((posX == 0) &&
 				(posY > 0) && (posY < colonne - 1))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, HAUT);
 
-			if ((posX == 0) && // cas 10
+			if ((posX == 0) &&
 				(posY == 0))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, HAUT_GAUCHE);
 
-			if ((posX == 0) && // cas 12
+			if ((posX == 0) &&
 				(posY == colonne - 1))
 				*(pT2 + i) = caseVivante(pT1, i, pVal, HAUT_DROITE);
-		}//else end
+		}
 
-	}//for end
+	}
 }
 
 static int caseVivante(int* tab, int position, struct basicVal* pVal, int cas)
 {
 	int count = 0;
-	int colonne = pVal->colonne;
-	tab += position;
-#ifdef DEBUG
-	printf("CALCUL :\tvaleur = %d\t cas = %d\n", *tab, cas);
-#endif
+
 	switch (cas)
 	{
-	case CENTRE :
-		count += *(tab - 1 - colonne);
-		count += *(tab - colonne);
-		count += *(tab + 1 - colonne);
-		count += *(tab - 1);
-		count += *(tab + 1);
-		count += *(tab - 1 + colonne);
-		count += *(tab + colonne);
-		count += *(tab + 1 + colonne);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));		
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));		
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
-#endif
+	case CENTRE:
+		count = voisinCentre(tab, position, pVal->colonne);
 		break;
-	case BAS :
-		count += *(tab - 1 - colonne);
-		count += *(tab - colonne);
-		count += *(tab + 1 - colonne);
-		count += *(tab - 1);
-		count += *(tab + 1);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));		
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
-#endif
+	case BAS:
+		count = voisinBas(tab, position, pVal->colonne);
 		break;
-	case GAUCHE :
-		count += *(tab - colonne);
-		count += *(tab + 1 - colonne);
-		count += *(tab + 1);
-		count += *(tab + colonne);
-		count += *(tab + 1 + colonne);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
-#endif
+	case GAUCHE:
+		count = voisinGauche(tab, position, pVal->colonne);
 		break;
-	case BAS_GAUCHE :
-		count += *(tab - colonne);
-		count += *(tab + 1 - colonne);
-		count += *(tab + 1);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
-#endif
+	case BAS_GAUCHE:
+		count = voisinBasGauche(tab, position, pVal->colonne);
 		break;
-	case DROITE :
-		count += *(tab - 1 - colonne);
-		count += *(tab - colonne);
-		count += *(tab - 1);
-		count += *(tab - 1 + colonne);
-		count += *(tab + colonne);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
-#endif
+	case DROITE:
+		count = voisinDroite(tab, position, pVal->colonne);
 		break;
-	case BAS_DROITE :
-		count += *(tab - 1 - colonne);
-		count += *(tab - colonne);
-		count += *(tab - 1);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
-#endif
+	case BAS_DROITE:
+		count = voisinBasDroite(tab, position, pVal->colonne);
 		break;
-	case HAUT :
-		count += *(tab - 1);
-		count += *(tab + 1);
-		count += *(tab - 1 + colonne);
-		count += *(tab + colonne);
-		count += *(tab + 1 + colonne);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
-#endif
+	case HAUT:
+		count = voisinHaut(tab, position, pVal->colonne);
 		break;
-	case HAUT_GAUCHE :
-		count += *(tab + 1);
-		count += *(tab + colonne);
-		count += *(tab + 1 + colonne);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + 1 + colonne));
-#endif
+	case HAUT_GAUCHE:
+		count = voisinHautGauche(tab, position, pVal->colonne);
 		break;
-	case HAUT_DROITE :
-		count += *(tab - 1);
-		count += *(tab - 1 + colonne);
-		count += *(tab + colonne);
-#ifdef DEBUG
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab - 1 + colonne));
-		printf("CALCUL :\tvaleurTab = %d\n", *(tab + colonne));
-#endif
+	case HAUT_DROITE:
+		count = voisinHautDroite(tab, position, pVal->colonne);
 		break;
 	default:
 		break;
 	}
-#ifdef DEBUG
-	printf("CALCUL :\tCOUNT = %d\n", count);
-#endif
-	if (*tab == 0)
-		if (count == NB_SAVE)
-			return ALIVE;
-		else
-			return DEAD;
+	if (*(tab+position) != ALIVE)
+		return (count == NB_SAVE) ? ALIVE : DEAD;
 	else
-		if (count == MIN_NB_SAVE || count == NB_SAVE)
-			return ALIVE;
-		else
-			return DEAD;
+		return (count == MIN_NB_SAVE || count == NB_SAVE) ? ALIVE : DEAD;
 }
+
+static int voisinCentre(int* tab, int position, int colonne)
+{
+	int count = 0;
+	tab += position;
+	count += *(tab - 1 - colonne);
+	count += *(tab - colonne);
+	count += *(tab + 1 - colonne);
+	count += *(tab - 1);
+	count += *(tab + 1);
+	count += *(tab - 1 + colonne);
+	count += *(tab + colonne);
+	count += *(tab + 1 + colonne);
+	
+	return count;
+}
+
+static int voisinBas(int* tab, int position, int colonne)
+{
+	int count = 0;
+	tab += position;
+	count += *(tab - 1 - colonne);
+	count += *(tab - colonne);
+	count += *(tab + 1 - colonne);
+	count += *(tab - 1);
+	count += *(tab + 1);
+	
+	return count;
+}
+
+static int voisinGauche(int* tab, int position, int colonne)
+{
+	int count = 0;
+	tab += position;
+	count += *(tab - colonne);
+	count += *(tab + 1 - colonne);
+	count += *(tab + 1);
+	count += *(tab + colonne);
+	count += *(tab + 1 + colonne);
+	
+	return count;
+}
+
+static int voisinDroite(int* tab, int position, int colonne)
+{
+	int count = 0;
+	tab += position;
+	count += *(tab - 1 - colonne);
+	count += *(tab - colonne);
+	count += *(tab - 1);
+	count += *(tab - 1 + colonne);
+	count += *(tab + colonne);
+	
+	return count;
+}
+
+static int voisinHaut(int* tab, int position, int colonne)
+{
+	int count = 0;
+	tab += position;
+	count += *(tab - 1);
+	count += *(tab + 1);
+	count += *(tab - 1 + colonne);
+	count += *(tab + colonne);
+	count += *(tab + 1 + colonne);
+	
+	return count;
+}
+static int voisinBasGauche(int* tab, int position, int colonne)
+{
+	int count = 0;
+	tab += position;
+	count += *(tab - colonne);
+	count += *(tab + 1 - colonne);
+	count += *(tab + 1);
+	
+	return count;
+}
+
+static int voisinBasDroite(int* tab, int position, int colonne)
+{
+	int count = 0;
+	tab += position;
+	count += *(tab - 1 - colonne);
+	count += *(tab - colonne);
+	count += *(tab - 1);
+	
+	return count;
+}
+
+static int voisinHautGauche(int* tab, int position, int colonne)
+{
+	int count = 0;
+	tab += position;
+	count += *(tab + 1);
+	count += *(tab + colonne);
+	count += *(tab + 1 + colonne);
+	
+	return count;
+}
+
+static int voisinHautDroite(int*tab, int position, int colonne)
+{
+	int count = 0;
+	tab += position;
+	count += *(tab - 1);
+	count += *(tab - 1 + colonne);
+	count += *(tab + colonne);
+	
+	return count;
+}
+
 
 static void start(int* pT1, int* pT2, struct basicVal* pVal)
 {
 	int i;
 	for (i = 1; i <= pVal->nbJ; i++)
 	{
-#ifdef DEBUG
-		printf("START :\ti = %d\n", i);
-#endif
 		if (i % 2 == 0)
 			analyse(pT2, pT1, pVal);
 		else
@@ -370,9 +374,6 @@ static void output(int* tableau, struct basicVal* pVal, int compteur)
 						printf("\n");
 						charcompteur = 0;
 					}
-#ifdef DEBUG
-					printf("%d ", (i*pVal->colonne) + j);
-#endif
 					printf("%d ", *(tableau + (i*pVal->colonne) + j));
 				}
 			printf("\n");
@@ -382,28 +383,21 @@ static void output(int* tableau, struct basicVal* pVal, int compteur)
 
 static void header(struct basicVal * pVal)
 {
-#ifdef DEBUG
-	printf("HEADER :\theader start\n");
-#endif
 	int col = pVal->colonne * pVal->zoom;
 	int lig = pVal->ligne * pVal->zoom;
-		lig += (pVal->nbJ / pVal->nbS) * (pVal->ligne * pVal->zoom);
-		lig += pVal->nbJ / pVal->nbS;
-#ifdef DEBUG
-	printf("HEADER :\theader end\n");
-#endif
+	lig += (pVal->nbJ / pVal->nbS) * (pVal->ligne * pVal->zoom);
+	lig += pVal->nbJ / pVal->nbS;
 	printf("P1\n%d %d\n", col, lig);
 }
 
 static void reprint(int question)
 {
 	if (verbose)
-	{
 		switch (question)
 		{
-		case 0: printf("Entrez le nombre de mises à jours\n");
+		case 0: printf("Entrez le nombre de mises Ã  jours\n");
 			break;
-		case 1: printf("Entrez la période d'affichage\n");
+		case 1: printf("Entrez la pÃ©riode d'affichage\n");
 			break;
 		case 2: printf("Entrez le facteur de zoom\n");
 			break;
@@ -415,37 +409,34 @@ static void reprint(int question)
 			break;
 		default: break;
 		}
-	}
 }
 
-
-
 //-------------------------------------------------------------------------------
-// Fonctions prédéfinies pour indiquer si les données sont correctes
+// Fonctions prÃ©dÃ©finies pour indiquer si les donnÃ©es sont correctes
 // Les fonctions signalant une erreur provoquent la fin du programme
-// en appelant exit(). Leur message d'erreur est toujours affiché.
+// en appelant exit(). Leur message d'erreur est toujours affichÃ©.
 //
 //                 NE PAS MODIFIER CES FONCTIONS
 //-------------------------------------------------------------------------------
 
-// A appeler si le nombre de mises à jours n'est pas positif
+// A appeler si le nombre de mises Ã  jours n'est pas positif
 static void erreur_nbJ(int nbJ)
 {
-	printf("Le nombre de mises à jours nbJ n'est pas positif: %d\n", nbJ);
+	printf("Le nombre de mises Ã  jours nbJ n'est pas positif: %d\n", nbJ);
 	exit(EXIT_FAILURE);
 }
 
 // A appeler si la periode de sauvegarde n'est pas positive
 static void erreur_nbS(int nbS)
 {
-	printf("La période de sauvegarde nbS n'est pas positive: %d\n", nbS);
+	printf("La pÃ©riode de sauvegarde nbS n'est pas positive: %d\n", nbS);
 	exit(EXIT_FAILURE);
 }
 
 // A appeler si la periode de sauvegarde n'est pas positive
 static void erreur_nbJ_nbS(int nbJ, int nbS)
 {
-	printf("La combinaison du nombre de mises à jour %d et de la période de "
+	printf("La combinaison du nombre de mises Ã  jour %d et de la pÃ©riode de "
 		"sauvegarde %d est interdite\n", nbJ, nbS);
 	exit(EXIT_FAILURE);
 }
