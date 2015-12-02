@@ -1,0 +1,87 @@
+﻿A OUVRIR AVEC UN EDITEUR DE CODE TEL QUE GEANY, VISUAL STUDIO OU NOTEPAD++
+--------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
+sciper 	: 253133
+nom 	: Borden
+prénom 	: Sven
+fichier : doc
+date 	: 30.09.2015
+Version : 1.0
+Descrip : Explications sur certaines subtilité concernant le projet PROG I Automne
+		  2015-16 EPFL MT-EL par Sven Borden
+--------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
+
+# FONCTION CASEVIV
+
+	Cette fonction vérifie les cases autours d'une case donnée et retourne
+	1 ou 0 qui correspond à si la case doit être vivante ou morte. Cette
+	fonction prend en considération plusieurs paramètres :
+	
+		[int* tableau, int position, struct basicVal* pVal, int cas]
+	- int* tableau  :	pointeur du tableau qu'on veut analyser
+	- int position  :	position de la case dans le tableau donné
+	- struct 
+	 basicVal* pVal : valeurs nbJ, nbS...
+	- int cas		:	cas du tableau, ces cas sont déterminé avec une 
+						valeur binaire entre 0 et 15 
+						[hdgb] = position dans le tableau = [HAUT|DROITE|GAUCHE|BAS]
+						 1111  = valeurs entre 0 et 15
+						
+						Decimal		Binaire		Position
+						--------------------------------
+												000
+						0			0000		0X0
+												000
+						--------------------------------
+												000
+						1			0001		000
+												0X0
+						--------------------------------
+												000
+						2			0010		X00
+												000
+						--------------------------------
+												000
+						3			0011		000
+												X00
+						--------------------------------
+												000
+						4			0100		00X
+												000
+						--------------------------------
+												000
+						5			0101		000
+												00X
+						--------------------------------
+						6			0110		NULL
+						--------------------------------
+						7			0111		NULL
+						--------------------------------
+												0X0
+						8			1000		000
+												000
+						--------------------------------
+						9			1001		NULL
+						--------------------------------
+												X00
+						10			1010		000
+												000
+						--------------------------------
+						11			1011		NULL
+						--------------------------------
+												00X
+						12			1100		000
+												000
+						--------------------------------
+						13			1101		NULL
+						--------------------------------
+						14			1110		NULL
+						--------------------------------	
+						15			1111		NULL
+						--------------------------------
+			comme on peut le remarquer, chaque nombre binaire 
+			dit si la case en considération est dans une bordure
+			et surtout dans quel bordure spécifique. Cela
+			permet par la suite de calculer le nombre de voisins
+			dans un temps optimal.
