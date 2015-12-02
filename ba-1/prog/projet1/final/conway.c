@@ -143,40 +143,40 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 
 		if ((posX > 0) && (posY > 0) && (posX < ligne-1) && 
 			(posY < colonne-1))
-			*(pT2 + i) = caseVivante(pT1, i, pVal, CENTRE);
+			*(pT2 + i) = caseViv(pT1, i, pVal, CENTRE);
 		else
 		{
 			if ((posX == ligne - 1) &&
 				(posY > 0) && (posY < colonne - 1))
-				*(pT2 + i) = caseVivante(pT1, i, pVal, BAS);
+				*(pT2 + i) = caseViv(pT1, i, pVal, BAS);
 
 			if ((posX > 0) && (posX < ligne - 1) &&
 				(posY == 0))
-				*(pT2 + i) = caseVivante(pT1, i, pVal, GAUCHE);
+				*(pT2 + i) = caseViv(pT1, i, pVal, GAUCHE);
 
 			if ((posX == ligne - 1) &&
 				(posY == 0))
-				*(pT2 + i) = caseVivante(pT1, i, pVal, BAS_GAUCHE);
+				*(pT2 + i) = caseViv(pT1, i, pVal, BAS_GAUCHE);
 
 			if ((posX > 0) && (posX < ligne - 1) &&
 				(posY == colonne - 1))
-				*(pT2 + i) = caseVivante(pT1, i, pVal, DROITE);
+				*(pT2 + i) = caseViv(pT1, i, pVal, DROITE);
 
 			if ((posX == ligne - 1) &&
 				(posY == colonne - 1))
-				*(pT2 + i) = caseVivante(pT1, i, pVal, BAS_DROITE);
+				*(pT2 + i) = caseViv(pT1, i, pVal, BAS_DROITE);
 
 			if ((posX == 0) &&
 				(posY > 0) && (posY < colonne - 1))
-				*(pT2 + i) = caseVivante(pT1, i, pVal, HAUT);
+				*(pT2 + i) = caseViv(pT1, i, pVal, HAUT);
 
 			if ((posX == 0) &&
 				(posY == 0))
-				*(pT2 + i) = caseVivante(pT1, i, pVal, HAUT_GAUCHE);
+				*(pT2 + i) = caseViv(pT1, i, pVal, HAUT_GAUCHE);
 
 			if ((posX == 0) &&
 				(posY == colonne - 1))
-				*(pT2 + i) = caseVivante(pT1, i, pVal, HAUT_DROITE);
+				*(pT2 + i) = caseViv(pT1, i, pVal, HAUT_DROITE);
 		}
 
 	}
