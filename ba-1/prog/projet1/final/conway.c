@@ -190,31 +190,31 @@ static int caseViv(int* tab, int pos, struct basicVal* pVal, int cas)
 	switch (cas)
 	{
 	case CENTRE:	
-		count = voisinCentre(tab, position, pVal->colonne);
+		count = voisinCentre(tab, pos, pVal->colonne);
 		break;
 	case BAS:	
-		count = voisinBas(tab, position, pVal->colonne);
+		count = voisinBas(tab, pos, pVal->colonne);
 		break;
 	case GAUCHE:	
-		count = voisinGauche(tab, position, pVal->colonne);
+		count = voisinGauche(tab, pos, pVal->colonne);
 		break;
 	case BAS_GAUCHE:	
-		count = voisinBasGauche(tab, position, pVal->colonne);
+		count = voisinBasGauche(tab, pos, pVal->colonne);
 		break;
 	case DROITE:	
-		count = voisinDroite(tab, position, pVal->colonne);
+		count = voisinDroite(tab, pos, pVal->colonne);
 		break;
 	case BAS_DROITE:	
-		count = voisinBasDroite(tab, position, pVal->colonne);
+		count = voisinBasDroite(tab, pos, pVal->colonne);
 		break;
 	case HAUT:	
-		count = voisinHaut(tab, position, pVal->colonne);
+		count = voisinHaut(tab, pos, pVal->colonne);
 		break;
 	case HAUT_GAUCHE:	
-		count = voisinHautGauche(tab, position, pVal->colonne);
+		count = voisinHautGauche(tab, pos, pVal->colonne);
 		break;
 	case HAUT_DROITE:	
-		count = voisinHautDroite(tab, position, pVal->colonne);
+		count = voisinHautDroite(tab, pos, pVal->colonne);
 		break;
 	default:
 		break;
