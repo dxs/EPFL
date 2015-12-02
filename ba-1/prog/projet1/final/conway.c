@@ -96,7 +96,8 @@ static void lecture()
 	scanf("%d", &val.nbS);
 	if (val.nbS < 0)
 		erreur_nbS(val.nbS);
-	if ((val.nbS > 0 && val.nbJ % val.nbS != 0) || (val.nbJ == 0 && val.nbS > 1))
+	if ((val.nbS > 0 && val.nbJ % val.nbS != 0) || 
+		(val.nbJ == 0 && val.nbS > 1))
 		erreur_nbJ_nbS(val.nbJ, val.nbS);
 
 	reprint(question++);
@@ -140,7 +141,8 @@ static void analyse(int* pT1, int* pT2, struct basicVal* pVal)
 		posX = i / colonne;
 		posY = i % colonne;
 
-		if ((posX > 0) && (posY > 0) && (posX < ligne-1) && (posY < colonne-1))
+		if ((posX > 0) && (posY > 0) && (posX < ligne-1) && 
+			(posY < colonne-1))
 			*(pT2 + i) = caseVivante(pT1, i, pVal, CENTRE);
 		else
 		{
