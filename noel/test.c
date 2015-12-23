@@ -41,21 +41,66 @@ struct TSIZE
 {
 	int width;
 	int height;
+	int sapin_height;
+	int sapin_width;
+	int sky_height;
 };
 
 static void clear();
 static int tWidth();
 static int tHeight();
+static void clearColor();
+static void setColor(int foreground, int background, int style);
+static void fillTerminal(int background, struct TSIZE);
+static void sapin(struct TSIZE*);
 
 int main()
 {
+	clear();
 	struct TSIZE terminal;
 	terminal.width = tWidth();
 	terminal.height = tHeight();
-	printf("ROW %d, col %d", terminal.height, terminal.width);
-	printf("%c[%d;%d;%dmHello Sven\n", MAGIC, BOLD, F_RED, B_BLACK);
-	clear();
+	printf("HEIGHT : %d\tWIDTH : %d\n", terminal.height, terminal.width);	
+	sapin(&terminal);
+
+	char arrayF[tWidth()][tHeight()];
+	char arrayB[tWidth()][tHeight()];
+
+	fillTerminal(F_BLUE, terminal);
+
+	setColor(F_BLUE, B_BLACK, BOLD);
+	clearColor();
 	getchar();
+}
+
+static void fillTerminal(int background, struct TSIZE t)
+{
+	int i, j;
+	setColor(F_BLACK, background, BOLD);
+	for(i = 0; i < t.height; i++)
+		for(j = 0; j < t.width; j++)
+			printf("%c", 240);
+}
+
+static void sapin(struct TSIZE *t)
+{
+	t->sapin_height = t->height * 2 / 3;
+	int tmp = 1, i;
+	
+	for(i = 1; tmp < t->sapin_height; i++)
+	{
+		tmp = i*(i+1);
+		tmp /= 2;
+	}
+	tmp =
+	tmp =  
+	t->sapin_height = tmp;
+	printf("HEIGHT : %d\t WIDTH : %d\n", t->sapin_height, tmp);
+}
+
+static void setColor(int foreground, int background, int style)
+{
+	printf("%c[%d;%d;%dm", MAGIC, style, foreground, background);
 }
 
 static int tWidth()
@@ -83,7 +128,13 @@ static int tHeight()
 	return w.ws_row;
 #endif
 }
-static void clear()
+
+static void clearColor()
 {
 	printf("%c[%dm", 0x1B, 0);
+}
+
+static void clear()
+{
+	printf("%s", "\e[1;1H\e[2J");
 }
