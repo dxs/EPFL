@@ -3,7 +3,7 @@
 #include <unistd.h>
 #ifdef WIN32
 	#include <windows.h>
-#elif//LINUX
+#else//LINUX
 	#include <sys/ioctl.h>
 #endif
 
@@ -64,7 +64,7 @@ static int tWidth()
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 	return csbi.srWindow.Right - csbi.srWindow.Left + 1;
-#elif
+#else
 	struct winsize w;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	return w.ws_col;
@@ -77,7 +77,7 @@ static int tHeight()
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 	return csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
-#elif
+#else
 	struct winsize w;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	return w.ws_row;
