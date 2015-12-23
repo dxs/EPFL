@@ -1,5 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+
 
 #define MAGIC 	0x1B
 
@@ -31,15 +34,40 @@
 #define B_CYAN 		46
 #define B_WHITE 	47
 
+struct TSIZE
+{
+	int width;
+	int height;
+};
+
 static void clear();
+static int tWidth();
+static int tHeight();
 
 int main()
 {
-	printf("%c[%d;%d;%dmHello Sven\n", MAGIC, BOLD, WHAT, B_BLACK);
+	struct TSIZE terminal;
+	terminal.width = tWidth();
+	terminal.height = tHeight();
+	printf("ROW %d, col %d", terminal.height, terminal.width);
+	printf("%c[%d;%d;%dmHello Sven\n", MAGIC, BOLD, F_RED, B_BLACK);
 	clear();
 	getchar();
 }
 
+static int tWidth()
+{
+	struct winsize w;
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	return w.ws_col;
+}
+
+static int tHeight()
+{
+	struct winsize w;
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	return w.ws_row;
+}
 static void clear()
 {
 	printf("%c[%dm", 0x1B, 0);
