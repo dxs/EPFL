@@ -1,8 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <sys/ioctl.h>
-
+#ifdef WIN32
+	#include <windows.h>
+#elif//LINUX
+	#include <sys/ioctl.h>
+#endif
 
 #define MAGIC 	0x1B
 
@@ -57,16 +60,28 @@ int main()
 
 static int tWidth()
 {
+#ifdef WIN32
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+	return csbi.srWindow.Right - csbi.srWindow.Left + 1;
+#elif
 	struct winsize w;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	return w.ws_col;
+#endif
 }
 
 static int tHeight()
 {
+#ifdef WIN32
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+	return csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+#elif
 	struct winsize w;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	return w.ws_row;
+#endif
 }
 static void clear()
 {
