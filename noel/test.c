@@ -93,7 +93,11 @@ int main()
    
     //OUTPUTMATRIX(terminal, F, B);
         OUTPUT(terminal, C, F, B);
+        #ifdef WIN32
         Sleep(SLEEP);
+        #else
+        sleep(SLEEP);
+        #endif
         clearColor();
         clear();
     }
