@@ -1,12 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <time.h>
 #ifdef WIN32
 	#include <windows.h>
     #define FOND    32//240
+    #define SLEEP   2000
 #else//LINUX
 	#include <sys/ioctl.h>
     #define FOND    32//178
+    #define SLEEP   2
 #endif
 
 #define MAGIC 	0x1B
@@ -62,6 +65,7 @@ static int  ground(int height);
 static void OUTPUT(struct TSIZE, char*, char*, char*);
 static void OUTPUTMATRIX(struct TSIZE, char*, char*);
 static void sapinEtoile(struct TSIZE, char*, char*, char*);
+static void fillSnow(struct TSIZE, char*, char*, char*);
 
 int main()
 {
@@ -69,7 +73,7 @@ int main()
 	struct TSIZE terminal;
 	terminal.width = tWidth();
 	terminal.height = tHeight();
-	printf("TERMIN\tHEIGHT : %d\tWIDTH : %d\n", terminal.height, terminal.width);	
+	//printf("TERMIN\tHEIGHT : %d\tWIDTH : %d\n", terminal.height, terminal.width);	
     terminal.sky_height = ground(terminal.height);
 	sapin(&terminal);
 
@@ -79,13 +83,21 @@ int main()
     char *C = (char*)arrayC;
     char *F = (char*)arrayF;
     char *B = (char*)arrayB;
-    	
-    fillTerminal(terminal, C, F, B);
-    fillGround(terminal, C, F, B);
-    fillSapin(terminal, C, F, B);
+    int i = 0;
+    for(;i < 100; i++)
+    {
+        fillTerminal(terminal, C, F, B);
+        fillGround(terminal, C, F, B);
+        fillSapin(terminal, C, F, B);
+        fillSnow(terminal, C, F, B);
    
-    OUTPUTMATRIX(terminal, F, B);
-    OUTPUT(terminal, C, F, B);
+    //OUTPUTMATRIX(terminal, F, B);
+        OUTPUT(terminal, C, F, B);
+        Sleep(SLEEP);
+        clearColor();
+        clear();
+    }
+    
 	clearColor();
 	getchar();
 }
@@ -114,6 +126,27 @@ static void fillGround(struct TSIZE dat, char *C, char *F, char *B)
         }
 }
 
+static void fillSnow(struct TSIZE dat, char *C, char *F, char *B)
+{
+    int skyHeight = dat.sky_height;
+    int width = dat.width;
+    int random, i, j;
+    //sRand(time(NULL));
+    for(i = 0; i < skyHeight; i++)
+        for(j = 0; j < width; j++)
+        {
+            random = rand() % 100; //0 to 99
+            if(random < 10)
+            {
+                if(*(B + i*width + j) != F_GREEN && *(B + i*width + j) != B_RED)
+                {
+                    *(C + i*width + j) = 0x2A;
+                    *(F + i*width + j) = F_WHITE;
+                }
+            }
+        }
+}
+
 static void sapinEtoile(struct TSIZE dat, char *C, char *F, char *B)
 {
     int height = dat.height;
@@ -122,13 +155,29 @@ static void sapinEtoile(struct TSIZE dat, char *C, char *F, char *B)
     int position = dat.sapin_position;
     int j = width / 2 + 3;
     
-    int start = height - (height-position) - sHeight - 4;
+    int start = height - (height-position) - sHeight - 2;
     position = start*width + j;
     
-    *(C + position) = 32;
+    *(C + position) = 177;
     *(F + position) = F_YELLOW;
-    *(B + position) = F_YELLOW;
-    
+    *(B + position) = B_BLACK;
+    position -= width;
+    *(C + position) = 177;
+    *(F + position) = F_YELLOW;
+    *(B + position) = B_YELLOW;
+    position--;
+    *(C + position) = 177;
+    *(F + position) = F_YELLOW;
+    *(B + position) = B_YELLOW;
+    position += 2;
+    *(C + position) = 177;
+    *(F + position) = F_YELLOW;
+    *(B + position) = B_YELLOW;
+    position -= width;
+    position--;
+    *(C + position) = 220;
+    *(F + position) = F_YELLOW;
+    *(B + position) = B_BLUE; 
 }
 
 static void fillSapin(struct TSIZE dat, char *C, char *F, char *B)
@@ -152,19 +201,47 @@ static void fillSapin(struct TSIZE dat, char *C, char *F, char *B)
     
     //pour pair impair
     if(sHeight % 2 == 0)
+    {
         basTronc = 2;
+        position++;
+        *(C + position) = 177;
+        *(F + position) = F_YELLOW;
+        *(B + position) = B_RED;
+        position -= 2;
+        *(C + position) = 177;
+        *(F + position) = F_YELLOW;
+        *(B + position) = B_RED;
+        position -= width;
+        *(C + position) = 177;
+        *(F + position) = F_YELLOW;
+        *(B + position) = B_RED;
+        position += 2;
+        *(C + position) = 177;
+        *(F + position) = F_YELLOW;
+        *(B + position) = B_RED;
+    }
     else
+    {
         basTronc = 1;
+        position++;
+        *(C + position) = 177;
+        *(F + position) = F_YELLOW;
+        *(B + position) = B_RED;
+        position -= 2;
+        *(C + position) = 177;
+        *(F + position) = F_YELLOW;
+        *(B + position) = B_RED;
+    }
         
     sapinEtoile(dat, C, F, B);    
     
     position = dat.sapin_position;
     start = height - (height-position) - sHeight - 2;
     position = start*width + j;
-    printf("SAPIN\tPos : %d\tstart : %d\n", position, start);
+    //printf("SAPIN\tPos : %d\tstart : %d\n", position, start);
     *(C + position) = 177;
-    *(F + position) = F_GREEN;
-    *(B + position) = F_GREEN;
+    *(F + position) = F_YELLOW;
+    *(B + position) = B_YELLOW;
     start++;
     position = start*width + j;
     *(C + position) = 177;
@@ -198,7 +275,6 @@ static void fillSapin(struct TSIZE dat, char *C, char *F, char *B)
     *(B + position) = F_GREEN;
     
     
-    printf("FEUILLES DROITES\n");
     //FEUILLES DROITE
     int posV = start+1, posH = j+1, borneF = 6, borneA = 4, max, zoomH = 2;
     for(; posV < start+sHeight-basTronc; posV++)
@@ -282,7 +358,7 @@ static void sapin(struct TSIZE *t)
     t->sapin_height = height;
     t->sapin_width  = width;
     t->sapin_position = position;
-    printf("SAPIN\tHEIGHT : %d\tWIDTH : %d\tPOSITION : %d\n", height, width, position);
+    //printf("SAPIN\tHEIGHT : %d\tWIDTH : %d\tPOSITION : %d\n", height, width, position);
 }
 
 static void sapin_OLD(struct TSIZE *t)
