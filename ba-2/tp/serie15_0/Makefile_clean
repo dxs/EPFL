@@ -1,0 +1,34 @@
+# Makefile
+
+CC = gcc 
+
+CFLAGS = -Wall -ansi 
+
+OFILES = fruits.o persons.o eatFruit.o	 
+
+
+all: eatFruit.x
+
+
+fruits.o   :  fruits.c fruits.h 
+
+	$(CC) $(CFLAGS) -c fruits.c -o fruits.o
+
+
+persons.o  :  persons.c persons.h fruits.h 
+
+	$(CC) $(CFLAGS) -c persons.c -o persons.o
+
+
+eatFruit.o :  fruits.h persons.h eatFruit.c 
+
+	$(CC) $(CFLAGS) -c eatFruit.c -o eatFruit.o
+
+
+eatFruit.x   : $(OFILES)
+
+	$(CC) $(OFILES) -o eatFruit.x
+
+clean:
+	@echo " *** EFFACE MODULES OBJET ET EXECUTABLE ***"
+	@/bin/rm -f *.o *.x *.c~ *.h~ 
