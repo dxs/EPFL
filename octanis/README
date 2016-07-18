@@ -1,0 +1,50 @@
+	creen mqdapes pour faire la calibration. 
+
+1) source /home/sven/octanis/catkin_ws/devel/setup.bash
+
+2) roscd getRaw
+
+3) modifier le getRaw.launch pour ajuster la résolution
+
+4) roslaunch getRaw getRaw.launch
+
+5) dans un new terminal aller dans image_pipeline (ou pas je suis pas sur)
+	
+6) rosrun camera_calibration cameracalibrator.py --size 9x6 --square 0.06 image:=/usb_cam/image_raw camera:=/usb_cam
+
+7) faire la calibration en jouant avec la cardboard, puis cliquer sur calibrate, attendre que l'image n'est plus grisée, puis save.
+
+8) fermer le programme de calibration puis aller dans /tmp/ ou on y trouve un fichier calibration*.py
+
+9) tar -zxvf calibration*.py
+
+10) modifier le nom de la camera dans le fichier ost.yaml par right_cam ou left_cam (selon)
+
+11) bouger ce fichier qq part
+
+12) dans le roslaunch file, ajouter le parametre de fichier de calibration
+
+Etapes pour faire le image_proc
+
+1) source /home/sven/octanis/catkin_ws/devel/setup.bash
+
+2) roscd getRaw
+
+3) roslaunch getRaw getRaw.launch
+
+4) ROS_NAMESPACE=usb_cam image_proc image_proc
+
+5) dans un new terminal rosrun image_view image_view image:=usb_cam/image_rect_color
+
+
+Etapes a faire pour faire fonctionner la stereo
+
+1) source /home/sven/octanis/catkin_ws/devel/setup.bash
+
+2) roscd getRaw
+
+3) roslaunch getRaw getRaw2.launch
+
+4) ROS_NAMESPACE=usb_cam stereo_image_proc stereo_image_proc __name:=PROC
+
+4.1) rosrun image_view stereo_view stereo:=/stereo image:=image_rect
