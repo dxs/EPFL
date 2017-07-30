@@ -1,0 +1,209 @@
+[12:13:18] [Server thread/INFO]: Starting minecraft server version 1.12
+[12:13:18] [Server thread/INFO]: Loading properties
+[12:13:18] [Server thread/INFO]: Default game type: SURVIVAL
+[12:13:18] [Server thread/INFO]: Generating keypair
+[12:13:18] [Server thread/INFO]: Starting Minecraft server on *:25565
+[12:13:18] [Server thread/INFO]: Using epoll channel type
+[12:13:19] [Server thread/INFO]: Preparing level "world"
+[12:13:19] [Server thread/INFO]: Loaded 488 advancements
+[12:13:19] [Server thread/INFO]: Preparing start region for level 0
+[12:13:20] [Server thread/INFO]: Preparing spawn area: 0%
+[12:13:21] [Server thread/INFO]: Preparing spawn area: 29%
+[12:13:22] [Server thread/INFO]: Preparing spawn area: 76%
+[12:13:23] [Server thread/INFO]: Done (4.221s)! For help, type "help" or "?"
+[12:13:40] [Server thread/INFO]: Opped taxiborden
+[12:16:07] [User Authenticator #1/INFO]: UUID of player taxiborden is 6c32d567-64e8-4147-b3ad-b7135afd34fa
+[12:16:07] [Server thread/INFO]: taxiborden[/83.76.128.55:63197] logged in with entity id 390 at (-86.59600944307047, 75.0, 230.9234598070653)
+[12:16:07] [Server thread/INFO]: taxiborden joined the game
+[12:16:12] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 3747ms behind, skipping 74 tick(s)
+[12:16:18] [Server thread/INFO]: [taxiborden: Cleared the inventory of taxiborden, removing 1 items]
+[12:16:24] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[12:16:38] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 7585ms behind, skipping 151 tick(s)
+[12:17:38] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2083ms behind, skipping 41 tick(s)
+[12:18:05] [User Authenticator #2/INFO]: UUID of player unclescr00ge is 9d2d5178-b0ea-476f-9b58-dfd8cd01335f
+[12:18:05] [Server thread/INFO]: unclescr00ge[/80.219.89.23:55047] logged in with entity id 1238 at (-80.5, 71.0, 245.5)
+[12:18:05] [Server thread/INFO]: unclescr00ge joined the game
+[12:18:12] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 16226ms behind, skipping 324 tick(s)
+[12:18:15] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 3666ms behind, skipping 73 tick(s)
+[12:18:47] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 20260ms behind, skipping 405 tick(s)
+[12:18:51] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 3743ms behind, skipping 74 tick(s)
+[12:19:01] [Server thread/INFO]: taxiborden has made the advancement [Stone Age]
+[12:19:03] [Server thread/INFO]: <unclescr00ge> tt
+[12:19:16] [Server thread/INFO]: unclescr00ge was slain by Spider
+[12:19:25] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 14650ms behind, skipping 293 tick(s)
+[12:19:47] [User Authenticator #3/INFO]: UUID of player emil2295 is 81b49fd9-c568-4380-9b2c-f434ec937f9b
+[12:19:47] [Server thread/INFO]: emil2295[/178.196.57.44:50652] logged in with entity id 2065 at (-92.5, 73.0, 245.5)
+[12:19:47] [Server thread/INFO]: emil2295 joined the game
+[12:20:13] [Server thread/INFO]: unclescr00ge was shot by Skeleton
+[12:20:37] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2883ms behind, skipping 57 tick(s)
+[12:20:42] [Server thread/INFO]: <taxiborden> op unclescr00ge
+[12:21:15] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 18579ms behind, skipping 371 tick(s)
+[12:21:18] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2851ms behind, skipping 57 tick(s)
+[12:21:18] [Server thread/INFO]: [taxiborden: Opped unclescr00ge]
+[12:21:39] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 5952ms behind, skipping 119 tick(s)
+[12:21:59] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 5285ms behind, skipping 105 tick(s)
+[12:22:21] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2043ms behind, skipping 40 tick(s)
+[12:22:36] [Server thread/INFO]: [unclescr00ge: Opped emil2295]
+[12:23:15] [Server thread/INFO]: unclescr00ge has made the advancement [Stone Age]
+[12:23:26] [Server thread/INFO]: emil2295 has made the advancement [Stone Age]
+[12:23:41] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2455ms behind, skipping 49 tick(s)
+[12:24:30] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2516ms behind, skipping 50 tick(s)
+[12:24:42] [Server thread/INFO]: emil2295 has made the advancement [Getting an Upgrade]
+[12:24:43] [Server thread/INFO]: unclescr00ge has made the advancement [Getting an Upgrade]
+[12:24:54] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 6877ms behind, skipping 137 tick(s)
+[12:24:58] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[12:25:16] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2335ms behind, skipping 46 tick(s)
+[12:25:41] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 7575ms behind, skipping 151 tick(s)
+[12:26:03] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 9308ms behind, skipping 186 tick(s)
+[12:26:17] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 6135ms behind, skipping 122 tick(s)
+[12:26:34] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 7606ms behind, skipping 152 tick(s)
+[12:26:47] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 3582ms behind, skipping 71 tick(s)
+[12:28:31] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 3197ms behind, skipping 63 tick(s)
+[12:28:57] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 11707ms behind, skipping 234 tick(s)
+[12:29:04] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2990ms behind, skipping 59 tick(s)
+[12:29:23] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 4428ms behind, skipping 88 tick(s)
+[12:29:26] [Server thread/INFO]: taxiborden has made the advancement [Getting an Upgrade]
+[12:29:42] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 3464ms behind, skipping 69 tick(s)
+[12:32:21] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[12:32:22] [Server thread/INFO]: unclescr00ge has made the advancement [Monster Hunter]
+[12:33:00] [Server thread/INFO]: unclescr00ge was shot by Skeleton
+[12:33:02] [Server thread/INFO]: taxiborden has made the advancement [Monster Hunter]
+[12:33:22] [Server thread/INFO]: [unclescr00ge: Set own game mode to Creative Mode]
+[12:33:42] [Server thread/INFO]: taxiborden was shot by Skeleton
+[12:34:36] [Server thread/INFO]: [unclescr00ge: Teleported unclescr00ge to emil2295]
+[12:34:51] [Server thread/INFO]: emil2295 has made the advancement [Monster Hunter]
+[12:35:35] [Server thread/INFO]: taxiborden was blown up by Creeper
+[12:35:45] [Server thread/INFO]: [unclescr00ge: Teleported unclescr00ge to emil2295]
+[12:36:30] [Server thread/INFO]: [unclescr00ge: Set own game mode to Survival Mode]
+[12:40:10] [Server thread/INFO]: unclescr00ge has made the advancement [Acquire Hardware]
+[12:41:04] [Server thread/INFO]: unclescr00ge has made the advancement [Isn't It Iron Pick]
+[12:42:51] [Server thread/INFO]: [taxiborden: Teleported taxiborden to emil2295]
+[12:46:49] [Server thread/INFO]: taxiborden was slain by Enderman
+[12:46:55] [Server thread/INFO]: [taxiborden: Teleported taxiborden to emil2295]
+[12:47:06] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[12:47:09] [Server thread/INFO]: [taxiborden: Teleported taxiborden to emil2295]
+[12:49:34] [Server thread/INFO]: [unclescr00ge: Set own game mode to Creative Mode]
+[12:49:44] [Server thread/INFO]: [unclescr00ge: Set own game mode to Survival Mode]
+[12:51:01] [Server thread/INFO]: taxiborden has made the advancement [Acquire Hardware]
+[12:51:11] [Server thread/INFO]: emil2295 has made the advancement [Acquire Hardware]
+[12:51:36] [Server thread/INFO]: emil2295 has made the advancement [Isn't It Iron Pick]
+[12:52:04] [Server thread/INFO]: [unclescr00ge: Set the time to 1000]
+[12:52:57] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[12:53:13] [Server thread/INFO]: unclescr00ge has made the advancement [A Seedy Place]
+[12:54:17] [Server thread/INFO]: emil2295 was slain by Zombie
+[12:54:31] [Server thread/INFO]: [emil2295: Teleported emil2295 to unclescr00ge]
+[12:55:01] [Server thread/INFO]: unclescr00ge has made the advancement [Suit Up]
+[12:55:20] [Server thread/INFO]: taxiborden has made the advancement [A Seedy Place]
+[12:56:09] [Server thread/INFO]: [emil2295: Teleported emil2295 to unclescr00ge]
+[12:57:53] [Server thread/INFO]: emil2295 has made the advancement [Suit Up]
+[12:59:58] [Server thread/INFO]: emil2295 has made the advancement [A Seedy Place]
+[13:01:36] [Server thread/INFO]: taxiborden has made the advancement [Isn't It Iron Pick]
+[13:05:20] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[13:13:04] [Server thread/INFO]: taxiborden has made the advancement [The Parrots and the Bats]
+[13:13:54] [Server thread/INFO]: taxiborden lost connection: Timed out
+[13:13:54] [Server thread/INFO]: taxiborden left the game
+[13:14:39] [User Authenticator #4/INFO]: UUID of player taxiborden is 6c32d567-64e8-4147-b3ad-b7135afd34fa
+[13:14:39] [Server thread/INFO]: taxiborden[/83.76.128.55:50149] logged in with entity id 101107 at (-314.86168138629233, 64.0, 40.21749809446253)
+[13:14:39] [Server thread/INFO]: taxiborden joined the game
+[13:19:43] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[13:23:50] [Server thread/INFO]: emil2295 has made the advancement [Take Aim]
+[13:27:39] [Server thread/INFO]: [unclescr00ge: Set the time to 1000]
+[13:31:37] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[13:40:35] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[13:43:19] [Server thread/INFO]: [emil2295: Set the time to 1000]
+[13:45:51] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2139ms behind, skipping 42 tick(s)
+[13:53:51] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[13:54:46] [Server thread/INFO]: taxiborden has made the advancement [Suit Up]
+[13:58:10] [Server thread/INFO]: <unclescr00ge> x -318 ; z = 61
+[13:58:26] [Server thread/INFO]: taxiborden lost connection: Timed out
+[13:58:26] [Server thread/INFO]: taxiborden left the game
+[13:59:28] [User Authenticator #5/INFO]: UUID of player taxiborden is 6c32d567-64e8-4147-b3ad-b7135afd34fa
+[13:59:28] [Server thread/INFO]: taxiborden[/83.76.128.55:50109] logged in with entity id 199543 at (-718.8221915128148, 71.0, -230.28289818812212)
+[13:59:28] [Server thread/INFO]: taxiborden joined the game
+[14:00:19] [Server thread/INFO]: [taxiborden: Teleported taxiborden to emil2295]
+[14:04:01] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[14:08:01] [Server thread/INFO]: [unclescr00ge: Set the time to 13000]
+[14:08:02] [Server thread/INFO]: unclescr00ge has made the advancement [Sweet dreams]
+[14:08:09] [Server thread/INFO]: [unclescr00ge: Set the time to 1000]
+[14:13:05] [Server thread/INFO]: emil2295 has made the advancement [The Parrots and the Bats]
+[14:13:29] [Server thread/INFO]: <emil2295> coucou
+[14:18:05] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[14:18:05] [Server thread/INFO]: [unclescr00ge: Changing to clear weather]
+[14:18:18] [Server thread/INFO]: emil2295 has made the advancement [Sweet dreams]
+[14:21:03] [Server thread/INFO]: [unclescr00ge: Set own game mode to Creative Mode]
+[14:21:26] [Server thread/INFO]: [unclescr00ge: Set own game mode to Survival Mode]
+[14:21:42] [Server thread/INFO]: [unclescr00ge: Set own game mode to Creative Mode]
+[14:21:52] [Server thread/INFO]: [unclescr00ge: Set own game mode to Survival Mode]
+[14:28:14] [Server thread/INFO]: [emil2295: Teleported emil2295 to unclescr00ge]
+[14:30:30] [Server thread/INFO]: emil2295 has made the advancement [Diamonds!]
+[14:32:55] [Server thread/INFO]: unclescr00ge lost connection: Disconnected
+[14:32:55] [Server thread/INFO]: unclescr00ge left the game
+[14:32:59] [User Authenticator #6/INFO]: UUID of player unclescr00ge is 9d2d5178-b0ea-476f-9b58-dfd8cd01335f
+[14:32:59] [Server thread/INFO]: unclescr00ge[/80.219.89.23:58647] logged in with entity id 252012 at (-308.1298332313619, 62.9375, 88.16479793505734)
+[14:32:59] [Server thread/INFO]: unclescr00ge joined the game
+[14:33:05] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[14:33:07] [Server thread/INFO]: [unclescr00ge: Set own game mode to Creative Mode]
+[14:33:10] [Server thread/INFO]: emil2295 has made the advancement [Ice Bucket Challenge]
+[14:33:13] [Server thread/INFO]: [unclescr00ge: Set own game mode to Survival Mode]
+[14:39:32] [Server thread/INFO]: [unclescr00ge: Set the time to 1000]
+[14:40:06] [Server thread/INFO]: emil2295 has made the advancement [We Need to Go Deeper]
+[14:40:07] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 9334ms behind, skipping 186 tick(s)
+[14:40:11] [Server thread/WARN]: emil2295 moved too quickly! 273.5819574016947,23.0,-61.6093743431077
+[14:40:59] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 28997ms behind, skipping 579 tick(s)
+[14:42:01] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2094ms behind, skipping 41 tick(s)
+[14:46:40] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[14:47:32] [Server thread/INFO]: emil2295 has made the advancement [A Terrible Fortress]
+[14:48:25] [Server thread/INFO]: [taxiborden: Teleported taxiborden to unclescr00ge]
+[14:49:15] [Server thread/INFO]: taxiborden has made the advancement [We Need to Go Deeper]
+[14:49:15] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2363ms behind, skipping 47 tick(s)
+[14:49:15] [Server thread/WARN]: taxiborden moved too quickly! 273.75815635956536,23.0,-61.04184365235557
+[14:49:25] [Server thread/INFO]: [taxiborden: Teleported taxiborden to emil2295]
+[14:49:26] [Server thread/INFO]: taxiborden has made the advancement [A Terrible Fortress]
+[14:50:41] [Server thread/INFO]: unclescr00ge has made the advancement [We Need to Go Deeper]
+[14:50:41] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2166ms behind, skipping 43 tick(s)
+[14:50:41] [Server thread/WARN]: unclescr00ge moved too quickly! 273.532740762874,23.0,-61.28760052060713
+[14:50:51] [Server thread/INFO]: [taxiborden: Teleported taxiborden to unclescr00ge]
+[14:52:02] [Server thread/INFO]: emil2295 was slain by Wither Skeleton
+[14:52:07] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 3333ms behind, skipping 66 tick(s)
+[14:52:07] [Server thread/WARN]: unclescr00ge moved too quickly! -273.389426784765,-23.0,61.554307466726264
+[14:54:00] [Server thread/INFO]: unclescr00ge lost connection: Disconnected
+[14:54:00] [Server thread/INFO]: unclescr00ge left the game
+[14:54:26] [User Authenticator #7/INFO]: UUID of player unclescr00ge is 9d2d5178-b0ea-476f-9b58-dfd8cd01335f
+[14:54:26] [Server thread/INFO]: unclescr00ge[/80.219.89.23:59353] logged in with entity id 291373 at (-315.53973956961096, 64.0, 49.30305549497754)
+[14:54:26] [Server thread/INFO]: unclescr00ge joined the game
+[14:54:28] [Server thread/WARN]: emil2295 moved too quickly! 6.762427517405314,1.1661092609382138,-7.472066597468682
+[14:55:06] [Server thread/INFO]: emil2295 was fireballed by Ghast
+[14:55:26] [Server thread/INFO]: taxiborden has made the advancement [Sweet dreams]
+[14:57:17] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[15:09:44] [Server thread/INFO]: [unclescr00ge: Changing to clear weather]
+[15:13:48] [Server thread/INFO]: [unclescr00ge: Set own game mode to Creative Mode]
+[15:13:53] [Server thread/INFO]: [unclescr00ge: Set the time to 1000]
+[15:14:31] [Server thread/INFO]: [unclescr00ge: Set own game mode to Survival Mode]
+[15:14:49] [Server thread/INFO]: [emil2295: Teleported emil2295 to taxiborden]
+[15:15:29] [Server thread/WARN]: unclescr00ge moved too quickly! 0.36467527308030867,-11.113989432500759,1.0990093289101424
+[15:16:21] [Server thread/INFO]: [emil2295: Teleported emil2295 to taxiborden]
+[15:16:49] [Server thread/INFO]: [unclescr00ge: Changing to clear weather]
+[15:22:13] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 4736ms behind, skipping 94 tick(s)
+[15:23:03] [Server thread/INFO]: [unclescr00ge: Set the time to 1000]
+[15:23:06] [Server thread/INFO]: [unclescr00ge: Set own game mode to Creative Mode]
+[15:23:10] [Server thread/INFO]: [unclescr00ge: Set own game mode to Survival Mode]
+[15:23:11] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 3956ms behind, skipping 79 tick(s)
+[15:25:15] [Server thread/WARN]: Boat moved wrongly!
+[15:25:32] [Server thread/WARN]: taxiborden moved wrongly!
+[15:26:03] [Server thread/INFO]: [emil2295: Teleported emil2295 to unclescr00ge]
+[15:27:46] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[15:29:24] [Server thread/WARN]: Keeping entity minecraft:skeleton that already exists with UUID 1e845ebb-d26d-4c3e-ab83-bafcdb1f65b2
+[15:31:36] [Server thread/INFO]: [emil2295: Teleported emil2295 to taxiborden]
+[15:32:55] [Server thread/INFO]: [emil2295: Set the time to 1000]
+[15:33:04] [Server thread/INFO]: [taxiborden: Changing to clear weather]
+[15:34:11] [Server thread/INFO]: <unclescr00ge> x = -315 ; y = 54 ; z = 88
+[15:35:05] [Server thread/WARN]: Can't keep up! Did the system time change, or is the server overloaded? Running 2458ms behind, skipping 49 tick(s)
+[15:35:41] [Server thread/INFO]: [emil2295: Teleported emil2295 to unclescr00ge]
+[15:37:09] [Server thread/INFO]: taxiborden lost connection: Timed out
+[15:37:09] [Server thread/INFO]: taxiborden left the game
+[15:40:04] [Server thread/INFO]: emil2295 lost connection: Disconnected
+[15:40:04] [Server thread/INFO]: emil2295 left the game
+[15:40:22] [Server thread/INFO]: [unclescr00ge: Set own game mode to Creative Mode]
+[15:41:27] [Server thread/INFO]: [unclescr00ge: Set own game mode to Survival Mode]
+[15:41:29] [Server thread/INFO]: unclescr00ge lost connection: Disconnected
+[15:41:29] [Server thread/INFO]: unclescr00ge left the game
