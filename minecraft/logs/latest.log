@@ -1,21 +1,19 @@
-[19:14:46] [Server thread/INFO]: Loading properties
-[19:14:46] [Server thread/INFO]: Default game type: SURVIVAL
-[19:14:46] [Server thread/INFO]: Generating keypair
-[19:14:46] [Server thread/INFO]: Starting Minecraft server on *:25565
-[19:14:46] [Server thread/INFO]: Using epoll channel type
-[19:14:46] [Server thread/INFO]: Preparing level "pvp"
-[19:14:46] [Server thread/INFO]: Loaded 488 advancements
-[19:14:49] [Server thread/INFO]: Preparing start region for level 0
-[19:14:50] [Server thread/INFO]: Preparing spawn area: 10%
-[19:14:51] [Server thread/INFO]: Preparing spawn area: 21%
-[19:14:52] [Server thread/INFO]: Preparing spawn area: 31%
-[19:14:53] [Server thread/INFO]: Preparing spawn area: 43%
-[19:14:54] [Server thread/INFO]: Preparing spawn area: 56%
-[19:14:55] [Server thread/INFO]: Preparing spawn area: 71%
-[19:14:56] [Server thread/INFO]: Preparing spawn area: 84%
-[19:14:57] [Server thread/INFO]: Preparing spawn area: 97%
-[19:14:57] [Server thread/INFO]: Done (11.185s)! For help, type "help" or "?"
-[19:15:11] [Server Shutdown Thread/INFO]: Stopping server
-[19:15:11] [Server Shutdown Thread/INFO]: Saving players
-[19:15:11] [Server Shutdown Thread/INFO]: Saving worlds
-[19:15:11] [Server Shutdown Thread/INFO]: Saving chunks for level 'pvp'/overworld
+[19:33:34] [Server thread/INFO]: Starting minecraft server version 1.12.1
+[19:33:34] [Server thread/INFO]: Loading properties
+[19:33:34] [Server thread/INFO]: Default game type: SURVIVAL
+[19:33:34] [Server thread/INFO]: Generating keypair
+[19:33:34] [Server thread/INFO]: Starting Minecraft server on *:25565
+[19:33:34] [Server thread/INFO]: Using epoll channel type
+[19:33:34] [Server thread/INFO]: Preparing level "pvp1"
+[19:33:35] [Server thread/INFO]: Loaded 488 advancements
+[19:33:35] [Server thread/INFO]: Preparing start region for level 0
+[19:33:36] [Server thread/INFO]: Preparing spawn area: 9%
+[19:33:37] [Server thread/INFO]: Preparing spawn area: 17%
+[19:33:38] [Server thread/INFO]: Preparing spawn area: 26%
+[19:33:39] [Server thread/INFO]: Preparing spawn area: 37%
+[19:33:40] [Server thread/INFO]: Preparing spawn area: 47%
+[19:33:41] [Server thread/INFO]: Preparing spawn area: 56%
+[19:33:42] [Server thread/INFO]: Preparing spawn area: 67%
+[19:33:43] [Server thread/INFO]: Preparing spawn area: 77%
+[19:33:44] [Server thread/INFO]: Preparing spawn area: 89%
+[19:33:45] [Server thread/INFO]: Done (10.869s)! For help, type "help" or "?"
