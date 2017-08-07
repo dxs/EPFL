@@ -1,7 +1,21 @@
-[09:27:27] [User Authenticator #8/INFO]: UUID of player emil2295 is 81b49fd9-c568-4380-9b2c-f434ec937f9b
-[09:27:27] [Server thread/INFO]: emil2295[/178.196.57.44:51386] logged in with entity id 398456 at (-322.0746389065848, 64.0, 52.81676362029286)
-[09:27:27] [Server thread/INFO]: emil2295 joined the game
-[09:36:52] [Server thread/INFO]: [emil2295: Set the time to 1000]
-[09:38:12] [Server thread/INFO]: [emil2295: Set the world spawn point to (-314, 64, 72)]
-[09:42:47] [Server thread/INFO]: emil2295 lost connection: Disconnected
-[09:42:47] [Server thread/INFO]: emil2295 left the game
+[19:14:46] [Server thread/INFO]: Loading properties
+[19:14:46] [Server thread/INFO]: Default game type: SURVIVAL
+[19:14:46] [Server thread/INFO]: Generating keypair
+[19:14:46] [Server thread/INFO]: Starting Minecraft server on *:25565
+[19:14:46] [Server thread/INFO]: Using epoll channel type
+[19:14:46] [Server thread/INFO]: Preparing level "pvp"
+[19:14:46] [Server thread/INFO]: Loaded 488 advancements
+[19:14:49] [Server thread/INFO]: Preparing start region for level 0
+[19:14:50] [Server thread/INFO]: Preparing spawn area: 10%
+[19:14:51] [Server thread/INFO]: Preparing spawn area: 21%
+[19:14:52] [Server thread/INFO]: Preparing spawn area: 31%
+[19:14:53] [Server thread/INFO]: Preparing spawn area: 43%
+[19:14:54] [Server thread/INFO]: Preparing spawn area: 56%
+[19:14:55] [Server thread/INFO]: Preparing spawn area: 71%
+[19:14:56] [Server thread/INFO]: Preparing spawn area: 84%
+[19:14:57] [Server thread/INFO]: Preparing spawn area: 97%
+[19:14:57] [Server thread/INFO]: Done (11.185s)! For help, type "help" or "?"
+[19:15:11] [Server Shutdown Thread/INFO]: Stopping server
+[19:15:11] [Server Shutdown Thread/INFO]: Saving players
+[19:15:11] [Server Shutdown Thread/INFO]: Saving worlds
+[19:15:11] [Server Shutdown Thread/INFO]: Saving chunks for level 'pvp'/overworld

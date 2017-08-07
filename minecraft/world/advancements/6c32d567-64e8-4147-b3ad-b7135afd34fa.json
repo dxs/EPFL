@@ -119,6 +119,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/combat/leather_helmet": {
+    "criteria": {
+      "has_leather": "2017-08-04 09:34:05 +0000"
+    },
+    "done": true
+  },
   "minecraft:recipes/decorations/crafting_table": {
     "criteria": {
       "has_planks": "2017-07-30 12:18:35 +0000"
@@ -345,6 +351,7 @@
     "criteria": {
       "cooked_porkchop": "2017-07-30 12:42:58 +0000",
       "cooked_mutton": "2017-07-30 12:27:05 +0000",
+      "cooked_beef": "2017-08-04 09:30:47 +0000",
       "baked_potato": "2017-07-30 14:09:11 +0000",
       "apple": "2017-07-30 13:55:57 +0000",
       "rabbit": "2017-07-30 13:49:20 +0000",
@@ -438,6 +445,12 @@
   "minecraft:recipes/misc/lime_dye": {
     "criteria": {
       "has_bonemeal": "2017-07-30 12:52:07 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/combat/leather_leggings": {
+    "criteria": {
+      "has_leather": "2017-08-04 09:34:05 +0000"
     },
     "done": true
   },
@@ -751,6 +764,12 @@
   "minecraft:recipes/building_blocks/white_concrete_powder": {
     "criteria": {
       "has_gravel": "2017-07-30 12:48:56 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/item_frame": {
+    "criteria": {
+      "has_leather": "2017-08-04 09:34:05 +0000"
     },
     "done": true
   },
@@ -1342,6 +1361,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/combat/leather_chestplate": {
+    "criteria": {
+      "has_leather": "2017-08-04 09:34:05 +0000"
+    },
+    "done": true
+  },
   "minecraft:recipes/building_blocks/acacia_planks": {
     "criteria": {
       "has_log2": "2017-07-30 14:26:22 +0000"
@@ -1394,18 +1419,28 @@
     "criteria": {
       "ice_flats": "2017-07-30 12:28:43 +0000",
       "forest": "2017-07-30 12:24:37 +0000",
+      "swampland": "2017-08-03 20:05:11 +0000",
+      "birch_forest": "2017-08-03 19:57:25 +0000",
+      "deep_ocean": "2017-08-03 19:58:55 +0000",
+      "beaches": "2017-08-03 19:59:21 +0000",
       "extreme_hills_with_trees": "2017-08-02 18:53:11 +0000",
       "desert_hills": "2017-07-30 13:24:13 +0000",
+      "mesa": "2017-08-03 20:11:31 +0000",
       "forest_hills": "2017-07-30 12:28:20 +0000",
       "savanna": "2017-07-30 13:08:56 +0000",
       "plains": "2017-07-30 12:22:54 +0000",
+      "mesa_clear_rock": "2017-08-03 20:11:33 +0000",
       "savanna_rock": "2017-07-30 13:18:12 +0000",
       "taiga": "2017-07-30 09:59:32 +0000",
       "taiga_hills": "2017-07-30 12:20:44 +0000",
+      "birch_forest_hills": "2017-08-03 19:57:28 +0000",
+      "mushroom_island": "2017-08-03 20:06:07 +0000",
+      "ocean": "2017-08-03 19:58:54 +0000",
       "extreme_hills": "2017-07-30 12:34:38 +0000",
       "roofed_forest": "2017-07-30 12:22:31 +0000",
       "river": "2017-07-30 12:22:27 +0000",
-      "desert": "2017-07-30 13:23:02 +0000"
+      "desert": "2017-07-30 13:23:02 +0000",
+      "stone_beach": "2017-08-03 20:03:51 +0000"
     },
     "done": false
   },
@@ -1469,6 +1504,12 @@
     },
     "done": true
   },
+  "minecraft:recipes/combat/leather_boots": {
+    "criteria": {
+      "has_leather": "2017-08-04 09:34:05 +0000"
+    },
+    "done": true
+  },
   "minecraft:recipes/transportation/jungle_boat": {
     "criteria": {
       "entered_water": "2017-07-30 12:22:28 +0000"
@@ -1490,6 +1531,12 @@
   "minecraft:recipes/redstone/heavy_weighted_pressure_plate": {
     "criteria": {
       "has_iron_ingot": "2017-07-30 12:51:01 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/diamond_block": {
+    "criteria": {
+      "has_at_least_9_diamond": "2017-08-03 12:46:47 +0000"
     },
     "done": true
   },
@@ -1580,6 +1627,12 @@
   "minecraft:recipes/decorations/brown_stained_glass_pane": {
     "criteria": {
       "has_glass": "2017-08-02 19:40:14 +0000"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/diamond": {
+    "criteria": {
+      "has_the_recipe": "2017-08-03 12:46:47 +0000"
     },
     "done": true
   },
