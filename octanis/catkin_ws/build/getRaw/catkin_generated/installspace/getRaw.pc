@@ -1,8 +1,0 @@
-prefix=/home/sven/octanis/catkin_ws/install
-
-Name: getRaw
-Description: Description of getRaw
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/sven/octanis/catkin_ws/install/lib 
-Requires: 
