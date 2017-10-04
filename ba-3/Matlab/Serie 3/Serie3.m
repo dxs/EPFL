@@ -40,5 +40,18 @@ hold off;
 title('Newton x0 = -pi/2');
 legend('',sprintf('%d',iter));
 
+x=-1.5:0.01:3;
+subplot(2,2,4);
+plot(x,f(x));
+hold on;
+grid on;
+x0 = pi;
+phi = @(x) sin(x) + x/2 - (pi/6 -sqrt(3)/2);
+[p, iter] = fixedpoint(phi,x0,1e-8,1000);
+plot(p,f(p),'mo');
+hold off;
+title('Fixed Point');
+legend('',sprintf('%d',iter));
+
 
 
