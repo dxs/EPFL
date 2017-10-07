@@ -1,0 +1,34 @@
+\documentclass[12pt]{report}
+
+
+%USEPACKAGE
+\usepackage{amsmath}
+\usepackage[french]{babel}
+\usepackage{blindtext}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[breakable, theorems, skins]{tcolorbox}
+\usepackage{subfiles}
+\usepackage{url}
+\usepackage{xcolor}
+
+%PATHS
+\graphicspath{{images/}{../images/}}
+
+%TITLE
+
+\title{MT - Matériaux}
+\author{Sven Borden}
+\date{\today}
+
+%DOCUMENT
+\begin{document}
+	\maketitle	
+	\tableofcontents
+	\clearpage
+
+	\chapter{Polymère}	
+	\subfile{sections/polymere}
+
+\end{document}
