@@ -1,0 +1,28 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.7</VERSION>
+ <DEVICE>"ATmega128"</DEVICE>
+ <WORKING_DIR>C:\Users\glagl\Documents\GitHub\EPFL\ba-4\MC - MicroControlleur\TP2\TP2\TP2\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\glagl\Documents\GitHub\EPFL\ba-4\MC - MicroControlleur\TP2\TP2\TP2\inout1.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.150\avrasm\inc\m128def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\glagl\Documents\GitHub\EPFL\ba-4\MC - MicroControlleur\TP2\TP2\TP2\Debug\TP2.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>TP2.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>TP2.map</FILE>
+  <FILE>TP2.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <reset><FILE>C:\Users\glagl\Documents\GitHub\EPFL\ba-4\MC - MicroControlleur\TP2\TP2\TP2\inout1.asm</FILE><LINE>4</LINE></reset>
+  <loop><FILE>C:\Users\glagl\Documents\GitHub\EPFL\ba-4\MC - MicroControlleur\TP2\TP2\TP2\inout1.asm</FILE><LINE>9</LINE></loop>
+ </LABELS>
+</ASSEMBLER_INFO>
